@@ -1,0 +1,62 @@
+<ion-view view-title="Enquiry Detail">
+    <ion-content ng-cloak ng-controller="enquiryDetailCtrl">
+        <div class="item item-text-wrap  item-bg-new ">
+            <div class="row " style="padding: 0px; ">
+                <div class="col" style="padding: 0px;">
+
+
+                    <h2><span ng-bind="sessionVariable.contact_list.selected_enquiry.FST_NAME +' '+ sessionVariable.contact_list.selected_enquiry.LAST_NAME">Pulkit Bhardwaj</span></h2>
+                    <p class="s_item"><span ng-if="sessionVariable.contact_list.selected_enquiry.AGE" ng-bind="sessionVariable.contact_list.selected_enquiry.AGE + 'yrs / '">32</span>
+                        <span ng-bind="sessionVariable.contact_list.selected_enquiry.GENDER">M</span></p>
+                </div>
+                <div class="col " style="padding: 0px;">
+
+                    <h4><b>Mobile : </b><span ng-bind="sessionVariable.contact_list.selected_enquiry.CELL_PH_NUM"></span></h4>
+                    <h4><b>Email : </b><span ng-bind="sessionVariable.contact_list.selected_enquiry.EMAIL_ADDR"></span></h4>
+                </div>
+
+            </div>
+            <br/>
+            <i class="icon ion ion-clipboard energized" style="font-size:25px;margin-right:10px;float:left"></i>
+            <p class="s_item"><span>Customer id : <span ng-bind="sessionVariable.contact_list.selected_enquiry.X_CON_SEQ_NUM"></span></span>
+            </p>
+
+
+        </div>
+        <div class="item">
+            <p><b>Interested in: </b><span ng-bind="sessionVariable.contact_list.selected_enquiry.X_MODEL_INTERESTED"></span></p>
+            <p><b>Expected date of purchase : </b><span ng-bind="sessionVariable.contact_list.selected_enquiry.EXPCTD_DT_PURCHASE"></span></p>
+            <h4>
+        <a  class="dark-grey-subtitle"><b>Exchange required : </b><span ng-bind="sessionVariable.contact_list.selected_enquiry.X_EXCHANGE_REQUIRED"></span></a>
+        <a  class="dark-grey-subtitle"><b>Finance required : </b><span ng-bind="sessionVariable.contact_list.selected_enquiry.X_FINANCE_REQUIRED"></span></a>
+      </h4>
+        </div>
+        <div class="item">
+            <p><b>Exisisting Vehical Type: </b><span ng-bind="sessionVariable.contact_list.selected_enquiry.EXISTING_VEHICLE"></span></p>
+            <!--<h4>
+        <a  class="dark-grey-subtitle"><b>Type : </b>120</a>
+        <a  class="dark-grey-subtitle"><b>make : </b>2012</a>
+       </h4>-->
+        </div>
+        <div class="item item-text-wrap">
+            <p><b>Remark : </b><span ng-bind="sessionVariable.contact_list.selected_enquiry.FOLLOWUP_COMMENTS"></span></p>
+        </div>
+
+        <!--<div class="row ">
+      <div class="col card add_box">
+        <p><b>Address 1 : </b>489, sec-21c, Near gol chowk, Gurgaon, 124001</p>
+      </div>
+      <div class="col card add_box">
+
+        <p><b>Address 2 : </b>489, sec-21c, Near gol chowk, Gurgaon, 124001</p>
+      </div>
+    </div>-->
+
+        <div class="item">
+            <div class="button-bar" >
+                <a class="button button-small button-assertive bolder" ng-click="open_CloseEnquiryModal($index)" >Close</a>
+                <a class="button button-outline button-assertive button-small bolder" ng-click="open_FollEnquiryModal()">Followup</a>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

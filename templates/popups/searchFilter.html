@@ -1,0 +1,134 @@
+<ion-modal-view>
+    <ion-header-bar class="header-bg">
+        <h1 class="title light">Search Filter</h1>
+        <button ng-click="closeModal()" class="animated fadeInUpBig fab-button-new t-20 r-20 size-48 light-bg ">
+            <i class="icon ion ion-close"></i></button>
+    </ion-header-bar>
+    <ion-content class="filterPage" ng-controller="searchFilterCtrl">
+        <div class="item item-divider">
+            Enquiry Type
+        </div>
+        <div class="item">
+
+            <div class="button-bar">
+                <button ng-class="{'button button-small button-assertive' : search_filter.status == 1,
+                            'button button-small button-assertive button-outline' : search_filter.status != 1}" ng-click="setStatus(1)">All</button>
+                <button ng-class="{'button button-small button-assertive' : search_filter.status == 2,
+                            'button button-small button-assertive button-outline' : search_filter.status != 2}" ng-click="setStatus(2)">Open</button>
+                <button ng-class="{'button button-small button-assertive' : search_filter.status == 3,
+                            'button button-small button-assertive button-outline' : search_filter.status != 3}" ng-click="setStatus(3)">Closed</button>
+            </div>
+        </div>
+        <div class="item  item-toggle stable-bg">
+            Created date
+            <label class="toggle toggle-assertive">
+                <input type="checkbox" ng-model="search_filter.IsCreateDate">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+        </div>
+        <div class="item padding-0" ng-disabled="!search_filter.IsCreateDate">
+            <div class="row">
+                <div class="col r-border date-col" ng-click="pickDate(dateModel.CRT_FROM)">
+                    <h2 class="dark">From</h2>
+                    <!--<p>23 oct, 2015</p>-->
+                    <p ng-bind=" getDateWithMonthName(search_filter.CRT_FROM)">23 oct, 2015</p>
+                    <p ng-if="!search_filter.CRT_FROM">--Select--</p>
+                </div>
+                <div class="col date-col" ng-click="pickDate(dateModel.CRT_TO)">
+
+                    <h2 class="dark">To</h2>
+
+                    <p ng-bind=" getDateWithMonthName(search_filter.CRT_TO)">23 oct, 2015</p>
+                    <p ng-if="!search_filter.CRT_TO">--Select--</p>
+                </div>
+            </div>
+        </div>
+        <div class="item  item-toggle stable-bg">
+            Exp purchase date
+            <label class="toggle toggle-assertive">
+                <input type="checkbox" ng-model="search_filter.IsExpDate">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+        </div>
+
+        <div class="item padding-0" ng-disabled="!search_filter.IsExpDate">
+            <div class="row">
+                <div class="col r-border date-col" ng-click="pickDate(dateModel.EXP_FROM)">
+                    <h2 class="dark">From </h2>
+                    <p ng-bind=" getDateWithMonthName(search_filter.EXP_FROM)">23 oct, 2015</p>
+                    <p ng-if="!search_filter.EXP_FROM">--Select--</p>
+                </div>
+                <div class="col date-col" ng-click="pickDate(dateModel.EXP_TO)">
+
+                    <h2 class="dark">To</h2>
+                    <p ng-bind=" getDateWithMonthName(search_filter.EXP_TO)">23 oct, 2015</p>
+                    <p ng-if="!search_filter.EXP_TO">--Select--</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="item  item-toggle stable-bg">
+            Next followup date
+            <label class="toggle toggle-assertive">
+                <input type="checkbox" ng-model="search_filter.IsNextDate">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+        </div>
+
+        <div class="item padding-0">
+            <div class="row">
+                <div class="col  date-col" ng-click="pickDate(dateModel.NXT)">
+                    <h2 class="dark">Date  </h2>
+                    <p ng-bind=" getDateWithMonthName(search_filter.NXT)">23 oct, 2015</p>
+                    <p ng-if="!search_filter.NXT">--Select--</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!--<div class="item item-divider">
+            Model
+        </div>-->
+        <div class="item item-input item-select stable-bg">
+            <div class="input-label">
+                Model
+            </div>
+            <select class="red-select">
+                <option>Splendor</option>
+                <option selected>Xtreme</option>
+                <option>Ignitor</option>
+            </select>
+        </div>
+
+        <div class="item">
+
+
+            <div class="button-bar">
+                <button ng-class="{'button button-small button-assertive' : search_filter.finance == 1,
+                            'button button-small button-assertive button-outline' : search_filter.finance != 1}" ng-click="setFinance(1)">All</button>
+                <button ng-class="{'button button-small button-assertive' : search_filter.finance == 2,
+                            'button button-small button-assertive button-outline' : search_filter.finance != 2}" ng-click="setFinance(2)">Finance</button>
+                <button ng-class="{'button button-small button-assertive' : search_filter.finance == 3,
+                            'button button-small button-assertive button-outline' : search_filter.finance != 3}" ng-click="setFinance(3)">Non-Finance</button>
+            </div>
+        </div>
+
+
+        <div class="item item-input item-select stable-bg">
+            <div class="input-label">
+                DSE Name
+            </div>
+            <select class="red-select">
+                <option>Arun Bhatia</option>
+                <option selected>Mohit</option>
+                <option>Nitin</option>
+            </select>
+        </div>
+    </ion-content>
+</ion-modal-view>

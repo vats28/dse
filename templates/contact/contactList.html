@@ -1,0 +1,34 @@
+<ion-view view-title="Contacts">
+    <ion-pane ng-controller="contactListCtrl" ng-init="init()">
+        <!--<fab-button target-id="">
+      <i class="icon ion ion-android-add "></i>
+    </fab-button>-->
+
+        <ion-content>
+            <div class="list">
+                <div class="item item-divider" ng-if="sessionVariable.contact_list.enquiry">Enquiry based contacts</div>
+
+                <a class="item item-icon-right " href="#" ng-click="showDetail(item)" ng-repeat="item in sessionVariable.contact_list.enquiry | unique:'X_CON_SEQ_NUM'">
+                    <i class="icon ion-ios-arrow-forward assertive"></i> <span ng-bind="item.FST_NAME + ' ' + item.LAST_NAME">Pawan Kumar</span>
+                    <p><span class="margin-r-20" ng-bind="item.CELL_PH_NUM">955571####</span><span ng-bind="item.CITY + ', ' + item.STATE">Gurgaon</span></p>
+                   
+                    
+                </a>
+
+                <div class="item item-divider" ng-if="sessionVariable.contact_list.vin">VIN based contacts</div>
+                <a class="item item-icon-right " href="#" ng-click="showDetail(item)" ng-repeat="item in sessionVariable.contact_list.vin | unique:'X_CON_SEQ_NUM'">
+                    <i class="icon ion-ios-arrow-forward assertive"></i> <span ng-bind="item.FST_NAME + ' ' + item.LAST_NAME">Pawan Kumar</span>
+                    <p><span class="margin-r-20" ng-bind="item.CELL_PH_NUM">955571####</span><span ng-bind="item.CITY + ', ' + item.STATE">Gurgaon</span></p>
+                </a>
+
+
+                <ion-item style="margin-top: 100px; text-align: center; border: 0px;" ng-if="!sessionVariable.contact_list" class="item item-text-wrap assertive">
+                    <!--<i class="icon ion ion-alert-circled"></i> Sorry-->
+                    <p>No such contact found. You can add new contact and enquiry.</p>
+
+                    <a class="button  button-block red-bg  light" style="padding:0px;" ng-click="jumpTo('app.add_personal_info')">Add new enquiry</a>
+                </ion-item>
+            </div>
+        </ion-content>
+    </ion-pane>
+</ion-view>

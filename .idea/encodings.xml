@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/../scss/ionic.app.scss" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Documents/personal_test_projetcs/mCURA_2015/mcura_2/www/css/style.css" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Documents/personal_test_projetcs/mCURA_2015/mcura_2/www/css/vats-fab-button.css" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Documents/personal_test_projetcs/mCURA_2015/mcura_2/www/js/app.js" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Documents/personal_test_projetcs/mCURA_2015/mcura_2/www/js/controllers.js" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Documents/personal_test_projetcs/mCURA_2015/mcura_2/www/js/loved_ones/add_loved_ones.js" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Documents/personal_test_projetcs/mCURA_2015/mcura_2/www/js/records/medical_records.js" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Documents/personal_test_projetcs/mCURA_2015/mcura_2/www/js/utils/http.js" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Documents/personal_test_projetcs/mCURA_2015/mcura_2/www/templates/loved_ones/add_loved_ones.html" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Documents/personal_test_projetcs/mCURA_2015/mcura_2/www/templates/loved_ones/list_loved_ones.html" charset="UTF-8" />
+  </component>
+</project>

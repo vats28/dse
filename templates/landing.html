@@ -1,0 +1,32 @@
+<ion-view hide-nav-bar="true" class="black-bg" ng-cloak>
+
+    <ion-content scroll="false" ng-controller="landingCtrl" ng-init="init()">
+
+        <section class="login-container" >
+            <div class="col header text-center" >
+                <img src="./img/landing_logo.png" class="logo" style="background-color: white; padding: 10px; border-radius: 15px"/>
+            </div>
+
+
+            <div class="list list-inset" style="background: transparent;">
+                <label class="item item-input">
+                    <i class="icon ion-person placeholder-icon"></i>
+                    <input type="text" ng-model="sessionVariable.username" placeholder="User Name">
+                </label>
+                <label class="item item-input">
+                    <i class="icon ion-lock-combination placeholder-icon"></i>
+                    <input type="password" ng-model="sessionVariable.password" placeholder="Password">
+                </label>
+
+                <div class="list">
+                    <button class=" button button-block red-bg light " style="font-weight: bold" ng-click="doLogin()">
+                        Sign In
+                    </button>
+                </div>
+            </div>
+            <!--<div class="col text-center stable ">-->
+                <!--Already have an account? <strong><a href="#">Sign in now!</a></strong>-->
+            <!--</div>-->
+        </section>
+    </ion-content>
+</ion-view>

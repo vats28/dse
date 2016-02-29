@@ -1,0 +1,90 @@
+<ion-view view-title="Contact Detail">
+
+    <ion-content ng-controller="contactDetailCtrl" ng-cloak>
+        <div class="item item-text-wrap  black-bg ">
+            <div class="row " style="padding: 0px; ">
+                <div class="col" style="padding: 0px;">
+
+                    <h2><span ng-bind="sessionVariable.contact_list.selected_item.FST_NAME +' '+ sessionVariable.contact_list.selected_item.LAST_NAME">Pulkit Bhardwaj</span></h2>
+                    <p class="s_item"><span ng-if="sessionVariable.contact_list.selected_item.AGE" ng-bind="sessionVariable.contact_list.selected_item.AGE + 'yrs / '">32</span>
+                        <span ng-bind="sessionVariable.contact_list.selected_item.GENDER">M</span></p>
+                    <!--<p>+91-9999999999</h4>-->
+                </div>
+                <div class="col " style="padding: 0px;">
+
+
+                    <h4><b>Mobile : </b><span ng-bind="sessionVariable.contact_list.selected_item.CELL_PH_NUM"></span></h4>
+                    <!--<h4><b>Home/Office : </b>011-88997678</h4>-->
+                    <h4><b>Email : </b><span ng-bind="sessionVariable.contact_list.selected_item.EMAIL_ADDR"></span></h4>
+
+                    <h4><b>state : </b><span ng-bind="sessionVariable.contact_list.selected_item.STATE"></span></h4>
+                    <h4><b>District : </b><span ng-bind="sessionVariable.contact_list.selected_item.DISTRICT"></span></h4>
+                    <h4><b>Tehsil : </b><span ng-bind="sessionVariable.contact_list.selected_item.TEHSIL"></span></h4>
+                    <h4><b>City : </b><span ng-bind="sessionVariable.contact_list.selected_item.CITY"></span></h4>
+                </div>
+
+            </div>
+            <br/>
+            <i class="icon ion ion-card energized" style="font-size:25px;margin-right:10px;float:left"></i>
+            <p class="s_item"><span>Customer id : <span ng-bind="sessionVariable.contact_list.selected_item.X_CON_SEQ_NUM"></span></span>
+            </p>
+        </div>
+
+        <div class="item item-divider">
+            Enquiries
+            <!--{{sessionVariable.contact_list.enquiry}}-->
+        </div>
+        <ion-list can-swipe ng-init="init()">
+            <ion-item class=" item-text-wrap item-icon-right" ng-click="showDetail(item)" 
+            ng-if="sessionVariable.contact_list.selected_item.X_CON_SEQ_NUM == item.X_CON_SEQ_NUM"
+            ng-repeat="item in testValue=(sessionVariable.contact_list.enquiry | unique:'X_CON_SEQ_NUM')">
+                <i class="icon ion ion-alert assertive"></i>
+                <!--Enquiry No : <span class="margin-r-20" ng-bind="item.number">10897</span>-->
+                <p>Model : <span ng-bind="item.X_MODEL_INTERESTED">Splender Pro</span></p>
+                <p>Date of enquiry : <span class="margin-r-20">27-10-2015</span></p>
+                <p>Expected date of purchase : <span ng-bind="item.EXPCTD_DT_PURCHASE">27-11-2015</span></p>
+                <p ng-bind="checkCount()"></p>
+                <ion-option-button class="button-balanced" ng-click="open_CloseEnquiryModal($index)">
+                    Close
+                </ion-option-button>
+                <ion-option-button class="button-dark" ng-click="open_FollEnquiryModal($index)">
+                    Followup
+                </ion-option-button>
+            </ion-item>
+
+            <ion-item class="item-icon-left item-text-wrap assertive" ng-click="jumpTo('app.createNewEnquiry')" ng-if="!hasEnquiry">
+                <i class="icon ion ion-plus-circled"></i> Add new enquiry
+                <p>As no open enquiry pending, you can add new enquiry.</p>
+            </ion-item>
+        </ion-list>
+
+
+
+        <div class="item item-divider">
+            Existing Vehicle Detail
+        </div>
+
+        <div class="item item-text-wrap row-col-pad-0" ng-if="sessionVariable.contact_list.selected_item.X_CON_SEQ_NUM == item.X_CON_SEQ_NUM"
+        ng-repeat="item in sessionVariable.contact_list.vin " ng-click="jumpTo('app.vehicleDetail')">
+
+            <div class="row">
+                <div class="col">
+                    <p class="dark">Model : <span ng-bind="item.MODEL_CD">Splendor</span></p>
+                    <p class="dark">Variant : <span ng-bind="item.ATTRIB_42">Pro</span></p>
+                    <p class="dark">Colour : <span ng-bind="item.PROD_ATTRIB02_CD">Black</span></p>
+                </div>
+                <div class="col">
+                    <p class="dark">Dealership : <span ng-bind="item.PRIMARY_DEALER_NAME">Black</span></p>
+                </div>
+            </div>
+            <p class="dark">VIN no. : <span ng-bind="item.SERIAL_NUM">1927vRYYT</span></p>
+            <p class="dark">Date of purchase : <span ng-bind="item.FIRST_SALE_DT">25-10-1999</span></p>
+            <p class="dark">SKU Description : <span ng-bind="item.DESC_TEXT">1927vRYYT bla bla bla .. ha</span></p>
+
+        </div>
+
+        <!--{{arrayList.enquiries}}-->
+
+
+    </ion-content>
+</ion-view>

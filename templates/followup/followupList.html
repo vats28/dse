@@ -1,0 +1,27 @@
+<ion-view view-title="Follow-ups">
+  
+  <ion-content ng-controller="followupListCtrl">
+     <ion-list can-swipe>
+      <ion-item class=" item-text-wrap item-icon-right" 
+      ng-repeat="item in arrayList.enquiries"  ng-click="jumpTo('app.enquiryDetail')">
+        <i class="icon ion ion-alert assertive"></i>
+        <p ng-bind="item.name">Pulkit</p>
+        <p>Enquiry No : <span class="margin-r-20" ng-bind="item.number">10897</span> Model : <span ng-bind="item.model">Splender Pro</span></p>
+        <p>Date of enquiry : <span class="margin-r-20" ng-bind="item.doe">27-10-2015</span></p>
+        <p>Expected date of purchase : <span ng-bind="item.dop">27-11-2015</span></p>
+
+        <ion-option-button class="button-balanced" ng-click="open_CloseEnquiryModal($index)">
+          Close
+        </ion-option-button>
+        <ion-option-button class="button-dark" ng-click="open_FollEnquiryModal($index)">
+          Followup
+        </ion-option-button>
+      </ion-item>
+
+      <ion-item class="item-icon-left item-text-wrap assertive" ng-click="jumpTo('app.dashboard')" ng-if="arrayList.enquiries == [] || arrayList.enquiries == ''">
+        <i class="icon ion ion-android-happy"></i> Enjoy !!
+        <p>As no open followup pending for today</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
