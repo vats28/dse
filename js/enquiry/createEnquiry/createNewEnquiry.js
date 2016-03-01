@@ -4,8 +4,10 @@ angular.module('starter.createNewEnquiry', [])
 
         $scope.sessionVariable.createEnquiry = {};// for create enquiry
 
-
-
+        $scope.init = function () {
+            $scope.sessionVariable.temp_cont_enq = {};
+            $scope.sessionVariable.temp_cont_enq.exp_purchase_date = '2016-03-10';
+        }
 
         $scope.selectedModel = '';
         $scope.pickDate = function (model) { //alert('d'); 
@@ -33,9 +35,10 @@ angular.module('starter.createNewEnquiry', [])
         }
 
         $scope.getFolDateWithMonthName = function (dateString) {
-            //alert(dateString);
+
             if (!dateString) {
-                dateString = date_picker.convertDateToString(new Date().setDate(1), 'yyyy-mm-dd');
+                var nextDate = date_picker.addDays(new Date(), -1);
+                dateString = date_picker.convertDateToString(nextDate, 'yyyy-mm-dd');
             } else {
                 return;
             }
@@ -80,11 +83,21 @@ angular.module('starter.createNewEnquiry', [])
             //}
 
             // $scope.jumpTo('app.add_vehicle_info');
+            $scope.requestData = {};
+            $scope.requestData.user_id = $scope.sessionVariable.username;
+            $scope.requestData.X_CON_SEQ_NUM = $scope.sessionVariable.contact_list.selected_item.X_CON_SEQ_NUM;           
+            $scope.requestData = $scope.sessionVariable.temp_cont_enq;
+            $scope.requestData.state = $scope.sessionVariable.login_data.state_id;//.split(',')[1];
+            $scope.requestData.district = $scope.sessionVariable.login_data.district_id;//.split(',')[1];
+            $scope.requestData.tehsil = $scope.sessionVariable.login_data.tehsil_id;//.split(',')[1];
+            $scope.requestData.village = $scope.sessionVariable.login_data.village_id;//.split(',')[1];
+            //alert($scope.requestData.state);
+            //alert(JSON.stringify($scope.requestData));
             $scope.showAlertWindow_Titled('Success', 'Enquiry has been created successfully', $scope.after_saveTempVehicle);
         }
 
         $scope.after_saveTempVehicle = function () {
-            $scope.sessionVariable.temp_cont_enq = undefined;
+            $scope.sessionVariable.temp_cont_enq = {};
             $scope.disableBack();
             $scope.jumpTo('app.dashboard');
         }

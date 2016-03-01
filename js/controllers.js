@@ -62,6 +62,7 @@ angular.module('starter.controllers', [])
             MAKE_MODEL:'dse_make_model',
             ALL_STATE:'dse_all_state',
             ALL_DISTRICT:'dse_all_district',
+            USERNAME:'username'
         });
 
         $scope.SaveLoginCredential = function (data) {

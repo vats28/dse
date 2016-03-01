@@ -34,18 +34,18 @@ angular.module('starter.createEnquiry', [])
         }
 
         $scope.getFolDateWithMonthName = function (dateString) {
-           
-            if(!dateString){
+
+            if (!dateString) {
                 var nextDate = date_picker.addDays(new Date(), -1);
                 dateString = date_picker.convertDateToString(nextDate, 'yyyy-mm-dd');
-            }else{
+            } else {
                 return;
             }
             $scope.sessionVariable.temp_cont_enq.fol_date = dateString;//date_picker.getDateWithMonthName(dateString);
         }
 
         $scope.saveTempEnquiry = function () {
-            if(!$scope.sessionVariable.temp_cont_enq.model_interested){
+            if (!$scope.sessionVariable.temp_cont_enq.model_interested) {
                 $scope.showAlertWindow_Titled('Error', 'Please select a model');
                 return;
             }
@@ -53,19 +53,19 @@ angular.module('starter.createEnquiry', [])
             //    $scope.showAlertWindow_Titled('Error', 'Please select a date of purcahse ');
             //    return;
             //}
-            if(!$scope.sessionVariable.temp_cont_enq.fol_date){
+            if (!$scope.sessionVariable.temp_cont_enq.fol_date) {
                 $scope.showAlertWindow_Titled('Error', 'Please select a followup date');
                 return;
             }
 
-            if($scope.sessionVariable.temp_cont_enq.existVeh == 1){
-                if(!$scope.sessionVariable.temp_cont_enq.existMake){
+            if ($scope.sessionVariable.temp_cont_enq.existVeh == 1) {
+                if (!$scope.sessionVariable.temp_cont_enq.existMake) {
                     $scope.showAlertWindow_Titled('Error', 'Please select make in dropdown');
 
                     return;
                 }
 
-                if(!$scope.sessionVariable.temp_cont_enq.existModel){
+                if (!$scope.sessionVariable.temp_cont_enq.existModel) {
                     $scope.showAlertWindow_Titled('Error', 'Please select model in dropdown');
                     return;
                 }
@@ -81,19 +81,20 @@ angular.module('starter.createEnquiry', [])
             //    return;
             //}
 
-           // $scope.jumpTo('app.add_vehicle_info');
-           $scope.requestData = {};
-           $scope.requestData = $scope.sessionVariable.temp_cont_enq;
-           $scope.requestData.state = $scope.sessionVariable.login_data.state_id.split(',')[1];
-           $scope.requestData.district = $scope.sessionVariable.login_data.district_id.split(',')[1];
-           $scope.requestData.tehsil = $scope.sessionVariable.login_data.tehsil_id.split(',')[1];
-           $scope.requestData.village = $scope.sessionVariable.login_data.village_id.split(',')[1];
-           alert($scope.requestData.state);
-           alert(JSON.stringify($scope.requestData));
+            // $scope.jumpTo('app.add_vehicle_info');
+            $scope.requestData = {};
+            $scope.requestData.user_id = $scope.sessionVariable.username;
+            $scope.requestData = $scope.sessionVariable.temp_cont_enq;
+            $scope.requestData.state = $scope.sessionVariable.login_data.state_id;//.split(',')[1];
+            $scope.requestData.district = $scope.sessionVariable.login_data.district_id;//.split(',')[1];
+            $scope.requestData.tehsil = $scope.sessionVariable.login_data.tehsil_id;//.split(',')[1];
+            $scope.requestData.village = $scope.sessionVariable.login_data.village_id;//.split(',')[1];
+            //alert($scope.requestData.state);
+            alert(JSON.stringify($scope.requestData));
             $scope.showAlertWindow_Titled('Success', 'Enquiry has been created successfully', $scope.after_saveTempVehicle);
         }
 
-        $scope.after_saveTempVehicle = function(){
+        $scope.after_saveTempVehicle = function () {
             $scope.sessionVariable.temp_cont_enq = {};
             $scope.disableBack();
             $scope.jumpTo('app.dashboard');

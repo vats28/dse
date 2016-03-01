@@ -14,6 +14,7 @@ angular.module('starter.landing', [])
             try {
                 loginData = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.STATE));
                 if (loginData) { // do login with previously available data
+                    $scope.sessionVariable.username = $scope.GetInLocalStorage($scope.localStorageKeys.USERNAME);
                     $scope.doLogin_callback(loginData);
                 }
             } catch (error) {
@@ -52,7 +53,7 @@ angular.module('starter.landing', [])
             //$scope.jumpTo('app.dashboard');
             //return;
             //{"result":true,"respDescription":"Valid User","respCode":1}
-            //alert(JSON.stringify(data));
+            
             if (data.result == true) {
                 $scope.sessionVariable.login_data = data;
                 $scope.sessionVariable.state_list = data.state;
@@ -60,6 +61,8 @@ angular.module('starter.landing', [])
 
                 $scope.SaveInLocalStorage($scope.localStorageKeys.STATE, JSON.stringify(data));
                 $scope.SaveInLocalStorage($scope.localStorageKeys.STATE_ID, data.state_id);
+                $scope.SaveInLocalStorage($scope.localStorageKeys.USERNAME, $scope.sessionVariable.username);
+                //alert(JSON.stringify($scope.sessionVariable.username));
                 //$scope.sessionVariable.isLoggedIn = false;
                 // $scope.sessionVariable.login_data = data;
 
