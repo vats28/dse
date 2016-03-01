@@ -20,7 +20,7 @@ angular.module('utils.date_picker', [])
                 var options = {
                     date: new Date(),
                     mode: dateOrTime,//'date', // or 'time'
-                    // minDate: _minDate,
+                    //minDate: _minDate,
                     // maxDate: _maxDate,
                     // allowOldDates: allowOld,
                     // allowFutureDates: allowFuture,
@@ -30,12 +30,12 @@ angular.module('utils.date_picker', [])
                     cancelButtonColor: '#000000'
                 };
 
-                if (!allowOld) {
-                    options.minDate = new Date() - 0;
-                }
-                if (!allowFuture) {
-                    options.maxDate = new Date() - 0;
-                }
+                // if (!allowOld) {
+                //     options.minDate = new Date() - 0;
+                // }
+                // if (!allowFuture) {
+                //     options.maxDate = new Date() - 0;
+                // }
 
                 // if (minDate) {
                 //     options.minDate = minDate;
@@ -135,6 +135,10 @@ angular.module('utils.date_picker', [])
             return age;
         }
 
+        function addDays(date, days) {
+            return new Date(date.getTime() + days * 24 * 60 * 60 * 1000);
+        }
+
         return {
             getDate: function (dateOrTime, callback, allowOld, allowFuture) {
                 _getDate(dateOrTime, callback, allowOld, allowFuture);
@@ -150,6 +154,9 @@ angular.module('utils.date_picker', [])
             },
             convertDateToString: function (date, format) { // new date(), yyyy-mm-dd
                 return ConvertDateToString(date, format);
+            },
+            addDays: function(date, days){
+                return addDays(date, days);
             }
         }
     });

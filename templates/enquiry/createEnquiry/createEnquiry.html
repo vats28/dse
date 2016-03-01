@@ -52,7 +52,7 @@
 
                             <p  ng-bind="getDateWithMonthName(sessionVariable.temp_cont_enq.fol_date)">23 oct, 2015</p>
                             <p  ng-bind="getFolDateWithMonthName(sessionVariable.temp_cont_enq.fol_date)"
-                                ng-if="!sessionVariable.temp_cont_enq.fol_date">23 oct, 2015</p>
+                                ng-if="!sessionVariable.temp_cont_enq.fol_date">-- select --</p>
 
                             <!--<p ng-if="!sessionVariable.temp_cont_enq.fol_date">&#45;&#45;Select&#45;&#45;</p>-->
                         </div>
@@ -61,7 +61,7 @@
 
                             <p ng-bind="getDateWithMonthName(sessionVariable.temp_cont_enq.exp_purchase_date)">23 oct, 2015</p>
 
-                            <p ng-if="!sessionVariable.temp_cont_enq.exp_purchase_date">--Select--</p>
+                            <p ng-if="!sessionVariable.temp_cont_enq.exp_purchase_date">-- select --</p>
                         </div>
                     </div>
                 </div>

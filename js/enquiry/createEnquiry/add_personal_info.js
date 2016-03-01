@@ -26,9 +26,7 @@ angular.module('starter.add_personal_info', [])
         $scope.init = function () {
             $scope.showLoader("");
             try {
-                if ($scope.sessionVariable.search.phone) {// to prepopulate phone number for which search initialized
-                    $scope.sessionVariable.temp_cont_enq.mobile = $scope.sessionVariable.search.phone;
-                }
+                
 
 
                 $scope.showLoader('Please wait...');
@@ -103,7 +101,7 @@ angular.module('starter.add_personal_info', [])
             $scope.sessionVariable.login_data.district_id = undefined;
             $scope.sessionVariable.login_data.tehsil_id = undefined;
             // fetch new districts
-            $scope.get_district($scope.sessionVariable.login_data.state_id);
+            $scope.get_district($scope.sessionVariable.login_data.state_id.split(',')[0]);
         }
 
         $scope.onDistrictChange = function () {
@@ -150,8 +148,8 @@ angular.module('starter.add_personal_info', [])
                 $scope.showAlertWindow_Titled('Error', 'Please enter last name');
                 return;
             }
-            if (!$scope.sessionVariable.temp_cont_enq.dob) {
-                $scope.showAlertWindow_Titled('Error', 'Please select date of birth');
+            if (!$scope.sessionVariable.temp_cont_enq.age) {
+                $scope.showAlertWindow_Titled('Error', 'Please enter age');
                 return;
             }
             if (!$scope.sessionVariable.temp_cont_enq.gender) {

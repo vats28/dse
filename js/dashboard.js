@@ -77,6 +77,7 @@ angular.module('starter.dashboard', [])
             $scope.hideLoader();
             //alert(JSON.stringify(data));
             $scope.sessionVariable.temp_cont_enq = {};
+            $scope.sessionVariable.temp_cont_enq.mobile = $scope.sessionVariable.search.phone;
             if (data.success == true ) {
                 //alert('true');
                 $scope.sessionVariable.contact_list = data;

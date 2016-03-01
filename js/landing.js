@@ -2,9 +2,7 @@ angular.module('starter.landing', [])
 
     .controller('landingCtrl', function ($scope, $cordovaOauth, generic_http_post_service) {
 
-        $scope.client_id = "98200528367-tfg3dnom46bo61d0aba7i19qbmurs0i9.apps.googleusercontent.com";
-        $scope.user_email = "abhi007vats@gmail.com";
-        $scope.google_scope = "https://www.googleapis.com/auth/drive";
+        
         // Form data for the login modal
 
         $scope.sessionVariable.username = '10375G01';

@@ -269,7 +269,7 @@ angular.module('starter.controllers', [])
             }
             $scope.showLoader("");
             $scope.requestData = {};
-            $scope.requestData.state_id = state_id;//$scope.sessionVariable.login_data.state_id;
+            $scope.requestData.state_id = state_id.split(',')[0];//$scope.sessionVariable.login_data.state_id;
             generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().GET_DISTRICT,
                 $scope.requestData, $scope.get_district_callback);
 
@@ -295,7 +295,7 @@ angular.module('starter.controllers', [])
             }
             $scope.showLoader("");
             $scope.requestData = {};
-            $scope.requestData.district_id = $scope.sessionVariable.login_data.district_id;
+            $scope.requestData.district_id = $scope.sessionVariable.login_data.district_id.split(',')[0];
             generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().GET_TEHSIL,
                 $scope.requestData, $scope.get_tehsil_callback);
         };//end doLogin
@@ -319,7 +319,7 @@ angular.module('starter.controllers', [])
             }
             $scope.showLoader("");
             $scope.requestData = {};
-            $scope.requestData.tehsil_id = $scope.sessionVariable.login_data.tehsil_id;
+            $scope.requestData.tehsil_id = $scope.sessionVariable.login_data.tehsil_id.split(',')[0];
             generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().GET_VILLAGE,
                 $scope.requestData, $scope.get_village_callback);
         };//end doLogin
@@ -343,7 +343,7 @@ angular.module('starter.controllers', [])
             }
             $scope.showLoader("");
             $scope.requestData = {};
-            $scope.requestData.state_id = $scope.sessionVariable.login_data.state_id;
+            $scope.requestData.state_id = $scope.sessionVariable.login_data.state_id.split(',')[0];
             generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().GET_STATE_DATA,
                 $scope.requestData, $scope.get_fullstate_data_callback);
         };//end doLogin
@@ -367,7 +367,7 @@ angular.module('starter.controllers', [])
             }
             $scope.showLoader("");
             $scope.requestData = {};
-            $scope.requestData.district_id = $scope.sessionVariable.login_data.district_id;
+            $scope.requestData.district_id = $scope.sessionVariable.login_data.district_id.split(',')[0];
             generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().GET_DISTRICT_DATA,
                 $scope.requestData, $scope.get_full_district_data_callback);
         };//end doLogin
