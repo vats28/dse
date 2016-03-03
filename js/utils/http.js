@@ -21,7 +21,7 @@ angular.module('utils.http_post', [])
             GET_STATE_DATA: server_host + server_api_path + 'get_state_data.php',// state_id to fetch all district, tehsil and village in one go
             LATLONG: server_host + server_api_path + 'latlong.php',
             FETCH_CONTACT: server_host + server_api_path + 'fetch_contact.php',
-            FETCH_CONTACT: server_host + server_api_path + 'fetch_contact.php',
+            SYNC_RECORDS: server_host + server_api_path + 'syncRecords.php',
         });
 
         var networkError = {

@@ -1,11 +1,14 @@
 <ion-modal-view>
-    <ion-header-bar class="header-bg">
+    <ion-header-bar class="light">
         <h1 class="title light">Search Filter</h1>
         <button ng-click="closeModal()" class="animated fadeInUpBig fab-button-new t-20 r-20 size-48 light-bg ">
             <i class="icon ion ion-close"></i></button>
     </ion-header-bar>
     <ion-content class="filterPage" ng-controller="searchFilterCtrl">
-        <div class="item item-divider">
+        <div class="item item-divider" style="border:0px;">
+            &nbsp;
+        </div>
+        <!--<div class="item item-divider">
             Enquiry Type
         </div>
         <div class="item">
@@ -18,8 +21,8 @@
                 <button ng-class="{'button button-small button-assertive' : search_filter.status == 3,
                             'button button-small button-assertive button-outline' : search_filter.status != 3}" ng-click="setStatus(3)">Closed</button>
             </div>
-        </div>
-        <div class="item  item-toggle stable-bg">
+        </div>-->
+        <div class="item  item-toggle stable-bg" style="border-top:0px;">
             Created date
             <label class="toggle toggle-assertive">
                 <input type="checkbox" ng-model="search_filter.IsCreateDate">

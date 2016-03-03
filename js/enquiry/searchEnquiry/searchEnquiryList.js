@@ -1,7 +1,7 @@
 
 angular.module('starter.searchEnquiryList', [])
 
-    .controller('searchEnquiryListCtrl', function ($scope, $ionicPopup, $ionicModal, date_picker) {
+    .controller('searchEnquiryListCtrl', function ($scope, $ionicPopup, $ionicModal,$timeout, date_picker) {
 
         $scope.arrayList = {};
         $scope.arrayList.enquiries = [
@@ -28,8 +28,10 @@ angular.module('starter.searchEnquiryList', [])
 
 
         $scope.init = function(){
-            openModal();
-        }
+           $timeout(function () {
+                  $scope.openModal();
+                 }, 300);           
+        }//end init
         
 
     $scope.closeEnquiry = function (index) {

@@ -106,6 +106,8 @@ angular.module('utils.date_picker', [])
 
             if (format == "dd/mm/yyyy") {
                 result = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+            }else if (format == "mm/dd/yyyy") {
+                result = date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
             } else if (format == "yyyy-mm-dd") {
                 result = date.getFullYear() + "-" + padLeftZero(date.getMonth() + 1) + "-" + padLeftZero(date.getDate());
             }
@@ -115,13 +117,17 @@ angular.module('utils.date_picker', [])
 
         function formattedDate(dateString, format) {
             var result = "";
-            if (dateString == "")
+            if (!dateString)
                 return result;
             //alert(datestring);
             var datArr = dateString.split('-');
-            if (format == "dd/mm/yyyy") {
-                var curr_date = new Date(datArr[0], datArr[1], datArr[2]); // new Date(y,m,d);
-                result = curr_date.getDate() + '/' + curr_date.getMonth() + '/' + curr_date.getFullYear();
+             var curr_date = new Date(datArr[0], datArr[1], datArr[2]); // new Date(y,m,d);
+            if (format == "dd/mm/yyyy") {               
+                result = padLeftZero(curr_date.getDate()) + '/' + padLeftZero(curr_date.getMonth()) + '/' + curr_date.getFullYear();
+            }else if (format == "mm/dd/yyyy") {
+                result = padLeftZero(curr_date.getMonth()) + '/' + padLeftZero(curr_date.getDate()) + '/' + curr_date.getFullYear();
+            }else if (format == "yyyy-mm-dd") {
+                result = curr_date.getFullYear() + '-' + padLeftZero(curr_date.getMonth()) + '-' + padLeftZero(curr_date.getDate());
             }
 
             return result;

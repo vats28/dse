@@ -5,7 +5,7 @@ angular.module('starter.landing', [])
         
         // Form data for the login modal
 
-        $scope.sessionVariable.username = '10375G01';
+        $scope.sessionVariable.username = '10691G01';
         $scope.sessionVariable.password = 'pass@123';
 
         $scope.init = function () {

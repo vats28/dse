@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
     .controller('AppCtrl', function ($scope, $state, $ionicModal, $ionicPopup, $ionicHistory, $ionicScrollDelegate,
-        $timeout, $ionicSideMenuDelegate, $ionicLoading,$ionicPlatform, generic_http_post_service, date_picker) {
+        $timeout, $ionicSideMenuDelegate, $ionicLoading, $ionicPlatform, generic_http_post_service, date_picker) {
 
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
@@ -57,12 +57,12 @@ angular.module('starter.controllers', [])
             VILLAGE: 'dse_village',
             STATE: 'dse_state',
             STATE_ID: 'dse_state_id',
-            DISTRICT_ID:'dse_district_id',
-            TEHSIL_ID:'dse_tehsil_id',
-            MAKE_MODEL:'dse_make_model',
-            ALL_STATE:'dse_all_state',
-            ALL_DISTRICT:'dse_all_district',
-            USERNAME:'username'
+            DISTRICT_ID: 'dse_district_id',
+            TEHSIL_ID: 'dse_tehsil_id',
+            MAKE_MODEL: 'dse_make_model',
+            ALL_STATE: 'dse_all_state',
+            ALL_DISTRICT: 'dse_all_district',
+            USERNAME: 'username'
         });
 
         $scope.SaveLoginCredential = function (data) {
@@ -213,14 +213,14 @@ angular.module('starter.controllers', [])
         };
 
         // A confirm dialog
-        $scope.showConfirm = function(title, template, callback) {
+        $scope.showConfirm = function (title, template, callback) {
             $ionicPopup.confirm({
                 title: title,
                 template: template,
-            }).then(function(res) {
-                if(res) {
+            }).then(function (res) {
+                if (res) {
                     console.log('You are sure');
-                    if(callback) {
+                    if (callback) {
                         callback();
                     }
                 } else {
@@ -243,7 +243,7 @@ angular.module('starter.controllers', [])
         }//end
 
 
-        $scope.doLogout = function(){
+        $scope.doLogout = function () {
             $scope.disableBack();
             $scope.jumpTo('app.landing');
             $scope.clearHistory();
@@ -279,7 +279,7 @@ angular.module('starter.controllers', [])
         $scope.get_district_callback = function (data) {
             $scope.hideLoader();
             //alert(JSON.stringify(data));
-            if (data.result != [] ) {
+            if (data.result != []) {
                 $scope.sessionVariable.district_list = data.district;
                 //alert($scope.localStorageKeys.DISTRICT);
                 $scope.SaveInLocalStorage($scope.localStorageKeys.DISTRICT, JSON.stringify(data));
@@ -304,9 +304,9 @@ angular.module('starter.controllers', [])
         $scope.get_tehsil_callback = function (data) {
             $scope.hideLoader();
             //alert(JSON.stringify(data));
-            if (data.result != [] ) {
+            if (data.result != []) {
                 $scope.sessionVariable.tehsil_list = data.tehsil;
-                $scope.SaveInLocalStorage($scope.localStorageKeys.TEHSIL,  JSON.stringify(data));
+                $scope.SaveInLocalStorage($scope.localStorageKeys.TEHSIL, JSON.stringify(data));
             } else {
                 $scope.showAlertWindow_Titled("Error", data.respDescription, null, null);
             }
@@ -328,7 +328,7 @@ angular.module('starter.controllers', [])
         $scope.get_village_callback = function (data) {
             $scope.hideLoader();
             //alert(JSON.stringify(data));
-            if (data.result != [] ) {
+            if (data.result != []) {
                 $scope.sessionVariable.village_list = data.village;
                 $scope.SaveInLocalStorage($scope.localStorageKeys.TEHSIL_ID, $scope.sessionVariable.login_data.tehsil_id);
                 // $scope.SaveInLocalStorage($scope.localStorageKeys.VILLAGE, data.village);
@@ -352,7 +352,7 @@ angular.module('starter.controllers', [])
         $scope.get_fullstate_data_callback = function (data) {
             $scope.hideLoader();
             //alert(JSON.stringify(data));
-            if (data.result != [] ) {
+            if (data.result != []) {
                 $scope.sessionVariable.allStates = data;
                 $scope.SaveInLocalStorage($scope.localStorageKeys.ALL_STATE, JSON.stringify(data));
                 // $scope.SaveInLocalStorage($scope.localStorageKeys.VILLAGE, data.village);
@@ -376,7 +376,7 @@ angular.module('starter.controllers', [])
         $scope.get_full_district_data_callback = function (data) {
             $scope.hideLoader();
             //alert(JSON.stringify(data));
-            if (data.result != [] ) {
+            if (data.result != []) {
                 $scope.sessionVariable.allDistrict = data;
                 $scope.sessionVariable.tehsil_list = data.tehsil;
                 $scope.sessionVariable.village_list = data.village;
@@ -397,7 +397,7 @@ angular.module('starter.controllers', [])
         $scope.get_make_model_callback = function (data) {
             $scope.hideLoader();
             //Falert(JSON.stringify(data));
-            if (data.result != [] ) {
+            if (data.result != []) {
                 $scope.sessionVariable.make_model_list = data;
                 $scope.SaveInLocalStorage($scope.localStorageKeys.MAKE_MODEL, JSON.stringify(data));
             } else {
@@ -472,6 +472,38 @@ angular.module('starter.controllers', [])
             $scope.search_filter.status = value;
         }
 
+        $scope.isNumberKey = function (evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+            if (charCode != 46 && charCode > 31
+                && (charCode < 48 || charCode > 57))
+                return false;
 
+            return true;
+        }
+        
+        
+        $scope.ConvertBoolToNumber = function(value){
+            var retval = 0;
+            if(value){
+                retval = 1;
+            }
+            return retval;
+        }
+        
+         $scope.getValueInJson = function (arr, keyvalue, keyname, required_key) {
+            var retval = "";
+            var keepGoing = true;
+
+            angular.forEach(arr, function (value, key) {
+                if (keepGoing) {
+                    if (value[keyname] == keyvalue) {
+                        retval = value[required_key];
+                        keepGoing = false;
+                    }
+                }
+            });
+            
+            return retval;
+        }
 
     });

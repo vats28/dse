@@ -9,7 +9,7 @@
 
                 <div class="item item-input item-select item-text-wrap " style="background-color: #CBCBCB; font-weight: bold">
                     <div class="input-label">
-                        Model interested in
+                       Model <!--Model interested in-->
                     </div>
                     <select class="red-select" ng-model="sessionVariable.temp_cont_enq.model_interested" style="width: 50% !important; align:center" >
                         <option value="">--select--</option>
@@ -56,8 +56,9 @@
 
                             <!--<p ng-if="!sessionVariable.temp_cont_enq.fol_date">&#45;&#45;Select&#45;&#45;</p>-->
                         </div>
+                        
                         <div class="col date-col" ng-click="pickDate('exp')">
-                            <h2 class="dark">Expected date of purchase</h2>
+                            <h2 class="dark">Expected date of purchase {{sessionVariable.temp_cont_enq.exp_purchase_date}}</h2>
 
                             <p ng-bind="getDateWithMonthName(sessionVariable.temp_cont_enq.exp_purchase_date)">23 oct, 2015</p>
 
@@ -85,13 +86,14 @@
             <div class="card">
                 <label class="item item-input item-select">
                     <div class="input-label">
-                        Existing Vehicle
+                        Existing Vehicle 
                     </div>
                     <select ng-model="sessionVariable.temp_cont_enq.existVeh" ng-changed="onExistVeh_Change()">
                         <option value="" selected>Select</option>
-                        <option value="1">Two wheeler</option>
-                        <option value="2">Four wheeler</option>
-                        <option value="3">First time buyer</option>
+                        <!--<option value="Two Wheeler">Two Wheeler</option>
+                        <option value="Four Wheeler">Four Wheeler</option>
+                        <option value="First Time Buyer">First Time Buyer</option>-->
+                        <option ng-repeat="item in veh_type_list" value="{{item.id}}">{{item.type}}</option>
                     </select>
                 </label>
 

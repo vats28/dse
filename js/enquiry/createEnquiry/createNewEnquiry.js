@@ -6,7 +6,74 @@ angular.module('starter.createNewEnquiry', [])
 
         $scope.init = function () {
             $scope.sessionVariable.temp_cont_enq = {};
-            $scope.sessionVariable.temp_cont_enq.exp_purchase_date = '2016-03-10';
+            //$scope.sessionVariable.temp_cont_enq.exp_purchase_date = '2016-03-10';
+        }
+        
+        
+         $scope.getMakeModel_data = function () {
+            $scope.showLoader("");
+            try {
+                
+
+
+                $scope.showLoader('Please wait...');
+                //in case full_district data is saved
+                var make_model_data = null;
+                var fullDistrictData = null;
+                var districtData = null;
+
+                //in case district data is already available
+                try {
+                    // alert($scope.GetInLocalStorage($scope.localStorageKeys.DISTRICT));
+                    districtData = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.DISTRICT));
+
+
+                } catch (error) {
+                    alert(error);
+                    $scope.hideLoader();
+                }
+                if (districtData) {
+
+                    $scope.sessionVariable.district_list = districtData.district;
+                    $scope.sessionVariable.login_data.district_id = $scope.GetInLocalStorage($scope.localStorageKeys.DISTRICT_ID);
+                    // alert("districtData.district  " + $scope.sessionVariable.login_data.district_id);
+
+                    try {
+                        fullDistrictData = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.ALL_DISTRICT));
+                        //alert(JSON.stringify(fullDistrictData));
+                        if (fullDistrictData) {
+                            $scope.sessionVariable.tehsil_list = fullDistrictData.tehsil;
+                            $scope.sessionVariable.village_list = fullDistrictData.village;
+                        }
+                    } catch (error) {
+                        alert(error);
+                        $scope.hideLoader();
+                    }
+                } else {
+                    $scope.get_district($scope.sessionVariable.login_data.state_id);
+                }
+
+
+                try {
+                    make_model_data = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.MAKE_MODEL));
+
+                } catch (error) {
+                    alert(error);
+                    $scope.hideLoader();
+                }
+                //if its already available dont
+                if (make_model_data) {
+                    $scope.sessionVariable.make_list = make_model_data.make;
+                    $scope.sessionVariable.model_list = make_model_data.model;
+                } else {
+                    $scope.get_make_model();
+                }
+                $scope.hideLoader();
+            }catch(error){
+                alert(error);
+                $scope.hideLoader();
+            }
+            //
         }
 
         $scope.selectedModel = '';
@@ -37,7 +104,7 @@ angular.module('starter.createNewEnquiry', [])
         $scope.getFolDateWithMonthName = function (dateString) {
 
             if (!dateString) {
-                var nextDate = date_picker.addDays(new Date(), -1);
+                var nextDate = date_picker.addDays(new Date(), 1);
                 dateString = date_picker.convertDateToString(nextDate, 'yyyy-mm-dd');
             } else {
                 return;
@@ -60,16 +127,16 @@ angular.module('starter.createNewEnquiry', [])
             }
 
             if ($scope.sessionVariable.temp_cont_enq.existVeh == 1) {
-                if (!$scope.sessionVariable.temp_cont_enq.existMake) {
-                    $scope.showAlertWindow_Titled('Error', 'Please select make in dropdown');
+                // if (!$scope.sessionVariable.temp_cont_enq.existMake) {
+                //     $scope.showAlertWindow_Titled('Error', 'Please select make in dropdown');
 
-                    return;
-                }
+                //     return;
+                // }
 
-                if (!$scope.sessionVariable.temp_cont_enq.existModel) {
-                    $scope.showAlertWindow_Titled('Error', 'Please select model in dropdown');
-                    return;
-                }
+                // if (!$scope.sessionVariable.temp_cont_enq.existModel) {
+                //     $scope.showAlertWindow_Titled('Error', 'Please select model in dropdown');
+                //     return;
+                // }
 
             }
             //if(!$scope.sessionVariable.temp_cont_enq.fol_time){

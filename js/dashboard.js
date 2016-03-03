@@ -63,7 +63,7 @@ angular.module('starter.dashboard', [])
             $scope.showLoader("");
             $scope.requestData = {};
             $scope.requestData.user_id = $scope.sessionVariable.username;
-            $scope.requestData.dealer_code = '10375';
+            $scope.requestData.dealer_code = '10691';
             $scope.requestData.phn_no = $scope.sessionVariable.search.phone? $scope.sessionVariable.search.phone : "" ;
             $scope.requestData.reg_no = $scope.sessionVariable.search.regno ? $scope.sessionVariable.search.regno : "" ;
 
@@ -79,7 +79,6 @@ angular.module('starter.dashboard', [])
             $scope.sessionVariable.temp_cont_enq = {};
             $scope.sessionVariable.temp_cont_enq.mobile = $scope.sessionVariable.search.phone;
             if (data.success == true ) {
-                //alert('true');
                 $scope.sessionVariable.contact_list = data;
                 $scope.jumpTo('app.contactList');
             } else {
