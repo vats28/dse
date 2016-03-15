@@ -1,0 +1,43 @@
+<ion-modal-view>
+    <ion-header-bar class="header-bg">
+        <h1 class="title light">Close Enquiry</h1>
+        <button ng-click="close_CloseEnquiryModal()" class="animated fadeInUpBig fab-button-new t-20 r-20 size-48 light-bg ">
+            <i class="icon ion ion-close"></i></button>
+    </ion-header-bar>
+    <fab-button target-id="" class="animated zoomInDown light_opacity" ng-click="close_CloseEnquiryModal()" >
+        <i class="icon ion ion-ios-arrow-forward "></i>
+    </fab-button>
+    <ion-content class="filterPage">
+        <div class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Main reason</span>
+                <input type="text" placeholder="Main reason">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Sub Reason</span>
+                <input type="text" placeholder="Sub Reason">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Make</span>
+                <input type="text" placeholder="Make">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Model</span>
+                <input type="text" placeholder="Model">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Close date</span>
+                <input type="date" placeholder="Close date">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Remark</span>
+                <input type="text" placeholder="Remark">
+            </label>
+
+            <!--<button class="button button-block button-assertive" style="margin: 0px 20px 0px 20px;">
+                           Done
+                        </button>-->
+        </div>
+    </ion-content>
+
+</ion-modal-view>

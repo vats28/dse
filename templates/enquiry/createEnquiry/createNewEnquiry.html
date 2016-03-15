@@ -1,0 +1,110 @@
+<ion-view ng-controller="createNewEnquiryCtrl" view-title="Add New Enquiry" class="black-bg"
+ ng-init="init()">
+    <fab-button target-id="" class="animated zoomInDown" 
+   ng-click="saveTempEnquiry()">
+        <i class="icon ion ion-ios-arrow-forward "></i>
+    </fab-button>
+    
+    <!--ng-style="{{sessionVariable.createEnquiry.dop ? style.opacity.FULL : style.opacity.LIGHT}}"
+    
+     ng-disabled="!createEnquiry.dop" -->
+    <ion-content class=" has-header">
+        <div class="card">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Model interested in
+                </div>
+                <select>
+                    <option>Splendor</option>
+                    <option selected>Duet</option>
+                    <option>Meastro</option>
+                </select>
+            </label>
+
+            <ion-list>
+
+                <ion-checkbox>Exchange Required</ion-checkbox>
+                <ion-checkbox>Finance Required</ion-checkbox>
+
+            </ion-list>
+        </div>
+
+        <div class="card">
+              <!--<label class="item item-input">
+                <span class="input-label">Expected date of purchase</span>
+                <input type="date" placeholder="eg. 24-01-2000">
+               
+                
+            </label>-->
+            <div class="item">
+             
+                    <span class=" margin-r-20" style="float:left;">Expected date of purchase</span>
+                    <h3 class="positive" ng-click="pickDate('exp')"  ng-bind="data.expDate" >24-01-1999</h3>
+               
+            </div>
+
+            <div class="item">
+                <p>Next followup date & time</p>
+                <h2>
+                    <a class="positive margin-r-20" ng-click="pickDate('fol')" ng-bind="data.folDate">24-01-1999</a>
+                    <a class="positive" ng-click="pickTime('folTime')" ng-bind="data.folTime">08:15 AM</a>
+                </h2>
+
+
+            </div>
+            <label class="item item-input">
+                <span class="input-label">Followup action</span>
+                <input type="text" placeholder="eg. anything worth noting">
+            </label>
+        </div>
+
+
+        <div class="card">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Existing Vehicle
+                </div>
+                <select ng-model="sessionVariable.existVeh">
+                    <option value="-1" selected>Select</option>
+                    <option  value="1">Two wheeler</option>
+                    <option value="2">Four wheeler</option>
+                    <option value="3">First time buyer</option>
+                </select>
+            </label>
+
+
+            <label class="item item-input item-select" 
+                ng-class="{'item-stable' : sessionVariable.existVeh != '1'}" >
+                <div class="input-label">
+                    Make
+                </div>
+                <select ng-disabled="sessionVariable.existVeh != '1'">
+                    <option selected>select</option>
+                    <option >Hero MotoCorp</option>
+                    <option>Bajaj</option>
+                    <option>Enfield</option>
+                </select>
+            </label>
+
+            <label class="item item-input item-select"
+            
+                ng-class="{'item-stable' : sessionVariable.existVeh != '1'}"  >
+                <div class="input-label">
+                    Type
+                </div>
+                <select ng-disabled="sessionVariable.existVeh != '1'">
+                    <option selected>select</option>
+                    <option>Splendor</option>
+                    <option >HF-Delux</option>
+                    <option>Plus</option>
+                </select>
+            </label>
+        </div>
+<br/>
+<br/>
+<br/>
+    </ion-content>
+    <!--<div class="bar bar-footer " style="background: transparent"> 
+        <button class="button button-balanced pull-right padding" ng-click="saveTempEnquiry()">Next</button>
+    </div>-->
+</ion-view>

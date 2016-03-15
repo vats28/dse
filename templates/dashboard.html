@@ -1,0 +1,51 @@
+<ion-view cache-view="false" view-title="Home" ng-controller="dashboardCtrl" ng-cloak class="black-bg">
+
+    <fab-button target-id="" class="animated zoomInDown" ng-click="fetch_contact()" ng-if="(sessionVariable.search.phone && sessionVariable.search.phone.length > 9) || (sessionVariable.search.regno && sessionVariable.search.regno.length > 9)">
+        <i class="icon ion ion-ios-arrow-forward "></i>
+    </fab-button>
+    <ion-content ng-init="init()">
+
+        <div style="margin: 40px 40px 40px 40px; text-align:center;background: transparent; font: 16px;">
+            <b class="light">To see enquiries you need to search for mobile or registartion no.</b>
+        </div>
+
+
+        <div class="row">
+            <div class="col v-tab-item" >
+                <button   ng-click="jumpTo('app.followupList')" class=" animated flip fab-button-new assertive-bg size-48 "
+                style="position:relative;animation-duration: 1s;">
+                    <i class="icon ion ion-calendar light"></i>
+                </button>
+                    <br/> Today's followup
+            </div>
+            <div class="col v-tab-item" >
+                <button   ng-click="jumpTo('app.followupList')" class=" animated flip fab-button-new assertive-bg size-48 "
+                          style="position:relative;animation-duration: 1s;">
+                    <i class="icon ion ion-ios-calendar light"></i>
+                </button>
+                <br/> Pending Followups
+            </div>
+            <div class="col v-tab-item" >
+                <button   ng-click="jumpTo('app.searchEnquiryList')" class=" animated flip fab-button-new assertive-bg size-48 "
+                          style="position:relative;animation-duration: 1s;">
+                    <i class="icon ion ion-android-search light"></i>
+                </button>
+                <br/> Search Enquiry
+            </div>
+        </div>
+        <div class="card">
+            <!--{{sessionVariable.hideFollowBtn}}-->
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Phone / Mobile</span>
+                <input type="tel" maxlength="10" data-ng-model="sessionVariable.search.phone" ng-focus="sessionVariable.hideFollowBtn" placeholder="eg : 90090909##">
+            </label>
+        </div>
+
+        <div class="card">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Registration No.</span>
+                <input type="text" maxlength="16" data-ng-model="sessionVariable.search.regno" ng-focus="sessionVariable.hideFollowBtn" placeholder="eg : 1234#####">
+            </label>
+        </div>
+    </ion-content>
+</ion-view>

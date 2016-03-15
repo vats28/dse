@@ -1,0 +1,36 @@
+<ion-modal-view>
+    <ion-header-bar class="header-bg">
+        <h1 class="title light">Followup Enquiry</h1>
+        <button ng-click="close_FollEnquiryModal()" class="animated fadeInUpBig fab-button-new t-20 r-20 size-48 light-bg ">
+            <i class="icon ion ion-close"></i></button>
+    </ion-header-bar>
+    <fab-button target-id="" class="animated zoomInDown light_opacity" ng-click="close_CloseEnquiryModal()">
+        <i class="icon ion ion-ios-arrow-forward "></i>
+    </fab-button>
+    <ion-content class="filterPage">
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">Followup action</span>
+            <input type="text" placeholder="Main reason">
+        </label>
+        <div class="item item-divider">
+            Next Schedule
+        </div>
+        <div class="item padding-0">
+            <div class="row">
+                <div class="col r-border date-col" ng-click="pickDate()">
+                    <h2 class="dark">Date</h2>
+                    <!--<p>23 oct, 2015</p>-->
+                    <!--<p style="line-height:2;" ng-bind=" getDateWithMonthName(nextFollowup.date)">23 oct, 2015</p>-->
+                    <p style="line-height:2;" >23 oct, 2015</p>
+                    <!--<p style="line-height:2;" ng-if="!nextFollowup.date">--Select--</p>-->
+                </div>
+                <div class="col date-col">
+
+                    <h2 class="dark">Time</h2>
+                    <p style="line-height:2;" >06:00 AM</p>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+
+</ion-modal-view>

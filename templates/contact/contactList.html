@@ -1,0 +1,25 @@
+<ion-view view-title="Contacts">
+  <ion-pane ng-controller="contactListCtrl" ng-init="init()">
+    <!--<fab-button target-id="">
+      <i class="icon ion ion-android-add "></i>
+    </fab-button>-->
+
+    <ion-content>
+      <div class="list">
+        <a class="item item-icon-right " href="#" ng-click="showDetail()" ng-repeat="item in sessionVariable.contact_list">
+          <i class="icon ion-ios-arrow-forward assertive"></i> <span ng-bind="item.name">Pawan Kumar</span>
+          <p><span class="margin-r-20" ng-bind="item.phone">955571####</span><span ng-bind="item.city">Gurgaon</span></p>
+        </a>
+
+
+        <ion-item class="item-icon-left item-text-wrap assertive" ng-if="!sessionVariable.contact_list">
+          <i class="icon ion ion-alert-circled"></i> Sorry
+          <p>No such contact found. You can add new contact and enquiry.</p>
+          
+          <a class="button  button-positive  button-clear" 
+          style="padding:0px; min-width: 175px; text-align: left;" ng-click="jumpTo('app.add_personal_info')">Add new enquiry</a>
+        </ion-item>
+      </div>
+    </ion-content>
+  </ion-pane>
+</ion-view>
