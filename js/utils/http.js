@@ -22,6 +22,9 @@ angular.module('utils.http_post', [])
             LATLONG: server_host + server_api_path + 'latlong.php',
             FETCH_CONTACT: server_host + server_api_path + 'fetch_contact.php',
             SYNC_RECORDS: server_host + server_api_path + 'syncRecords.php',
+            SYNC_FOLLOW_UP: server_host + server_api_path + 'sync_follow_up.php',
+            GET_FOLLOW_UP: server_host + server_api_path + 'get_follow_up.php',
+            //sync_follow_up.php
         });
 
         var networkError = {

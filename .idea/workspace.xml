@@ -25,8 +25,8 @@
       <file leaf-file-name="contactDetail.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/contact/contactDetail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="97" selection-start-line="8" selection-start-column="97" selection-end-line="8" selection-end-column="97" />
+            <state vertical-scroll-proportion="0.46815833">
+              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
@@ -40,11 +40,8 @@
         <entry file="file://$PROJECT_DIR$/templates/contact/contactList.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="158" selection-start-line="10" selection-start-column="134" selection-end-line="10" selection-end-column="158" />
-              <folding>
-                <element signature="n#style#0;n#ion-item#0;n#div#0;n#ion-content#0;n#ion-pane#0;n#ion-view#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#ion-item#0;n#div#0;n#ion-content#0;n#ion-pane#0;n#ion-view#0;n#!!top" expanded="true" />
-              </folding>
+              <caret line="10" column="158" selection-start-line="10" selection-start-column="158" selection-end-line="10" selection-end-column="158" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -154,6 +151,9 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -202,14 +202,11 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/personal_test_projetcs/mCURA_2015/mcura_3_html" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="SearchEverywhereHistoryKey" value="app&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero-Copy/www/js/app.js&#10;index&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero-Copy/www/index.html&#10;con&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero-Copy/www/templates/contact/contactDetail.html&#10;das&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero-Copy/www/js/dashboard.js&#10;add&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero-Copy/www/js/enquiry/createEnquiry/add_personal_info.js&#10;sear&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero-Copy/www/js/enquiry/searchEnquiry/searchEnquiryList.js&#10;menu&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero-Copy/www/templates/menu.html&#10;dash&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero-Copy/www/templates/dashboard.html&#10;create&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero-Copy/www/js/enquiry/createEnquiry/createEnquiry.js&#10;contr&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero-Copy/www/js/controllers.js&#10;STY&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero-Copy/www/css/style.css&#10;lan&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero-Copy/www/js/landing.js&#10;date&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero/www/js/utils/date_picker.js&#10;crea&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero/www/templates/enquiry/createEnquiry/createEnquiry.html&#10;sty&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero/www/css/style.css&#10;contact&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero/www/templates/contact/contactDetail.html&#10;conta&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero/www/templates/contact/contactList.html&#10;http&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero/www/js/utils/http.js&#10;sea&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero/www/templates/popups/searchFilter.html&#10;contro&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero/www/js/controllers.js&#10;cre&#9;FILE&#9;file://C:/Users/deepanshus/Desktop/ionic/DSE_APP/dse_hero/www/templates/enquiry/createEnquiry/createEnquiry.html" />
     <property name="editor.config.accepted" value="true" />
@@ -577,15 +574,17 @@
       <workItem from="1456491452059" duration="1574000" />
       <workItem from="1456493357558" duration="15000" />
       <workItem from="1456653773372" duration="1096000" />
+      <workItem from="1457415091382" duration="509000" />
+      <workItem from="1457419682861" duration="240000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120930000" />
+    <option name="totallyTimeSpent" value="121679000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -596,7 +595,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24524158" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24524158" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -659,7 +658,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/controllers.js</url>
-          <line>355</line>
+          <line>356</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
@@ -668,6 +667,30 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/templates/contact/contactList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="158" selection-start-line="10" selection-start-column="158" selection-end-line="10" selection-end-column="158" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="32" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="60" selection-start-line="10" selection-start-column="60" selection-end-line="10" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -785,21 +808,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/a_logo.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/bg_new.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/button-transparent-bg.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/followup/followupList.html">
@@ -1011,18 +1019,15 @@
     <entry file="file://$PROJECT_DIR$/templates/contact/contactList.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="158" selection-start-line="10" selection-start-column="134" selection-end-line="10" selection-end-column="158" />
-          <folding>
-            <element signature="n#style#0;n#ion-item#0;n#div#0;n#ion-content#0;n#ion-pane#0;n#ion-view#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#ion-item#0;n#div#0;n#ion-content#0;n#ion-pane#0;n#ion-view#0;n#!!top" expanded="true" />
-          </folding>
+          <caret line="10" column="158" selection-start-line="10" selection-start-column="158" selection-end-line="10" selection-end-column="158" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/contact/contactDetail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="97" selection-start-line="8" selection-start-column="97" selection-end-line="8" selection-end-column="97" />
+        <state vertical-scroll-proportion="0.46815833">
+          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />

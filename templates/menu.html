@@ -18,7 +18,7 @@
     </ion-nav-bar>
     <ion-nav-view name="menuContent">
       <button ng-if="headerButton.showFilter" 
-      ng-click="openModal()"  ng-controller="searchEnquiryListCtrl"
+      ng-click="jumpTo('app.searchFilter')"  ng-controller="searchEnquiryListCtrl"
       class="animated fadeInUpBig fab-button-new t-20 r-20 size-48 light-bg ">
       <i class="icon ion ion-funnel"></i></button>
     </ion-nav-view>
@@ -46,7 +46,7 @@
           <i class="icon ion ion-calendar" ></i>
           Today's followup
         </ion-item>
-        <ion-item menu-close ng-click="jumpTo('app.followupList')" class="s_item dark-bg item-icon-left">
+        <ion-item menu-close ng-click="jumpTo('app.pendingFollowupList')" class="s_item dark-bg item-icon-left">
           <i class="icon ion ion-ios-calendar" ></i>
           Pending followup
         </ion-item>

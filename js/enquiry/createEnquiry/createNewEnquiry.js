@@ -1,80 +1,25 @@
 angular.module('starter.createNewEnquiry', [])
 
-    .controller('createNewEnquiryCtrl', function ($scope, date_picker) {
+    .controller('createNewEnquiryCtrl', function ($scope, generic_http_post_service, date_picker) {
 
         $scope.sessionVariable.createEnquiry = {};// for create enquiry
+        $scope.temp_cont_enq = {};
+        $scope.temp_cont_enq.exp_purchase_date = '2016-03-10';
 
-        $scope.init = function () {
-            $scope.sessionVariable.temp_cont_enq = {};
-            //$scope.sessionVariable.temp_cont_enq.exp_purchase_date = '2016-03-10';
-        }
-        
-        
-         $scope.getMakeModel_data = function () {
-            $scope.showLoader("");
-            try {
-                
-
-
-                $scope.showLoader('Please wait...');
-                //in case full_district data is saved
-                var make_model_data = null;
-                var fullDistrictData = null;
-                var districtData = null;
-
-                //in case district data is already available
-                try {
-                    // alert($scope.GetInLocalStorage($scope.localStorageKeys.DISTRICT));
-                    districtData = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.DISTRICT));
-
-
-                } catch (error) {
-                    alert(error);
-                    $scope.hideLoader();
-                }
-                if (districtData) {
-
-                    $scope.sessionVariable.district_list = districtData.district;
-                    $scope.sessionVariable.login_data.district_id = $scope.GetInLocalStorage($scope.localStorageKeys.DISTRICT_ID);
-                    // alert("districtData.district  " + $scope.sessionVariable.login_data.district_id);
-
-                    try {
-                        fullDistrictData = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.ALL_DISTRICT));
-                        //alert(JSON.stringify(fullDistrictData));
-                        if (fullDistrictData) {
-                            $scope.sessionVariable.tehsil_list = fullDistrictData.tehsil;
-                            $scope.sessionVariable.village_list = fullDistrictData.village;
-                        }
-                    } catch (error) {
-                        alert(error);
-                        $scope.hideLoader();
-                    }
-                } else {
-                    $scope.get_district($scope.sessionVariable.login_data.state_id);
-                }
-
-
-                try {
-                    make_model_data = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.MAKE_MODEL));
-
-                } catch (error) {
-                    alert(error);
-                    $scope.hideLoader();
-                }
-                //if its already available dont
-                if (make_model_data) {
-                    $scope.sessionVariable.make_list = make_model_data.make;
-                    $scope.sessionVariable.model_list = make_model_data.model;
-                } else {
-                    $scope.get_make_model();
-                }
-                $scope.hideLoader();
-            }catch(error){
-                alert(error);
-                $scope.hideLoader();
-            }
-            //
-        }
+        $scope.veh_type_list = [
+            {
+                id: 1,
+                type: "Two Wheeler",
+            },
+            {
+                id: 2,
+                type: "Four Wheeler",
+            },
+            {
+                id: 3,
+                type: "First Time Buyer",
+            },
+        ];
 
         $scope.selectedModel = '';
         $scope.pickDate = function (model) { //alert('d'); 
@@ -83,9 +28,9 @@ angular.module('starter.createNewEnquiry', [])
         }
         $scope.pickDate_callback = function (data) {
             if ($scope.selectedModel == 'exp') {
-                $scope.sessionVariable.temp_cont_enq.exp_purchase_date = data.currDate;
+                $scope.temp_cont_enq.exp_purchase_date = data.currDate;
             } else if ($scope.selectedModel == 'fol') {
-                $scope.sessionVariable.temp_cont_enq.fol_date = data.currDate;
+                $scope.temp_cont_enq.fol_date = data.currDate;
             }
         }
         $scope.pickTime = function () { //alert('t');  
@@ -109,64 +54,79 @@ angular.module('starter.createNewEnquiry', [])
             } else {
                 return;
             }
-            $scope.sessionVariable.temp_cont_enq.fol_date = dateString;//date_picker.getDateWithMonthName(dateString);
+            $scope.temp_cont_enq.fol_date = dateString;//date_picker.getDateWithMonthName(dateString);
         }
 
         $scope.saveTempEnquiry = function () {
-            if (!$scope.sessionVariable.temp_cont_enq.model_interested) {
-                $scope.showAlertWindow_Titled('Error', 'Please select a model');
-                return;
+            try {
+                if (!$scope.temp_cont_enq.model_interested) {
+                    $scope.showAlertWindow_Titled('Error', 'Please select a model');
+                    return;
+                }
+                if (!$scope.temp_cont_enq.fol_date) {
+                    $scope.showAlertWindow_Titled('Error', 'Please select a followup date');
+                    return;
+                }
+
+                if (!$scope.temp_cont_enq.existVeh) {
+                    $scope.showAlertWindow_Titled('Error', 'Please select existing vehical type');
+                    return;
+                }
+
+                if ($scope.temp_cont_enq.existVeh == 1) {
+                }
+                $scope.showLoader("Please wait...");
+                $scope.requestData = {};
+                $scope.requestData = $scope.temp_cont_enq;
+                $scope.requestData.user_id = $scope.sessionVariable.username;
+                //alert($scope.sessionVariable.login_data.state_id);
+                $scope.requestData.state =  $scope.sessionVariable.contact_list.selected_item.STATE;
+                $scope.requestData.district = $scope.sessionVariable.contact_list.selected_item.DISTRICT;
+                $scope.requestData.tehsil = $scope.sessionVariable.contact_list.selected_item.TEHSIL;
+                $scope.requestData.village = $scope.sessionVariable.contact_list.selected_item.CITY;
+                $scope.requestData.exchange_req = $scope.temp_cont_enq.exchange_req ? "Y" : "N";
+                $scope.requestData.finance_req = $scope.temp_cont_enq.finance_req ? "Y" : "N";
+                $scope.requestData.existVeh = $scope.getValueInJson($scope.veh_type_list, $scope.temp_cont_enq.existVeh, "id", "type");
+                $scope.requestData.existMake = $scope.getValueInJson($scope.sessionVariable.make_list, $scope.temp_cont_enq.existMake, "id", "make_name");
+
+                var fol_d = $scope.temp_cont_enq.fol_date;
+                var exp_purchase_d = $scope.temp_cont_enq.exp_purchase_date;
+                $scope.requestData.fol_date = date_picker.getDateInFormat(fol_d, "mm/dd/yyyy");
+                $scope.requestData.exp_purchase_date = date_picker.getDateInFormat(exp_purchase_d, "mm/dd/yyyy");
+
+
+                //  alert($scope.temp_cont_enq.fol_date);
+                alert(JSON.stringify($scope.requestData));
+                generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().SYNC_RECORDS,
+                    $scope.requestData, $scope.saveTempEnquiry_callback);
+            } catch (error) {
+                alert(error);
+                $scope.hideLoader();
             }
-            //if(!$scope.sessionVariable.temp_cont_enq.exp_purchase_date){
-            //    $scope.showAlertWindow_Titled('Error', 'Please select a date of purcahse ');
-            //    return;
-            //}
-            if (!$scope.sessionVariable.temp_cont_enq.fol_date) {
-                $scope.showAlertWindow_Titled('Error', 'Please select a followup date');
-                return;
+            //
+        }
+
+        $scope.saveTempEnquiry_callback = function (data) {
+            $scope.hideLoader();
+            //make it again in same format
+            $scope.temp_cont_enq.fol_date = "";
+            $scope.temp_cont_enq.exp_purchase_date = "";
+            if (data.success == 1) {
+                $scope.showAlertWindow_Titled('Success', 'Enquiry has been created successfully', $scope.after_saveTempVehicle);
+                $scope.closeModal();
+            } else {
+                $scope.showAlertWindow_Titled('Error', data.resDescription);
             }
-
-            if ($scope.sessionVariable.temp_cont_enq.existVeh == 1) {
-                // if (!$scope.sessionVariable.temp_cont_enq.existMake) {
-                //     $scope.showAlertWindow_Titled('Error', 'Please select make in dropdown');
-
-                //     return;
-                // }
-
-                // if (!$scope.sessionVariable.temp_cont_enq.existModel) {
-                //     $scope.showAlertWindow_Titled('Error', 'Please select model in dropdown');
-                //     return;
-                // }
-
-            }
-            //if(!$scope.sessionVariable.temp_cont_enq.fol_time){
-            //    $scope.showAlertWindow_Titled('Error', 'Please select a followup time');
-            //    return;
-            //}
-
-            //if(!$scope.sessionVariable.temp_cont_enq.fol_action){
-            //    $scope.showAlertWindow_Titled('Error', 'Please select a followup action');
-            //    return;
-            //}
-
-            // $scope.jumpTo('app.add_vehicle_info');
-            $scope.requestData = {};
-            $scope.requestData.user_id = $scope.sessionVariable.username;
-            $scope.requestData.X_CON_SEQ_NUM = $scope.sessionVariable.contact_list.selected_item.X_CON_SEQ_NUM;           
-            $scope.requestData = $scope.sessionVariable.temp_cont_enq;
-            $scope.requestData.state = $scope.sessionVariable.login_data.state_id;//.split(',')[1];
-            $scope.requestData.district = $scope.sessionVariable.login_data.district_id;//.split(',')[1];
-            $scope.requestData.tehsil = $scope.sessionVariable.login_data.tehsil_id;//.split(',')[1];
-            $scope.requestData.village = $scope.sessionVariable.login_data.village_id;//.split(',')[1];
-            //alert($scope.requestData.state);
-            //alert(JSON.stringify($scope.requestData));
-            $scope.showAlertWindow_Titled('Success', 'Enquiry has been created successfully', $scope.after_saveTempVehicle);
         }
 
         $scope.after_saveTempVehicle = function () {
-            $scope.sessionVariable.temp_cont_enq = {};
+            $scope.temp_cont_enq = {};
             $scope.disableBack();
             $scope.jumpTo('app.dashboard');
         }
+
+
+
+
 
     });

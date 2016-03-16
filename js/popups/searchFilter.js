@@ -1,7 +1,13 @@
 angular.module('starter.searchFilter', [])
 
-    .controller('searchFilterCtrl', function ($scope, date_picker) {
+    .controller('searchFilterCtrl', function ($scope, $timeout, date_picker) {
 
+    //   $scope.search_filter.NXT = '2016-03-11';
+    //     $scope.search_filter.EXP_TO = '2016-03-16';
+    //     $scope.search_filter.EXP_FROM = '2016-03-06';
+
+
+        ///below this search filter js
         $scope.dateModel = {
             EXP_FROM: 1,
             EXP_TO: 2,
@@ -10,10 +16,26 @@ angular.module('starter.searchFilter', [])
             NXT: 5,
         };
 
+        // $scope.init = function () {
+        //     $scope.setFinance(1);
+        // }//end 
+        
+        
+        $scope.default_filter = function () {
+        }//ned clear_filter
+
+
+        $scope.setFinance = function (value) {
+            $scope.search_filter.finance = value;
+        }
+        $scope.setStatus = function (value) {
+            $scope.search_filter.status = value;
+        }
+
 
 
         $scope.pickDate = function (dateModel) {
-           
+
             try {
                 // var allowOld = old;//true;
                 // var allowFuture = future;// false;
@@ -29,7 +51,7 @@ angular.module('starter.searchFilter', [])
                     date_picker.getDate('date', $scope.pickNXT_callback, null, null);
                 }
 
-            } catch (error) {   
+            } catch (error) {
                 alert(error);
             }
         };
@@ -51,6 +73,16 @@ angular.module('starter.searchFilter', [])
 
         $scope.getDateWithMonthName = function (dateString) {
             return date_picker.getDateWithMonthName(dateString);
+        }
+
+        $scope.setSearchFilter = function () {
+            $scope.jumpTo('app.searchEnquiryList');           
+
+        }
+
+        $scope.clearSearchFilter = function () {
+            $scope.search_filter = {};
+            $scope.search_filter.finance = 1;
         }
 
     });

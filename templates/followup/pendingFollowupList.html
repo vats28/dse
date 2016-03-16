@@ -1,6 +1,6 @@
 <ion-view cache-view="false" view-title="Follow-ups">
 
-  <ion-content ng-controller="followupListCtrl" ng-init="init()">
+  <ion-content ng-controller="pendingFollowupListCtrl" ng-init="init()">
 
     <div class="item stable-bg padding-10" align="center" ng-hide="!dataRefreshing">
       <div class="col v-tab-item ">
@@ -27,7 +27,7 @@
 
       <ion-item class="item-icon-left item-text-wrap assertive" ng-click="jumpTo('app.dashboard')" ng-if="arrayList.follow_up == [] || arrayList.follow_up == ''">
         <i class="icon ion ion-android-happy"></i> Enjoy !!
-        <p>As no open followup pending for today</p>
+        <p>As no open followup pending</p>
       </ion-item>
     </ion-list>
   </ion-content>

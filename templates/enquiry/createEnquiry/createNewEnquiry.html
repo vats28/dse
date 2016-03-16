@@ -9,7 +9,7 @@
                     <div class="input-label">
                         Model interested in
                     </div>
-                    <select class="red-select" ng-model="sessionVariable.temp_cont_enq.model_interested" style="width: 50% !important; align:center" >
+                    <select class="red-select" ng-model="temp_cont_enq.model_interested" style="width: 50% !important; align:center" >
                         <option value="">--select--</option>
                         <option ng-repeat="item in sessionVariable.model_list" ng-if="item.make_id == 35"
                                 value="{{item.model_name}}">{{item.model_name}}
@@ -21,10 +21,10 @@
                 <div class="item padding-0 item-text-wrap">
                     <div class="row">
                         <div class="col r-border date-col">
-                            <ion-checkbox ng-model="sessionVariable.temp_cont_enq.exchange_req">Exchange Required</ion-checkbox>
+                            <ion-checkbox ng-model="temp_cont_enq.exchange_req">Exchange Required</ion-checkbox>
                         </div>
                         <div class="col date-col">
-                            <ion-checkbox ng-model="sessionVariable.temp_cont_enq.finance_req">Finance Required</ion-checkbox>
+                            <ion-checkbox ng-model="temp_cont_enq.finance_req">Finance Required</ion-checkbox>
                         </div>
                     </div>
                 </div>
@@ -48,18 +48,18 @@
                         <div class="col r-border date-col" ng-click="pickDate('fol')">
                             <h2 class="dark">Next followup date</h2>
 
-                            <p  ng-bind="getDateWithMonthName(sessionVariable.temp_cont_enq.fol_date)">23 oct, 2015</p>
-                            <p  ng-bind="getFolDateWithMonthName(sessionVariable.temp_cont_enq.fol_date)"
-                                ng-if="!sessionVariable.temp_cont_enq.fol_date">-- select --</p>
+                            <p  ng-bind="getDateWithMonthName(temp_cont_enq.fol_date)">23 oct, 2015</p>
+                            <p  ng-bind="getFolDateWithMonthName(temp_cont_enq.fol_date)"
+                                ng-if="!temp_cont_enq.fol_date">-- select --</p>
 
-                            <!--<p ng-if="!sessionVariable.temp_cont_enq.fol_date">&#45;&#45;Select&#45;&#45;</p>-->
+                            <!--<p ng-if="!temp_cont_enq.fol_date">&#45;&#45;Select&#45;&#45;</p>-->
                         </div>
                         <div class="col date-col" ng-click="pickDate('exp')">
                             <h2 class="dark">Expected date of purchase</h2>
 
-                            <p ng-bind="getDateWithMonthName(sessionVariable.temp_cont_enq.exp_purchase_date)">23 oct, 2015</p>
+                            <p ng-bind="getDateWithMonthName(temp_cont_enq.exp_purchase_date)">23 oct, 2015</p>
 
-                            <p ng-if="!sessionVariable.temp_cont_enq.exp_purchase_date">-- select --</p>
+                            <p ng-if="!temp_cont_enq.exp_purchase_date">-- select --</p>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Remark</span>
-                    <input type="text" ng-model="sessionVariable.temp_cont_enq.remarks"
+                    <input type="text" ng-model="temp_cont_enq.remarks"
                         placeholder="eg. anything worth noting">
                 </label>
             </div>
@@ -85,7 +85,7 @@
                     <div class="input-label">
                         Existing Vehicle
                     </div>
-                    <select ng-model="sessionVariable.temp_cont_enq.existVeh" ng-changed="onExistVeh_Change()">
+                    <select ng-model="temp_cont_enq.existVeh" ng-changed="onExistVeh_Change()">
                         <option value="" selected>Select</option>
                         <option value="1">Two wheeler</option>
                         <option value="2">Four wheeler</option>
@@ -94,27 +94,27 @@
                 </label>
 
 
-                <label ng-if="sessionVariable.temp_cont_enq.existVeh == 1" class="item item-input item-select" ng-class="{'item-stable' : !sessionVariable.temp_cont_enq.existVeh}">
+                <label ng-if="temp_cont_enq.existVeh == 1" class="item item-input item-select" ng-class="{'item-stable' : !temp_cont_enq.existVeh}">
                     <div class="input-label">
                         Make
                     </div>
-                        <select ng-model="sessionVariable.temp_cont_enq.existMake" ng-changed="onExistMake_Change()"
-                            ng-disabled="!sessionVariable.temp_cont_enq.existVeh">
+                        <select ng-model="temp_cont_enq.existMake" ng-changed="onExistMake_Change()"
+                            ng-disabled="!temp_cont_enq.existVeh">
                         <option value="" selected>select</option>
                         <option ng-repeat="item in sessionVariable.make_list" value="{{item.id}}">{{item.make_name}}</option>
                     </select>
                 </label>
 
-                <label ng-if="sessionVariable.temp_cont_enq.existVeh == 1" class="item item-input item-select" ng-class="{'item-stable' : !sessionVariable.temp_cont_enq.existMake}">
+                <label ng-if="temp_cont_enq.existVeh == 1" class="item item-input item-select" ng-class="{'item-stable' : !temp_cont_enq.existMake}">
                     <div class="input-label">
                         Model
 
                         <!--{{sessionVariable.model_list}}-->
                     </div>
-                    <select ng-model="sessionVariable.temp_cont_enq.existModel" ng-changed="onExistModel_Change()"
-                            ng-disabled="!sessionVariable.temp_cont_enq.existMake">
+                    <select ng-model="temp_cont_enq.existModel" ng-changed="onExistModel_Change()"
+                            ng-disabled="!temp_cont_enq.existMake">
                         <option value="" selected>select</option>
-                        <option ng-repeat="item in sessionVariable.model_list" ng-if="sessionVariable.temp_cont_enq.existMake == item.make_id" value="{{item.model_name}}">{{item.model_name}}</option>
+                        <option ng-repeat="item in sessionVariable.model_list" ng-if="temp_cont_enq.existMake == item.make_id" value="{{item.model_name}}">{{item.model_name}}</option>
                     </select>
                 </label>
 

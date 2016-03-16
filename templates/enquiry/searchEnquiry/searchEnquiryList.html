@@ -1,101 +1,41 @@
-<ion-view cache-view="false" view-title="Search Enquiry">
+<ion-view cache-view="false" view-title="Search Enquiry" ng-controller="searchEnquiryListCtrl">
 
-    <ion-content ng-controller="searchEnquiryListCtrl" ng-init="init()">
+    <ion-content ng-init="init()" class="has-footer">
+        <div class="item stable-bg padding-10" align="center" ng-if="dataRefreshing">
+            <div class="col v-tab-item ">
+                <ion-spinner icon="spiral " style="stroke:red;"></ion-spinner>
+                <br/> <span class="dark">Refreshing Data</span>
+            </div>
+        </div>
         <ion-list can-swipe>
-            <!--ng-click="jumpTo('app.enquiryDetail')"-->
-            <ion-item class=" item-text-wrap item-icon-right" ng-repeat="item in arrayList.enquiries">
-                <i class="icon ion ion-alert assertive"></i>
-                <p ng-bind="item.name">Pulkit</p>
-                <p>Enquiry No : <span class="margin-r-20" ng-bind="item.number">10897</span> Model : <span ng-bind="item.model">Splender Pro</span></p>
-                <p>Date of enquiry : <span class="margin-r-20" ng-bind="item.doe">27-10-2015</span></p>
-                <p>Expected date of purchase : <span ng-bind="item.dop">27-11-2015</span></p>
 
-                <ion-option-button class="button-balanced" ng-click="open_CloseEnquiryModal()">
+            <ion-item class=" item-text-wrap item-icon-right" ng-click="showDetail(item)" ng-repeat="item in arrayList.follow_up">
+                <i class="icon ion ion-alert assertive"></i>
+                <p> <span ng-bind="item.FST_NAME +' '+ item.LAST_NAME" class="margin-r-20">Pulkit</span> Enquiry Id : <span ng-bind="item.ENQUIRY_ID">10897</span></p>
+
+                <p>Model : <span ng-bind="item.X_MODEL_INTERESTED">Splender Pro</span></p>
+                <p>Date of enquiry : <span class="margin-r-20" ng-bind="item.ENQUIRY_ENTRY_DATE">27-10-2015</span></p>
+                <p>Expected date of purchase : <span ng-bind="item.EXPCTD_DT_PURCHASE">27-11-2015</span></p>
+                <p ng-bind="checkCount()"></p>
+                <ion-option-button class="button-balanced" ng-click="showCloseEnquiryModal(item)">
                     Close
                 </ion-option-button>
-                <ion-option-button class="button-dark" ng-click="open_FollEnquiryModal($index)">
+                <ion-option-button class="button-dark" ng-click="showFollowupEnquiryModal(item)">
                     Followup
                 </ion-option-button>
             </ion-item>
 
-            <ion-item class="item-icon-left item-text-wrap assertive" ng-click="jumpTo('app.dashboard')" ng-if="arrayList.enquiries == [] || arrayList.enquiries == ''">
-                <i class="icon ion ion-android-happy"></i> Enjoy !!
-                <p>As no open followup pending for today</p>
+            <ion-item class="item-icon-left item-text-wrap assertive" ng-click="jumpTo('app.dashboard')" ng-if="arrayList.follow_up == [] || arrayList.follow_up == ''">
+                <i class="icon ion ion-alert-circled"></i>
+                <p>No data</p>
             </ion-item>
         </ion-list>
 
-
-        <script id="filter-modal.html" type="text/ng-template" ng-cloak="true">
-            <div class="modal">
-
-                <ion-header-bar class="header-bg">
-                    <h1 class="title light">Search Filter</h1>
-                    <button ng-click="closeModal()" class="animated fadeInUpBig fab-button-new t-20 r-20 size-48 light-bg ">
-                        <i class="icon ion ion-close"></i></button>
-                </ion-header-bar>
-                <ion-content class="filterPage">
-                    <div class="item item-divider">
-                        Enquiry Type
-                    </div>
-                    <div class="item">
-                        <div class="button-bar">
-                            <button class="button button-assertive button-outline">Open</button>
-                            <button class="button button-assertive button-outline">Closed</button>
-                            <button class="button button-assertive ">All</button>
-                        </div>
-                    </div>
-                    <div class="item item-divider">
-                        Date
-                    </div>
-                    <div class="item padding-0">
-                        <div class="row">
-                            <div class="col r-border date-col">
-                                <h2 class="dark">From</h2>
-                                <p>23 oct, 2015</p>
-                            </div>
-                            <div class="col date-col">
-
-                                <h2 class="dark">To</h2>
-                                <p>23 oct, 2015</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item padding-0">
-                        <div class="row">
-                            <div class="col r-border date-col">
-                                <h2 class="dark">Created date</h2>
-                                <p>23 oct, 2015</p>
-                            </div>
-                            <div class="col date-col">
-
-                                <h2 class="dark">Exp purchase date</h2>
-                                <p>23 oct, 2015</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item padding-0">
-                        <div class="row">
-                            <div class="col  date-col">
-                                <h2 class="dark">Next followup date</h2>
-                                <p>23 oct, 2015</p>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="item item-divider">
-                        Model
-                    </div>
-                    <div class="item">
-                        <select style="width:100%;">
-                            <option>Splendor</option>
-                            <option selected>Xtreme</option>
-                            <option>Ignitor</option>
-                        </select>
-                    </div>
-                </ion-content>
-            </div>
-        </script>
-
     </ion-content>
+
+    <ion-footer-bar style="background-color:black;">
+        <center style="width:100%;">
+            <a ng-click="clear_filter()" class="button button-clear light">Clear filter</a>
+        </center>
+    </ion-footer-bar>
 </ion-view>

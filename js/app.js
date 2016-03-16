@@ -7,7 +7,8 @@
 angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.controllers', 'starter.landing', 'starter.createEnquiry',
     'starter.addVehicleInfo', 'starter.add_personal_info', 'starter.enquiryList', 'starter.enquiryDetail', 'starter.searchFilter',
     'starter.dashboard', 'starter.contactList', 'starter.contactDetail', 'starter.vehicleDetail', 'starter.createNewEnquiry',
-    'starter.followupList', 'starter.searchEnquiryList',
+    'starter.followupList', 'starter.searchEnquiryList', 'starter.closeEnquiryModal', 'starter.followupEnquiryModal',
+    'starter.pendingFollowupList',
     'utils.date_picker', 'ion-fab-button', 'utils.http_post'])
 
     .run(function ($ionicPlatform) {
@@ -133,6 +134,15 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
                 }
             })
 
+            .state('app.pendingFollowupList', {
+                url: '/pendingFollowupList',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/followup/pendingFollowupList.html'
+                    }
+                }
+            })
+
             .state('app.contactList', {
                 url: '/contactList',
                 views: {
@@ -164,7 +174,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
                 url: '/searchFilter',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/enquiry/searchEnquiry/searchFilter.html'
+                        templateUrl: 'templates/popups/searchFilter.html'
                     }
                 }
             })
@@ -180,3 +190,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/landing');
     });
+
+function getController(controllerName) {
+    var scope = angular.element(document.querySelector('[ng-controller=' + controllerName + ']')).scope();
+    return scope;
+}

@@ -41,13 +41,13 @@
                 <i class="icon ion ion-alert assertive"></i>
                 <!--Enquiry No : <span class="margin-r-20" ng-bind="item.number">10897</span>-->
                 <p>Model : <span ng-bind="item.X_MODEL_INTERESTED">Splender Pro</span></p>
-                <p>Date of enquiry : <span class="margin-r-20">27-10-2015</span></p>
+                <p>Date of enquiry : <span class="margin-r-20" ng-bind="item.ENQUIRY_ENTRY_DATE">27-10-2015</span></p>
                 <p>Expected date of purchase : <span ng-bind="item.EXPCTD_DT_PURCHASE">27-11-2015</span></p>
                 <p ng-bind="checkCount()"></p>
-                <ion-option-button class="button-balanced" ng-click="open_CloseEnquiryModal($index)">
+                <ion-option-button class="button-balanced" ng-click="showCloseEnquiryModal(item)">
                     Close
                 </ion-option-button>
-                <ion-option-button class="button-dark" ng-click="open_FollEnquiryModal($index)">
+                <ion-option-button class="button-dark" ng-click="showFollowupEnquiryModal(item)">
                     Followup
                 </ion-option-button>
             </ion-item>

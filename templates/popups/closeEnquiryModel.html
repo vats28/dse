@@ -1,37 +1,66 @@
-<ion-modal-view>
+<ion-modal-view ng-controller="closeEnquiryModalCtrl">
     <ion-header-bar class="header-bg">
         <h1 class="title light">Close Enquiry</h1>
-        <button ng-click="close_CloseEnquiryModal()" class="animated fadeInUpBig fab-button-new t-20 r-20 size-48 light-bg ">
+        <button ng-click="closeModal()" class="animated fadeInUpBig fab-button-new t-20 r-20 size-48 light-bg ">
             <i class="icon ion ion-close"></i></button>
     </ion-header-bar>
-    <fab-button target-id="" class="animated zoomInDown light_opacity" ng-click="close_CloseEnquiryModal()" >
+    <fab-button target-id="" class="animated zoomInDown " ng-click="closeEnquiry()">
         <i class="icon ion ion-ios-arrow-forward "></i>
     </fab-button>
-    <ion-content class="filterPage">
+    <ion-content class="filterPage"  ng-init="init()">
         <div class="list">
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Main reason</span>
-                <input type="text" placeholder="Main reason">
-            </label>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Sub Reason</span>
-                <input type="text" placeholder="Sub Reason">
-            </label>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Make</span>
-                <input type="text" placeholder="Make">
-            </label>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Model</span>
-                <input type="text" placeholder="Model">
-            </label>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Close date</span>
-                <input type="date" placeholder="Close date">
-            </label>
+            <div class="item item-input item-select stable-bg">
+                <div class="input-label">
+                    Main Reason
+                </div>
+                <select class="red-select big-select-box" style="font-size:12px;" ng-model="data.reason">
+                    <option value="">--select--</option>
+                    <option ng-repeat="item in mainReason" value={{item}}>{{item}}</option>
+                </select>
+            </div>
+
+            <div class="item item-input item-select item-text-wrap stable-bg">
+                <div class="input-label">
+                    Sub Reason
+                </div>
+                <select class="red-select big-select-box" style="font-size:12px;" ng-model="data.sub_reason">
+                    <option value="">--select--</option>
+                    <option ng-repeat="item in subReason[data.reason]" value={{item.value}}>{{item.value}}</option>
+                </select>
+            </div>
+            <div class="item item-input item-select stable-bg">
+                <div class="input-label">
+                    Make
+                </div>
+                <select class="red-select big-select-box" ng-model="data.existMake">
+                    <option value="" selected>--select--</option>
+                    <option ng-repeat="item in sessionVariable.make_list" value="{{item.id +','+ item.make_name}}">{{item.make_name}}</option>
+                </select>
+            </div>
+
+            <div class="item item-input item-select stable-bg">
+                <div class="input-label">
+                    Model
+                </div>
+                <select class="red-select big-select-box" ng-model="data.existModel">
+                    <option value="" selected>--select--</option>
+                    <option ng-repeat="item in sessionVariable.model_list" ng-if="data.existMake.split(',')[0] == item.make_id" value="{{item.model_name}}">{{item.model_name}}</option>
+                </select>
+            </div>
+            
+            <!--{{sessionVariable.make_list}}-->
+            <!--<div class="item padding-0">
+                <div class="row">
+                    <div class="col  date-col" ng-click="pickDate()">
+                        <h2 class="dark">Date  </h2>
+                        <p ng-bind=" getDateWithMonthName(data.NXT)">23 oct, 2015</p>
+                        <p ng-if="!search_filter.NXT" style="opacity:0.5;">--Select--</p>
+                    </div>
+                </div>
+            </div>-->
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Remark</span>
-                <input type="text" placeholder="Remark">
+                <input type="text" ng-model="data.remarks" placeholder="Remark">
             </label>
 
             <!--<button class="button button-block button-assertive" style="margin: 0px 20px 0px 20px;">

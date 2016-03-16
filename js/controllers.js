@@ -36,6 +36,7 @@ angular.module('starter.controllers', [])
         $scope.sessionVariable.temp_cont_enq = {};//when both enq and ontact need to be added
         $scope.sessionVariable.temp_enq = {}; // when only enq need to be added
         $scope.sessionVariable.temp_cont = {}; // when only contact need to be added
+        $scope.search_filter = {};
         $scope.InTesting = false;
 
 
@@ -62,7 +63,8 @@ angular.module('starter.controllers', [])
             MAKE_MODEL: 'dse_make_model',
             ALL_STATE: 'dse_all_state',
             ALL_DISTRICT: 'dse_all_district',
-            USERNAME: 'username'
+            USERNAME: 'username',
+            TEN_DAY_FOLLOW: 'ten_day_follow'
         });
 
         $scope.SaveLoginCredential = function (data) {
@@ -217,6 +219,8 @@ angular.module('starter.controllers', [])
             $ionicPopup.confirm({
                 title: title,
                 template: template,
+                okType: 'button-assertive',
+                cancelType: 'button-dark'
             }).then(function (res) {
                 if (res) {
                     console.log('You are sure');
@@ -258,6 +262,7 @@ angular.module('starter.controllers', [])
             $scope.RemoveInLocalStorage($scope.localStorageKeys.TEHSIL_ID);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.ALL_DISTRICT);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.ALL_STATE);
+            $scope.RemoveInLocalStorage($scope.localStorageKeys.TEN_DAY_FOLLOW);
         }
 
 
@@ -406,43 +411,18 @@ angular.module('starter.controllers', [])
         }
 
 
-        $ionicModal.fromTemplateUrl('templates/popups/closeEnquiryModel.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function (modal) {
-            $scope.closeEnqModal = modal
-        })
-
-        $scope.open_CloseEnquiryModal = function () {
-            //alert('asx');
-            $scope.closeEnqModal.show()
+        $scope.showCloseEnquiryModal = function (item) {
+            if (item)
+                $scope.sessionVariable.selected_enquiry = item;
+            $scope.showModal('templates/popups/closeEnquiryModel.html');
+        }
+        $scope.showFollowupEnquiryModal = function (item) {
+            if (item)
+                $scope.sessionVariable.selected_enquiry = item;
+            $scope.showModal('templates/popups/followupEnquiryPopup.html');
         }
 
-        $scope.close_CloseEnquiryModal = function () {
-            //$scope.arrayList.enquiries.splice(index, 1);
-            $scope.closeEnqModal.hide();
-        };
 
-        $scope.$on('$destroy', function () {
-            $scope.closeEnquiryModal.remove();
-            $scope.follEnqModal.remove();
-        });
-
-        $ionicModal.fromTemplateUrl('templates/popups/followupEnquiryPopup.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function (modal) {
-            $scope.follEnqModal = modal
-        })
-
-        $scope.open_FollEnquiryModal = function () {
-            //alert('asx');
-            $scope.follEnqModal.show()
-        }
-
-        $scope.close_FollEnquiryModal = function () {
-            $scope.follEnqModal.hide();
-        };
 
 
         $scope.pickDate = function () {
@@ -457,21 +437,6 @@ angular.module('starter.controllers', [])
         }
 
 
-        $scope.search_filter = {};
-        $scope.clear_filter = function () {
-            $scope.search_filter = {};
-        }//ned clear_filter
-        $scope.default_filter = function () {
-        }//ned clear_filter
-
-
-        $scope.setFinance = function (value) {
-            $scope.search_filter.finance = value;
-        }
-        $scope.setStatus = function (value) {
-            $scope.search_filter.status = value;
-        }
-
         $scope.isNumberKey = function (evt) {
             var charCode = (evt.which) ? evt.which : event.keyCode;
             if (charCode != 46 && charCode > 31
@@ -480,17 +445,17 @@ angular.module('starter.controllers', [])
 
             return true;
         }
-        
-        
-        $scope.ConvertBoolToNumber = function(value){
+
+
+        $scope.ConvertBoolToNumber = function (value) {
             var retval = 0;
-            if(value){
+            if (value) {
                 retval = 1;
             }
             return retval;
         }
-        
-         $scope.getValueInJson = function (arr, keyvalue, keyname, required_key) {
+
+        $scope.getValueInJson = function (arr, keyvalue, keyname, required_key) {
             var retval = "";
             var keepGoing = true;
 
@@ -502,8 +467,27 @@ angular.module('starter.controllers', [])
                     }
                 }
             });
-            
+
             return retval;
         }
+
+
+        $scope.showModal = function (templateUrl) {
+            $ionicModal.fromTemplateUrl(templateUrl, {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal = modal;
+                $scope.modal.show();
+            });
+        }
+
+        // Close the modal
+        $scope.closeModal = function () {
+            // $ionicBackdrop.release();
+            $scope.modal.hide();
+            $scope.modal.remove()
+        };
+
 
     });

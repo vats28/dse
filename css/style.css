@@ -199,6 +199,10 @@ p.s_item{	color: #D7E7E9 !important;}
     font-weight: bold;
 }
 
+.big-select-box{
+	width: 80% !important;
+}
+
 
 .popup-head {
     background-color: red;

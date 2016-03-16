@@ -105,17 +105,17 @@ angular.module('utils.date_picker', [])
             //var datArr = result.split('-');
 
             if (format == "dd/mm/yyyy") {
-                result = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+                result = padLeftZero(date.getDate()) + '/' + padLeftZero(date.getMonth()+1) + '/' + date.getFullYear();
             }else if (format == "mm/dd/yyyy") {
-                result = date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
+                result = padLeftZero(date.getMonth()+1) + '/' + padLeftZero(date.getDate()) + '/' + date.getFullYear();
             } else if (format == "yyyy-mm-dd") {
                 result = date.getFullYear() + "-" + padLeftZero(date.getMonth() + 1) + "-" + padLeftZero(date.getDate());
             }
 
             return result;
-        }//ned formattedDate
+        }//ned ConvertDateToString
 
-        function formattedDate(dateString, format) {
+        function getDateInFormat(dateString, format) {
             var result = "";
             if (!dateString)
                 return result;
@@ -131,7 +131,7 @@ angular.module('utils.date_picker', [])
             }
 
             return result;
-        }//ned formattedDate
+        }//ned getDateInFormat
         
         function _getAge(date, month, year) {
             var birthdate = new Date(year, month, date);// new Date(y,m,d);
@@ -153,7 +153,7 @@ angular.module('utils.date_picker', [])
                 return formatDate_with_month_name(dateString);
             },
             getDateInFormat: function (dateString, format) {
-                return formattedDate(dateString, format);
+                return getDateInFormat(dateString, format);
             },
             getAge: function (date, month, year) {
                 return _getAge(date, month, year);
