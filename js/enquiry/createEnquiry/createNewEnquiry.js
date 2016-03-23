@@ -5,7 +5,6 @@ angular.module('starter.createNewEnquiry', [])
         $scope.sessionVariable.createEnquiry = {};// for create enquiry
         $scope.temp_cont_enq = {};
         $scope.temp_cont_enq.exp_purchase_date = '2016-03-10';
-
         $scope.veh_type_list = [
             {
                 id: 1,
@@ -13,7 +12,7 @@ angular.module('starter.createNewEnquiry', [])
             },
             {
                 id: 2,
-                type: "Four Wheeler",
+                type: "Four wheeler",
             },
             {
                 id: 3,
@@ -24,7 +23,7 @@ angular.module('starter.createNewEnquiry', [])
         $scope.selectedModel = '';
         $scope.pickDate = function (model) { //alert('d'); 
             $scope.selectedModel = model;
-            date_picker.getDate('date', $scope.pickDate_callback);
+            date_picker.getDate('date', $scope.pickDate_callback, false);
         }
         $scope.pickDate_callback = function (data) {
             if ($scope.selectedModel == 'exp') {
@@ -67,6 +66,15 @@ angular.module('starter.createNewEnquiry', [])
                     $scope.showAlertWindow_Titled('Error', 'Please select a followup date');
                     return;
                 }
+                
+                 if ($scope.temp_cont_enq.exp_purchase_date) {
+                    var smaller = $scope.temp_cont_enq.fol_date;
+                    var bigger = $scope.temp_cont_enq.exp_purchase_date;
+                    if (date_picker.isGreaterDate(smaller, bigger) == 2) {//2 means not smaller but greater 1 smaller 3 equal
+                        $scope.showAlertWindow_Titled('Error', 'Followup date should be smaller then expected purchase date');
+                        return;
+                    }
+                }
 
                 if (!$scope.temp_cont_enq.existVeh) {
                     $scope.showAlertWindow_Titled('Error', 'Please select existing vehical type');
@@ -80,7 +88,7 @@ angular.module('starter.createNewEnquiry', [])
                 $scope.requestData = $scope.temp_cont_enq;
                 $scope.requestData.user_id = $scope.sessionVariable.username;
                 //alert($scope.sessionVariable.login_data.state_id);
-                $scope.requestData.state =  $scope.sessionVariable.contact_list.selected_item.STATE;
+                $scope.requestData.state = $scope.sessionVariable.contact_list.selected_item.STATE;
                 $scope.requestData.district = $scope.sessionVariable.contact_list.selected_item.DISTRICT;
                 $scope.requestData.tehsil = $scope.sessionVariable.contact_list.selected_item.TEHSIL;
                 $scope.requestData.village = $scope.sessionVariable.contact_list.selected_item.CITY;
@@ -93,6 +101,7 @@ angular.module('starter.createNewEnquiry', [])
                 var exp_purchase_d = $scope.temp_cont_enq.exp_purchase_date;
                 $scope.requestData.fol_date = date_picker.getDateInFormat(fol_d, "mm/dd/yyyy");
                 $scope.requestData.exp_purchase_date = date_picker.getDateInFormat(exp_purchase_d, "mm/dd/yyyy");
+                $scope.requestData.dealer_code = $scope.sessionVariable.login_data.dealer_code;
 
 
                 //  alert($scope.temp_cont_enq.fol_date);

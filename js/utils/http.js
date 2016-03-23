@@ -30,13 +30,13 @@ angular.module('utils.http_post', [])
         var networkError = {
             success: 0,
             failure_title: 'Error',
-            failure_msg: 'No Network Connectivity',
+            failure_msg: 'Something went wrong',
             error_code: 101
         };
         var networkTimeout = {
             success: 0,
             failure_title: 'Error',
-            failure_msg: 'ohh oh! connection timeout',
+            failure_msg: 'Something went wrong',
             error_code: 101
         };
         var isTimedOut = false;
@@ -58,7 +58,7 @@ angular.module('utils.http_post', [])
                     }).
                     error(function (data, status, headers, config) {
                         // alert("data" + JSON.stringify(data));
-                        alert("status : " + JSON.stringify(status));
+                        //alert("status : " + JSON.stringify(status));
                         //  alert("headers" + JSON.stringify(headers));
                         //  alert("config" + JSON.stringify(config));
                         // window.analytics.trackEvent('webservice', API, 'fail', 'http_post');
@@ -81,7 +81,7 @@ angular.module('utils.http_post', [])
                 });
 
                 //alert(API);
-                $http.get(API).
+                $http.get(API, {timeout: 1000 * 20}).
                     success(function (data, status, headers, config) {
 
                         isTimedOut = false;
@@ -89,7 +89,7 @@ angular.module('utils.http_post', [])
                     }).
                     error(function (data, status, headers, config) {
                         //alert("data" + JSON.stringify(data));
-                        alert("status : " + JSON.stringify(status));
+                        //alert("status : " + JSON.stringify(status));
                         //alert("headers" + JSON.stringify(headers));
                         //alert("config" + JSON.stringify(config));
                         isTimedOut = false;

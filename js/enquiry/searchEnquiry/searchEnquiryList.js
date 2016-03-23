@@ -5,16 +5,17 @@ angular.module('starter.searchEnquiryList', [])
 
         $scope.arrayList = {};
 
-        
 
         $scope.showDetail = function (item) {
             $scope.sessionVariable.selected_enquiry = item;
             $scope.jumpTo('app.enquiryDetail');
         }
 
-
+        $scope.$on('filterFollowups', function(event, data) { 
+            $scope.filterFollowups();
+        });
+        
         $scope.init = function () {
-
             $scope.dataRefreshing = true;
             $scope.sessionVariable.ten_days_followup = {};
             $scope.find_10_days_data();
@@ -163,9 +164,9 @@ angular.module('starter.searchEnquiryList', [])
                 var to = new Date(d2[0], d2[1] - 1, d2[2]);
                 
                 //now decrease a day from - from date and increase a day in to
-                from  = date_picker.addDays(from, -1);
-                to  = date_picker.addDays(to, 1);
-                
+                from = date_picker.addDays(from, -1);
+                to = date_picker.addDays(to, 1);
+
                 var check = new Date(('20' + c[2]), month_names.indexOf(c[1].toLowerCase()), c[0]);
                 //alert('check ' + check + '<br/>' + 'from ' + from + '<br/>' + 'to ' + to + '<br/>')
                 if (check > from && check < to) {
@@ -199,10 +200,10 @@ angular.module('starter.searchEnquiryList', [])
 
         $scope.clear_filter = function () {
             $scope.showConfirm('Are you sure', 'Do you really want to clear filter from search list?', $scope.clear_filter_callback);
-            
+
         }//ned clear_filter
         
-        $scope.clear_filter_callback = function(){
+        $scope.clear_filter_callback = function () {
             $scope.search_filter = {};
             $scope.search_filter.finance = 1;
             $scope.filterFollowups();

@@ -1,9 +1,9 @@
 angular.module('starter.closeEnquiryModal', [])
 
-    .controller('closeEnquiryModalCtrl', function ($scope, generic_http_post_service) {
+    .controller('closeEnquiryModalCtrl', function ($scope,$rootScope, generic_http_post_service) {
         $scope.data = {};
 
-
+//$scope.GetInLocalStorage('Dealer')
         $scope.init = function () {
             // get make model
             var make_model_data = null;
@@ -27,15 +27,15 @@ angular.module('starter.closeEnquiryModal', [])
 
 
         $scope.mainReason = [
-            "Lost to Other Dealervalue",
-            "Dropped the Ideavalue",
-            "Lost Sale to Competitive Makevalue",
-            "Customer Deferred Buyingvalue",
+            "Lost to Other Dealer",
+            "Dropped the Idea",
+            "Lost Sale to Competitive Make",
+            "Customer Deferred Buying",
             "Bought newvalue",
-            "Purchased from Own Dealershipvalue",
-            "Bought usedvalue",
-            "Leased newvalue",
-            "Leased usedvalue",
+            "Purchased from Own Dealership",
+            "Bought used",
+            "Leased new",
+            "Leased used",
             "Buyout",
             "Others",
             "Purchased From CoDealer",
@@ -149,6 +149,8 @@ angular.module('starter.closeEnquiryModal', [])
                                 $scope.sessionVariable.ten_days_followup.follow_up.splice(index, 1);
                                 $scope.SaveInLocalStorage($scope.localStorageKeys.TEN_DAY_FOLLOW,
                                     JSON.stringify($scope.sessionVariable.ten_days_followup));
+                                    
+                                $rootScope.$broadcast('filterFollowups', 'close');
                                 keepGoing = false;
                             }
                             index++;
@@ -157,17 +159,18 @@ angular.module('starter.closeEnquiryModal', [])
                 }
 
                 if (keepGoing) { //means not found in above array
-                    alert("here");
+                    //alert("here");
                     index = 0;
                     angular.forEach($scope.sessionVariable.contact_list.enquiry, function (value, key) {
 
                         if (keepGoing) {
                             if (value['ENQUIRY_ID'] == $scope.sessionVariable.selected_enquiry.ENQUIRY_ID) {
-                                alert(value['ENQUIRY_ID']);
-                                alert(JSON.stringify($scope.sessionVariable.contact_list.enquiry));
+                                // alert(value['ENQUIRY_ID']);
+                                // alert(JSON.stringify($scope.sessionVariable.contact_list.enquiry));
                                 $scope.sessionVariable.contact_list.enquiry.splice(index, 1);
+                                $rootScope.$broadcast('filterFollowups', 'close');
                                 
-                                alert(JSON.stringify($scope.sessionVariable.contact_list.enquiry));
+                                //alert(JSON.stringify($scope.sessionVariable.contact_list.enquiry));
                                 keepGoing = false; //in this more the one query is returning with same id which is wrong
                                 
                             }

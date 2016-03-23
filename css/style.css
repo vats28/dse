@@ -38,10 +38,10 @@
 .header-bg {
     /*background-image: url("../img/header_red_bg2.jpg");*/
     background-color: red;
-    -webkit-background-size: cover;
+    /*-webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.26);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.26);*/
 }
 .body-bg {
     background-image: url("../img/body_bg2.jpg");

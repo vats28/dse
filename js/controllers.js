@@ -24,6 +24,11 @@ angular.module('starter.controllers', [])
 
             if (stateId == "app.dashboard") {
                 //do nothing
+                backAsHome.trigger(function () {
+                    //console.log("Success");
+                }, function () {
+                    //console.log("Error");
+                })
             } else {
                 $scope.goBackScreen();
             }
@@ -41,6 +46,10 @@ angular.module('starter.controllers', [])
 
 
         $scope.style = {};
+        $scope.OS = {
+            ANDROID: true,
+            IOS: false,
+        }
         $scope.validationClass = Object.freeze({
             ERROR: 'ion-asterisk assertive',
             OK: 'ion-checkmark balanced'/*'ion-thumbsdown energized'*/

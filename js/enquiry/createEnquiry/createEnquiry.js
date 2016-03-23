@@ -4,7 +4,7 @@ angular.module('starter.createEnquiry', [])
 
 
         $scope.sessionVariable.createEnquiry = {};// for create enquiry
-        $scope.sessionVariable.temp_cont_enq.exp_purchase_date = '2016-03-10';
+        //$scope.sessionVariable.temp_cont_enq.exp_purchase_date = '2016-03-27';
 
         $scope.veh_type_list = [
             {
@@ -13,7 +13,7 @@ angular.module('starter.createEnquiry', [])
             },
             {
                 id: 2,
-                type: "Four Wheeler",
+                type: "Four wheeler",
             },
             {
                 id: 3,
@@ -24,7 +24,7 @@ angular.module('starter.createEnquiry', [])
         $scope.selectedModel = '';
         $scope.pickDate = function (model) { //alert('d'); 
             $scope.selectedModel = model;
-            date_picker.getDate('date', $scope.pickDate_callback);
+            date_picker.getDate('date', $scope.pickDate_callback, false);
         }
         $scope.pickDate_callback = function (data) {
             if ($scope.selectedModel == 'exp') {
@@ -76,6 +76,15 @@ angular.module('starter.createEnquiry', [])
                     $scope.showAlertWindow_Titled('Error', 'Please select existing vehical type');
                     return;
                 }
+                
+                 if ($scope.sessionVariable.temp_cont_enq.exp_purchase_date) {
+                    var smaller = $scope.sessionVariable.temp_cont_enq.fol_date;
+                    var bigger = $scope.sessionVariable.temp_cont_enq.exp_purchase_date;
+                    if (date_picker.isGreaterDate(smaller, bigger) == 2) {//2 means not smaller but greater 1 smaller 3 equal
+                        $scope.showAlertWindow_Titled('Error', 'Followup date should be smaller then expected purchase date');
+                        return;
+                    }
+                }
 
                 if ($scope.sessionVariable.temp_cont_enq.existVeh == 1) {
                     // if (!$scope.sessionVariable.temp_cont_enq.existMake) {
@@ -120,10 +129,11 @@ angular.module('starter.createEnquiry', [])
                 var exp_purchase_d = $scope.sessionVariable.temp_cont_enq.exp_purchase_date;
                 $scope.requestData.fol_date = date_picker.getDateInFormat(fol_d, "mm/dd/yyyy");
                 $scope.requestData.exp_purchase_date = date_picker.getDateInFormat(exp_purchase_d, "mm/dd/yyyy");
+            $scope.requestData.dealer_code = $scope.sessionVariable.login_data.dealer_code;
 
 
               //  alert($scope.sessionVariable.temp_cont_enq.fol_date);
-                alert(JSON.stringify($scope.requestData));
+               // alert(JSON.stringify($scope.requestData));
                 generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().SYNC_RECORDS,
                     $scope.requestData, $scope.saveTempEnquiry_callback);
             } catch (error) {

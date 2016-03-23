@@ -4,6 +4,10 @@ angular.module('starter.pendingFollowupList', [])
     .controller('pendingFollowupListCtrl', function ($scope, $ionicPopup, generic_http_post_service, date_picker) {
 
         $scope.arrayList = {};
+        
+        $scope.$on('filterFollowups', function(event, data) { 
+            $scope.filterFollowups();
+        });
         $scope.showDetail = function (item) {
             $scope.sessionVariable.selected_enquiry = item;
             $scope.jumpTo('app.enquiryDetail');

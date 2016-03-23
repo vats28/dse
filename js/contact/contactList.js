@@ -24,4 +24,9 @@ angular.module('starter.contactList', [])
             //alert(JSON.stringify($scope.sessionVariable.contact_list.selected_item));
             $scope.jumpTo('app.contactDetail');
         }
+        
+        
+         $scope.$on('filterFollowups', function(event, data) { 
+            $scope.$digest();
+        });
     });

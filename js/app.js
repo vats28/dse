@@ -9,10 +9,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
     'starter.dashboard', 'starter.contactList', 'starter.contactDetail', 'starter.vehicleDetail', 'starter.createNewEnquiry',
     'starter.followupList', 'starter.searchEnquiryList', 'starter.closeEnquiryModal', 'starter.followupEnquiryModal',
     'starter.pendingFollowupList',
-    'utils.date_picker', 'ion-fab-button', 'utils.http_post'])
+    'utils.date_picker', 'ion-fab-button', 'utils.http_post', 'utils.fileTransfer'])
 
-    .run(function ($ionicPlatform) {
-        $ionicPlatform.ready(function ($cordovaPush, $rootScope) {
+    .run(function ($ionicPlatform, $cordovaFile) {
+        $ionicPlatform.ready(function ($rootScope) {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -25,6 +25,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
                 StatusBar.styleDefault();
             }
         });
+
     })
 
     .filter('unique', function () {

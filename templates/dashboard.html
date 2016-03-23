@@ -3,6 +3,7 @@
     <fab-button target-id="" class="animated zoomInDown" ng-click="fetch_contact()" ng-if="(sessionVariable.search.phone && sessionVariable.search.phone.length > 9) || (sessionVariable.search.regno && sessionVariable.search.regno.length > 9)">
         <i class="icon ion ion-ios-arrow-forward "></i>
     </fab-button>
+
     <ion-content ng-init="init()">
 
         <div style="margin: 40px 40px 40px 40px; text-align:center;background: transparent; font: 16px;">
@@ -11,23 +12,20 @@
 
 
         <div class="row">
-            <div class="col v-tab-item" >
-                <button   ng-click="jumpTo('app.followupList')" class=" animated flip fab-button-new assertive-bg size-48 "
-                style="position:relative;animation-duration: 1s;">
+            <div class="col v-tab-item">
+                <button ng-click="jumpTo('app.followupList')" class=" animated flip fab-button-new assertive-bg size-48 " style="position:relative;animation-duration: 1s;">
                     <i class="icon ion ion-calendar light"></i>
                 </button>
-                    <br/> Today's followup
+                <br/> Today's followup
             </div>
-            <div class="col v-tab-item" >
-                <button   ng-click="jumpTo('app.pendingFollowupList')" class=" animated flip fab-button-new assertive-bg size-48 "
-                          style="position:relative;animation-duration: 1s;">
+            <div class="col v-tab-item">
+                <button ng-click="jumpTo('app.pendingFollowupList')" class=" animated flip fab-button-new assertive-bg size-48 " style="position:relative;animation-duration: 1s;">
                     <i class="icon ion ion-ios-calendar light"></i>
                 </button>
                 <br/> Pending Followups
             </div>
-            <div class="col v-tab-item" >
-                <button   ng-click="jumpTo('app.searchEnquiryList')" class=" animated flip fab-button-new assertive-bg size-48 "
-                          style="position:relative;animation-duration: 1s;">
+            <div class="col v-tab-item">
+                <button ng-click="jumpTo('app.searchEnquiryList')" class=" animated flip fab-button-new assertive-bg size-48 " style="position:relative;animation-duration: 1s;">
                     <i class="icon ion ion-android-search light"></i>
                 </button>
                 <br/> Search Enquiry
@@ -47,5 +45,19 @@
                 <input type="text" maxlength="16" data-ng-model="sessionVariable.search.regno" ng-focus="sessionVariable.hideFollowBtn" placeholder="eg : 1234#####">
             </label>
         </div>
+
+
+        <!--<button ng-click="" class="animated fadeInUpBig fab-button-new b-20 l-50 light-bg hero-product-button">
+            <span style="">Hero Products</span> </button>
+        <button ng-click="" class="animated fadeInUpBig fab-button-new b-20 l-20 size-48 light-bg ">
+              <i class="icon ion icon-motorcycle" style=""></i>
+        </button>-->
+
     </ion-content>
+    <div class="v-tab-item hide-on-keyboard-open  b-20 l-20" style="position:absolute;">
+            <button ng-click="launchProductCatalogApp()"  class="animated fadeInUpBig fab-button-new  size-48 light-bg " style="position:relative;animation-duration: 1s;">
+               <i class="icon ion icon-motorcycle" style=""></i>
+            </button>
+            <br/> Hero Products
+        </div>
 </ion-view>

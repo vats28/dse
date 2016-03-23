@@ -1,27 +1,54 @@
 <ion-view view-title="Vehicle Detail">
   <ion-content ng-controller="vehicleDetailCtrl">
+    <div class="item item-text-wrap  black-bg ">
+      <div class="row " style="padding: 0px; ">
+        <div class="col" style="padding: 0px;">
 
+          <h2><span ng-bind="sessionVariable.contact_list.selected_item.FST_NAME +' '+ sessionVariable.contact_list.selected_item.LAST_NAME">Pulkit Bhardwaj</span></h2>
+          <p class="s_item"><span ng-if="sessionVariable.contact_list.selected_item.AGE" ng-bind="sessionVariable.contact_list.selected_item.AGE + 'yrs / '">32</span>
+            <span ng-bind="sessionVariable.contact_list.selected_item.GENDER">M</span></p>
+          <!--<p>+91-9999999999</h4>-->
+        </div>
+        <div class="col " style="padding: 0px;">
+
+
+          <h4><b>Mobile : </b><span ng-bind="sessionVariable.contact_list.selected_item.CELL_PH_NUM"></span></h4>
+          <!--<h4><b>Home/Office : </b>011-88997678</h4>-->
+          <h4><b>Email : </b><span ng-bind="sessionVariable.contact_list.selected_item.EMAIL_ADDR"></span></h4>
+
+          <h4><b>state : </b><span ng-bind="sessionVariable.contact_list.selected_item.STATE"></span></h4>
+          <h4><b>District : </b><span ng-bind="sessionVariable.contact_list.selected_item.DISTRICT"></span></h4>
+          <h4><b>Tehsil : </b><span ng-bind="sessionVariable.contact_list.selected_item.TEHSIL"></span></h4>
+          <h4><b>City : </b><span ng-bind="sessionVariable.contact_list.selected_item.CITY"></span></h4>
+        </div>
+
+      </div>
+      <br/>
+      <i class="icon ion ion-card energized" style="font-size:25px;margin-right:10px;float:left"></i>
+      <p class="s_item"><span>Customer id : <span ng-bind="sessionVariable.contact_list.selected_item.X_CON_SEQ_NUM"></span></span>
+      </p>
+    </div>
     <div class="item item-divider">
       Goodlife Detail
     </div>
     <div class="item">
-      <p>Card number : <span>109977</span></p>
-      <p>Current points : <span>107</span></p>
+      <p>Card number : <span  ng-bind="sessionVariable.contact_list.selected_item.X_HMGL_CARD_NUM ? sessionVariable.contact_list.selected_item.X_HMGL_CARD_NUM : 'NA'">109977</span></p>
+      <p>Current points : <span  ng-bind="sessionVariable.contact_list.selected_item.X_HMGL_CARD_POINTS ? sessionVariable.contact_list.selected_item.X_HMGL_CARD_POINTS : 'NA'">107</span></p>
     </div>
     <div class="item item-divider">
       Service Detail
     </div>
     <div class="item">
-      <p>Last Service Date : <span>25-09-2015</span></p>
-      <p>Next Service Date : <span>25-12-2015</span></p>
+      <p>Last Service Date : <span ng-bind="sessionVariable.contact_list.selected_item.LAST_SRVC_DT ? sessionVariable.contact_list.selected_item.LAST_SRVC_DT : 'NA'">25-09-2015</span></p>
+      <p>Next Service Date : <span ng-bind="sessionVariable.contact_list.selected_item.NEXT_SERVICE_DUE_DT ? sessionVariable.contact_list.selected_item.NEXT_SERVICE_DUE_DT : 'NA'">25-12-2015</span></p>
     </div>
     <div class="item item-divider">
       Insurance Detail
     </div>
     <div class="item">
-      <p>Expiry date : <span>27-10-2030</span></p>
-      <p>Policy number : <span>109876</span></p>
-      <p>Insurance company : <span>Hero Finance</span></p>
+      <p>Expiry date : <span ng-bind="sessionVariable.contact_list.selected_item.X_INS_EXP_DT ? sessionVariable.contact_list.selected_item.X_INS_EXP_DT : 'NA'">27-10-2030</span></p>
+      <p>Policy number : <span ng-bind="sessionVariable.contact_list.selected_item.INS_POLICY_NUM ? sessionVariable.contact_list.selected_item.INS_POLICY_NUM : 'NA'">109876</span></p>
+      <p>Insurance company : <span ng-bind="sessionVariable.contact_list.selected_item.INS_POLICY_CO ? sessionVariable.contact_list.selected_item.INS_POLICY_CO : 'NA'">Hero Finance</span></p>
     </div>
 
 

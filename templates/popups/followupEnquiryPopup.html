@@ -4,7 +4,7 @@
         <button ng-click="closeModal()" class="animated fadeInUpBig fab-button-new t-20 r-20 size-48 light-bg ">
             <i class="icon ion ion-close"></i></button>
     </ion-header-bar>
-    <fab-button target-id="" class="animated zoomInDown light_opacity" ng-click="followupEnquiry()">
+    <fab-button target-id="" class="animated zoomInDown" ng-click="followupEnquiry()">
         <i class="icon ion ion-ios-arrow-forward "></i>
     </fab-button>
     <ion-content class="filterPage">
@@ -25,7 +25,19 @@
                     <p style="line-height:2;" ng-bind="getFolDateWithMonthName(page.date)" ng-if="!page.date">-- select --</p>
                 </div>
             </div>
+            <!--$scope.sessionVariable.selected_enquiry-->
         </div>
+        <!--<div class="item item-divider" ng-if="sessionVariable.selected_enquiry.EXPCTD_DT_PURCHASE" >
+            Expected Purchase Date
+        </div>
+        <div class="item padding-0"  ng-if="sessionVariable.selected_enquiry.EXPCTD_DT_PURCHASE" >
+            <div class="row">
+                <div class="col  date-col" ng-click="pickDate('exp')">
+                    <h2 class="dark">Date</h2>
+                    <p style="line-height:2;" ng-bind="getDateWithMonthName(sessionVariable.selected_enquiry.EXPCTD_DT_PURCHASE)">23 oct, 2015</p>
+                </div>
+            </div>
+        </div>-->
     </ion-content>
 
 </ion-modal-view>

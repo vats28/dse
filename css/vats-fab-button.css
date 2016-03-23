@@ -32,9 +32,19 @@
     right: 126px;
 }
 
-.b-20{    
-    bottom: 20px;
+ .l-20{    
+    left: 20px;
 }
+ .l-50{    
+    left: 50px;
+}
+ .l-126{    
+    left: 126px;
+}
+    
+    .b-20{    
+        bottom: 20px;
+    }
 .b-106{    
     bottom: 106px;
 }
@@ -63,4 +73,14 @@
 .size-30{    
     width: 30px;
     height: 30px;
+}
+
+.hero-product-button {
+	border-radius: 50px;
+	height: 25px;
+	bottom: 30px;
+	font-weight: bold;
+	padding-right: 10px;
+	padding-bottom: 3px;
+	padding-left: 30px;
 }

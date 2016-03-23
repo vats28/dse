@@ -13,36 +13,33 @@ angular.module('utils.date_picker', [])
         function _getDate(dateOrTime, callback, allowOld, allowFuture, minDate, maxDate) {
             try {
                 //var _maxDate, _minDate = undefined;
-                
-                
-                // alert(minDate);
-                // alert('maxDate  ' + maxDate);
+                allowOld = allowOld != undefined ? allowOld : true;
+                allowFuture = allowFuture != undefined ? allowFuture : true;
+                if (!allowOld) {
+                    if (minDate == null) {
+                        minDate = new Date() - 0;
+                    }
+                }
+                if (!allowFuture) {
+                    if (maxDate == null) {
+                        maxDate = new Date() - 0;
+                    }
+                }
+                // alert('minDate  ' + minDate);
+                //alert('maxDate  ' + maxDate);
                 var options = {
                     date: new Date(),
                     mode: dateOrTime,//'date', // or 'time'
-                    //minDate: _minDate,
-                    // maxDate: _maxDate,
-                    // allowOldDates: allowOld,
-                    // allowFutureDates: allowFuture,
+                    minDate: minDate,
+                    maxDate: maxDate,
+                    allowOldDates: allowOld,
+                    allowFutureDates: allowFuture,
                     doneButtonLabel: 'DONE',
                     doneButtonColor: '#F2F3F4',
                     cancelButtonLabel: 'CANCEL',
                     cancelButtonColor: '#000000'
                 };
 
-                // if (!allowOld) {
-                //     options.minDate = new Date() - 0;
-                // }
-                // if (!allowFuture) {
-                //     options.maxDate = new Date() - 0;
-                // }
-
-                // if (minDate) {
-                //     options.minDate = minDate;
-                // }
-                // if (maxDate) {
-                //     options.maxDate = maxDate;
-                // }
 
                 $cordovaDatePicker.show(options).then(function (date) {
                     date = convertDate(date);
@@ -105,15 +102,35 @@ angular.module('utils.date_picker', [])
             //var datArr = result.split('-');
 
             if (format == "dd/mm/yyyy") {
-                result = padLeftZero(date.getDate()) + '/' + padLeftZero(date.getMonth()+1) + '/' + date.getFullYear();
-            }else if (format == "mm/dd/yyyy") {
-                result = padLeftZero(date.getMonth()+1) + '/' + padLeftZero(date.getDate()) + '/' + date.getFullYear();
+                result = padLeftZero(date.getDate()) + '/' + padLeftZero(date.getMonth() + 1) + '/' + date.getFullYear();
+            } else if (format == "mm/dd/yyyy") {
+                result = padLeftZero(date.getMonth() + 1) + '/' + padLeftZero(date.getDate()) + '/' + date.getFullYear();
             } else if (format == "yyyy-mm-dd") {
                 result = date.getFullYear() + "-" + padLeftZero(date.getMonth() + 1) + "-" + padLeftZero(date.getDate());
             }
 
             return result;
         }//ned ConvertDateToString
+        
+        function ConvertStringToDate(date, format) {
+            var result = null;
+            try {
+                var datArr;
+                if (format == "dd/mm/yyyy") {
+                    datArr = date.split('/');
+                    result = new Date(datArr[2], parseInt(datArr[1]) - 1, datArr[0]);
+                } else if (format == "mm/dd/yyyy") {
+                    datArr = date.split('/');
+                    result = new Date(datArr[2], parseInt(datArr[0]) - 1, datArr[1]);
+                } else if (format == "yyyy-mm-dd") {
+                    datArr = date.split('-');
+                    result = new Date(datArr[0], parseInt(datArr[1]) - 1, datArr[2]);
+                    // alert('hasbh' + result);
+                }
+            } catch (error) { alert(error); }
+
+            return result;
+        }//ned ConvertStringToDate
 
         function getDateInFormat(dateString, format) {
             var result = "";
@@ -121,12 +138,12 @@ angular.module('utils.date_picker', [])
                 return result;
             //alert(datestring);
             var datArr = dateString.split('-');
-             var curr_date = new Date(datArr[0], datArr[1], datArr[2]); // new Date(y,m,d);
-            if (format == "dd/mm/yyyy") {               
+            var curr_date = new Date(datArr[0], datArr[1], datArr[2]); // new Date(y,m,d);
+            if (format == "dd/mm/yyyy") {
                 result = padLeftZero(curr_date.getDate()) + '/' + padLeftZero(curr_date.getMonth()) + '/' + curr_date.getFullYear();
-            }else if (format == "mm/dd/yyyy") {
+            } else if (format == "mm/dd/yyyy") {
                 result = padLeftZero(curr_date.getMonth()) + '/' + padLeftZero(curr_date.getDate()) + '/' + curr_date.getFullYear();
-            }else if (format == "yyyy-mm-dd") {
+            } else if (format == "yyyy-mm-dd") {
                 result = curr_date.getFullYear() + '-' + padLeftZero(curr_date.getMonth()) + '-' + padLeftZero(curr_date.getDate());
             }
 
@@ -145,9 +162,30 @@ angular.module('utils.date_picker', [])
             return new Date(date.getTime() + days * 24 * 60 * 60 * 1000);
         }
 
+        function isGreaterDate(startDate_string, endDate_string) {
+            var retval = 0;
+            try {
+                var d1 = startDate_string.split("-");
+                var d2 = endDate_string.split("-");
+                var from = new Date(d1[0], parseInt(d1[1]) - 1, d1[2]);// y,m,d // -1 because months are from 0 to 11
+                var to = new Date(d2[0], parseInt(d2[1]) - 1, d2[2]);
+                if (from < to) {
+                    retval = 1;
+                }else if(from > to){
+                    retval = 2;
+                }else if(from == to){
+                     retval = 3;
+                }
+            } catch (error) {
+
+            }
+
+            return retval;
+        }//end
+
         return {
-            getDate: function (dateOrTime, callback, allowOld, allowFuture) {
-                _getDate(dateOrTime, callback, allowOld, allowFuture);
+            getDate: function (dateOrTime, callback, allowOld, allowFuture, minDate, maxDate) {
+                _getDate(dateOrTime, callback, allowOld, allowFuture, minDate, maxDate);
             },
             getDateWithMonthName: function (dateString) {
                 return formatDate_with_month_name(dateString);
@@ -161,8 +199,14 @@ angular.module('utils.date_picker', [])
             convertDateToString: function (date, format) { // new date(), yyyy-mm-dd
                 return ConvertDateToString(date, format);
             },
-            addDays: function(date, days){
+            ConvertStringToDate: function (date, format) { // new date(), yyyy-mm-dd
+                return ConvertStringToDate(date, format);
+            },
+            addDays: function (date, days) {
                 return addDays(date, days);
+            },
+            isGreaterDate: function (startDate_string, endDate_string) {
+                return isGreaterDate(startDate_string, endDate_string)
             }
         }
     });

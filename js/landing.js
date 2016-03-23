@@ -1,19 +1,19 @@
 angular.module('starter.landing', [])
 
-    .controller('landingCtrl', function ($scope, $cordovaOauth, generic_http_post_service) {
+    .controller('landingCtrl', function ($scope, $cordovaDevice, generic_http_post_service) {
 
         
         // Form data for the login modal
 
-        $scope.sessionVariable.username = '10691G01';
-        $scope.sessionVariable.password = 'pass@123';
+        //$scope.sessionVariable.username = '10691G01';
+        //$scope.sessionVariable.password = 'pass@123';
 
         $scope.init = function () {
             //if already logged in then  jump to next page
             var loginData = null;
             try {
                 loginData = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.STATE));
-                if (loginData) { // do login with previously available data
+                if (loginData) { // do login with previously available data                
                     $scope.sessionVariable.username = $scope.GetInLocalStorage($scope.localStorageKeys.USERNAME);
                     $scope.doLogin_callback(loginData);
                 }
@@ -41,7 +41,8 @@ angular.module('starter.landing', [])
                 $scope.requestData = {};
                 $scope.requestData.username = $scope.sessionVariable.username;
                 $scope.requestData.password = $scope.sessionVariable.password;
-                $scope.requestData.imei = '0';
+                $scope.requestData.imei = '0';// $cordovaDevice.getUUID();
+                //alert(JSON.stringify($scope.requestData));
                 generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().LOGIN, $scope.requestData, $scope.doLogin_callback);
             } catch (error) {
                 alert(error);
@@ -76,7 +77,7 @@ angular.module('starter.landing', [])
                 $scope.disableBack();
                 $scope.jumpTo('app.dashboard');
             } else {
-                $scope.showAlertWindow_Titled("Error", data.respDescription, null, null);
+                $scope.showAlertWindow_Titled("Error", data.failure_msg, null, null);
             }
         }
 

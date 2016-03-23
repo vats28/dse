@@ -32,7 +32,7 @@
                 <div class="input-label">
                     Make
                 </div>
-                <select class="red-select big-select-box" ng-model="data.existMake">
+                <select class="red-select big-select-box" style="font-size:12px;" ng-model="data.existMake">
                     <option value="" selected>--select--</option>
                     <option ng-repeat="item in sessionVariable.make_list" value="{{item.id +','+ item.make_name}}">{{item.make_name}}</option>
                 </select>
@@ -42,7 +42,7 @@
                 <div class="input-label">
                     Model
                 </div>
-                <select class="red-select big-select-box" ng-model="data.existModel">
+                <select class="red-select big-select-box" style="font-size:12px;" ng-model="data.existModel">
                     <option value="" selected>--select--</option>
                     <option ng-repeat="item in sessionVariable.model_list" ng-if="data.existMake.split(',')[0] == item.make_id" value="{{item.model_name}}">{{item.model_name}}</option>
                 </select>

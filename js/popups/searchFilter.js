@@ -2,9 +2,9 @@ angular.module('starter.searchFilter', [])
 
     .controller('searchFilterCtrl', function ($scope, $timeout, date_picker) {
 
-    //   $scope.search_filter.NXT = '2016-03-11';
-    //     $scope.search_filter.EXP_TO = '2016-03-16';
-    //     $scope.search_filter.EXP_FROM = '2016-03-06';
+        //   $scope.search_filter.NXT = '2016-03-11';
+        //     $scope.search_filter.EXP_TO = '2016-03-16';
+        //     $scope.search_filter.EXP_FROM = '2016-03-06';
 
 
         ///below this search filter js
@@ -40,15 +40,24 @@ angular.module('starter.searchFilter', [])
                 // var allowOld = old;//true;
                 // var allowFuture = future;// false;
                 if ((dateModel == $scope.dateModel.EXP_FROM) && $scope.search_filter.IsExpDate) {
-                    date_picker.getDate('date', $scope.pickEXP_FROM_callback, null, null);
+                    date_picker.getDate('date', $scope.pickEXP_FROM_callback, true);
                 } else if ((dateModel == $scope.dateModel.EXP_TO) && $scope.search_filter.IsExpDate) {
-                    date_picker.getDate('date', $scope.pickEXP_TO_callback, null, null);
+                    if ($scope.search_filter.EXP_FROM) {
+                        var thenDate = date_picker.ConvertStringToDate($scope.search_filter.EXP_FROM, 'yyyy-mm-dd');
+                        date_picker.getDate('date', $scope.pickEXP_TO_callback, false, false, thenDate);
+                    } else {
+                        $scope.showAlertWindow_Titled('oh oh!', 'Please select expiry from date first');
+                    }
                 } else if ((dateModel == $scope.dateModel.CRT_FROM) && $scope.search_filter.IsCreateDate) {
-                    date_picker.getDate('date', $scope.pickCRT_FROM_callback, null, null);
+                    date_picker.getDate('date', $scope.pickCRT_FROM_callback, true );
                 } else if ((dateModel == $scope.dateModel.CRT_TO) && $scope.search_filter.IsCreateDate) {
-                    date_picker.getDate('date', $scope.pickCRT_TO_callback, null, null);
+                    if ($scope.search_filter.CRT_FROM) {
+                        date_picker.getDate('date', $scope.pickCRT_TO_callback, false, false, date_picker.ConvertStringToDate($scope.search_filter.CRT_FROM, 'yyyy-mm-dd') );
+                    } else {
+                        $scope.showAlertWindow_Titled('oh oh!', 'Please select expiry from date first');
+                    }
                 } else if ((dateModel == $scope.dateModel.NXT) && $scope.search_filter.IsNextDate) {
-                    date_picker.getDate('date', $scope.pickNXT_callback, null, null);
+                    date_picker.getDate('date', $scope.pickNXT_callback);
                 }
 
             } catch (error) {
@@ -76,7 +85,7 @@ angular.module('starter.searchFilter', [])
         }
 
         $scope.setSearchFilter = function () {
-            $scope.jumpTo('app.searchEnquiryList');           
+            $scope.jumpTo('app.searchEnquiryList');
 
         }
 

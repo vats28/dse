@@ -17,4 +17,11 @@ angular.module('starter.contactDetail', [])
             $scope.jumpTo('app.enquiryDetail');
         }
 
+        $scope.$on('filterFollowups', function (event, data) {
+            if (data == 'close') {
+                $scope.hasEnquiry = false;
+            }
+            $scope.$digest();
+        });
+
     });

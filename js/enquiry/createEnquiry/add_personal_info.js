@@ -188,10 +188,10 @@ angular.module('starter.add_personal_info', [])
                 $scope.showAlertWindow_Titled('Error', 'Please enter address1');
                 return;
             }
-            if (!$scope.sessionVariable.temp_cont_enq.pincode) {
-                $scope.showAlertWindow_Titled('Error', 'Please enter pincode');
-                return;
-            }
+            // if (!$scope.sessionVariable.temp_cont_enq.pincode) {
+            //     $scope.showAlertWindow_Titled('Error', 'Please enter pincode');
+            //     return;
+            // }
             $scope.jumpTo('app.createEnquiry');
 
         }
