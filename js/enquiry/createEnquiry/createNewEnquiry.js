@@ -1,10 +1,10 @@
 angular.module('starter.createNewEnquiry', [])
 
-    .controller('createNewEnquiryCtrl', function ($scope, generic_http_post_service, date_picker) {
+    .controller('createNewEnquiryCtrl', function($scope, generic_http_post_service, date_picker) {
 
         $scope.sessionVariable.createEnquiry = {};// for create enquiry
         $scope.temp_cont_enq = {};
-        $scope.temp_cont_enq.exp_purchase_date = '2016-03-10';
+        //$scope.temp_cont_enq.exp_purchase_date = '2016-04-10';
         $scope.veh_type_list = [
             {
                 id: 1,
@@ -21,31 +21,31 @@ angular.module('starter.createNewEnquiry', [])
         ];
 
         $scope.selectedModel = '';
-        $scope.pickDate = function (model) { //alert('d'); 
+        $scope.pickDate = function(model) { //alert('d'); 
             $scope.selectedModel = model;
             date_picker.getDate('date', $scope.pickDate_callback, false);
         }
-        $scope.pickDate_callback = function (data) {
+        $scope.pickDate_callback = function(data) {
             if ($scope.selectedModel == 'exp') {
                 $scope.temp_cont_enq.exp_purchase_date = data.currDate;
             } else if ($scope.selectedModel == 'fol') {
                 $scope.temp_cont_enq.fol_date = data.currDate;
             }
         }
-        $scope.pickTime = function () { //alert('t');  
+        $scope.pickTime = function() { //alert('t');  
             date_picker.getDate('time', $scope.pickTime_callback);
         }
-        $scope.pickTime_callback = function (data) {
+        $scope.pickTime_callback = function(data) {
             if ($scope.selectedModel == 'folTime') {
                 $scope.data.folTime = data.currTime;
             }
         }
 
-        $scope.getDateWithMonthName = function (dateString) {
+        $scope.getDateWithMonthName = function(dateString) {
             return date_picker.getDateWithMonthName(dateString);
         }
 
-        $scope.getFolDateWithMonthName = function (dateString) {
+        $scope.getFolDateWithMonthName = function(dateString) {
 
             if (!dateString) {
                 var nextDate = date_picker.addDays(new Date(), 1);
@@ -56,7 +56,7 @@ angular.module('starter.createNewEnquiry', [])
             $scope.temp_cont_enq.fol_date = dateString;//date_picker.getDateWithMonthName(dateString);
         }
 
-        $scope.saveTempEnquiry = function () {
+        $scope.saveTempEnquiry = function() {
             try {
                 if (!$scope.temp_cont_enq.model_interested) {
                     $scope.showAlertWindow_Titled('Error', 'Please select a model');
@@ -66,8 +66,8 @@ angular.module('starter.createNewEnquiry', [])
                     $scope.showAlertWindow_Titled('Error', 'Please select a followup date');
                     return;
                 }
-                
-                 if ($scope.temp_cont_enq.exp_purchase_date) {
+
+                if ($scope.temp_cont_enq.exp_purchase_date) {
                     var smaller = $scope.temp_cont_enq.fol_date;
                     var bigger = $scope.temp_cont_enq.exp_purchase_date;
                     if (date_picker.isGreaterDate(smaller, bigger) == 2) {//2 means not smaller but greater 1 smaller 3 equal
@@ -88,6 +88,14 @@ angular.module('starter.createNewEnquiry', [])
                 $scope.requestData = $scope.temp_cont_enq;
                 $scope.requestData.user_id = $scope.sessionVariable.username;
                 //alert($scope.sessionVariable.login_data.state_id);
+
+                $scope.requestData.fname = $scope.sessionVariable.contact_list.selected_item.FST_NAME;
+                $scope.requestData.lname = $scope.sessionVariable.contact_list.selected_item.LAST_NAME;
+                $scope.requestData.mobile = $scope.sessionVariable.contact_list.selected_item.CELL_PH_NUM;
+                $scope.requestData.gender = $scope.sessionVariable.contact_list.selected_item.GENDER;
+                $scope.requestData.age = $scope.sessionVariable.contact_list.selected_item.AGE;
+                if ($scope.sessionVariable.contact_list.selected_item.ADDR)
+                    $scope.requestData.address1 = $scope.sessionVariable.contact_list.selected_item.ADDR;
                 $scope.requestData.state = $scope.sessionVariable.contact_list.selected_item.STATE;
                 $scope.requestData.district = $scope.sessionVariable.contact_list.selected_item.DISTRICT;
                 $scope.requestData.tehsil = $scope.sessionVariable.contact_list.selected_item.TEHSIL;
@@ -105,7 +113,7 @@ angular.module('starter.createNewEnquiry', [])
 
 
                 //  alert($scope.temp_cont_enq.fol_date);
-                alert(JSON.stringify($scope.requestData));
+                console.log(JSON.stringify($scope.requestData));
                 generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().SYNC_RECORDS,
                     $scope.requestData, $scope.saveTempEnquiry_callback);
             } catch (error) {
@@ -115,7 +123,7 @@ angular.module('starter.createNewEnquiry', [])
             //
         }
 
-        $scope.saveTempEnquiry_callback = function (data) {
+        $scope.saveTempEnquiry_callback = function(data) {
             $scope.hideLoader();
             //make it again in same format
             $scope.temp_cont_enq.fol_date = "";
@@ -128,7 +136,7 @@ angular.module('starter.createNewEnquiry', [])
             }
         }
 
-        $scope.after_saveTempVehicle = function () {
+        $scope.after_saveTempVehicle = function() {
             $scope.temp_cont_enq = {};
             $scope.disableBack();
             $scope.jumpTo('app.dashboard');

@@ -13,9 +13,11 @@
                 <div class="col " style="padding: 0px;">
 
 
-                    <h4><b>Mobile : </b><span ng-bind="sessionVariable.contact_list.selected_item.CELL_PH_NUM"></span></h4>
+                    <h4><b>Mobile : </b><span ng-bind="sessionVariable.contact_list.selected_item.CELL_PH_NUM"
+                    ng-click="call(sessionVariable.contact_list.selected_item.CELL_PH_NUM)"></span></h4>
                     <!--<h4><b>Home/Office : </b>011-88997678</h4>-->
-                    <h4><b>Email : </b><span ng-bind="sessionVariable.contact_list.selected_item.EMAIL_ADDR"></span></h4>
+                    <h4><b>Email : </b><span ng-bind="sessionVariable.contact_list.selected_item.EMAIL_ADDR"
+                    ng-click="email(sessionVariable.contact_list.selected_item.EMAIL_ADDR)"></span></h4>
 
                     <h4><b>state : </b><span ng-bind="sessionVariable.contact_list.selected_item.STATE"></span></h4>
                     <h4><b>District : </b><span ng-bind="sessionVariable.contact_list.selected_item.DISTRICT"></span></h4>
@@ -35,14 +37,14 @@
             <!--{{sessionVariable.contact_list.enquiry}}-->
         </div>
         <ion-list can-swipe ng-init="init()">
-            <ion-item class=" item-text-wrap item-icon-right" ng-click="showDetail(item)" 
-            ng-if="sessionVariable.contact_list.selected_item.X_CON_SEQ_NUM == item.X_CON_SEQ_NUM"
+            <ion-item class=" item-text-wrap item-icon-right" ng-click="showDetail(item)" ng-if="sessionVariable.contact_list.selected_item.X_CON_SEQ_NUM == item.X_CON_SEQ_NUM"
             ng-repeat="item in testValue=(sessionVariable.contact_list.enquiry | unique:'X_CON_SEQ_NUM')">
                 <i class="icon ion ion-alert assertive"></i>
                 <!--Enquiry No : <span class="margin-r-20" ng-bind="item.number">10897</span>-->
                 <p>Model : <span ng-bind="item.X_MODEL_INTERESTED">Splender Pro</span></p>
                 <p>Date of enquiry : <span class="margin-r-20" ng-bind="item.ENQUIRY_ENTRY_DATE">27-10-2015</span></p>
                 <p>Expected date of purchase : <span ng-bind="item.EXPCTD_DT_PURCHASE">27-11-2015</span></p>
+                <p>Next followup date : <span ng-bind="item.FOLLOW_DATE">27-11-2015</span></p>
                 <p ng-bind="checkCount()"></p>
                 <ion-option-button class="button-balanced" ng-click="showCloseEnquiryModal(item)">
                     Close

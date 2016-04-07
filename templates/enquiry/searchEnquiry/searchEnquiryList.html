@@ -16,6 +16,7 @@
                 <p>Model : <span ng-bind="item.X_MODEL_INTERESTED">Splender Pro</span></p>
                 <p>Date of enquiry : <span class="margin-r-20" ng-bind="item.ENQUIRY_ENTRY_DATE">27-10-2015</span></p>
                 <p>Expected date of purchase : <span ng-bind="item.EXPCTD_DT_PURCHASE">27-11-2015</span></p>
+                <p>Next followup date : <span ng-bind="item.FOLLOW_DATE">27-11-2015</span></p>
                 <p ng-bind="checkCount()"></p>
                 <ion-option-button class="button-balanced" ng-click="showCloseEnquiryModal(item)">
                     Close
@@ -29,7 +30,7 @@
                 <i class="icon ion ion-alert-circled"></i>
                 <p>No data</p>
             </ion-item>
-            
+
         </ion-list>
 
     </ion-content>

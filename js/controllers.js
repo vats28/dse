@@ -255,6 +255,9 @@ angular.module('starter.controllers', [])
             window.localStorage.removeItem(key);
         }//end
 
+        $scope.askLogout = function(){
+            $scope.showConfirm('Do you really want to logout?', 'This may discard your pending changes. If you still want to logout then press yes otherwise no', $scope.doLogout);
+        }//end            
 
         $scope.doLogout = function () {
             $scope.disableBack();
@@ -497,6 +500,22 @@ angular.module('starter.controllers', [])
             $scope.modal.hide();
             $scope.modal.remove()
         };
+        
+         $scope.call = function (number) {
+            $scope.showConfirm('Are you sure?', 'Call this number<br/>' + number, number, $scope.call_callback);
+        }
+
+        $scope.call_callback = function (number) {
+            launchCall(number);
+        }
+
+        $scope.email = function (email) {
+            $scope.showConfirm('Are you sure?', 'Email this to<br/>' + email, email, $scope.email_callback);
+        }
+
+        $scope.email_callback = function (email) {
+            launchMail(email);
+        }
 
 
     });

@@ -4,7 +4,7 @@ angular.module('starter.followupList', [])
     .controller('followupListCtrl', function ($scope, $ionicPopup, generic_http_post_service, date_picker) {
 
         $scope.arrayList = {};
-        $scope.$on('filterFollowups', function(event, data) { 
+        $scope.$on('filterFollowups', function (event, data) {
             $scope.filterFollowups();
         });
         $scope.showDetail = function (item) {
@@ -76,7 +76,9 @@ angular.module('starter.followupList', [])
         $scope.Fetch_10_days_Enquiry_callback = function (data) {
             $scope.dataRefreshing = false;
             if (data.success == 1) {
+
                 $scope.SaveInLocalStorage($scope.localStorageKeys.TEN_DAY_FOLLOW, JSON.stringify(data));
+                $scope.sessionVariable.ten_days_followup = {};
                 $scope.sessionVariable.ten_days_followup = data;
                 filterFollowups();
             } else {
@@ -87,30 +89,33 @@ angular.module('starter.followupList', [])
 
 
         function filterFollowups() {
-
-            var finance = undefined;
-            if ($scope.search_filter.finance == 2) {
-                finance = 'Y';
-            } else if ($scope.search_filter.finance == 3) {
-                finance = 'N';
-            }
-            var output = [];
-            var currDate = date_picker.convertDateToString(new Date(), 'yyyy-mm-dd');
-            angular.forEach($scope.sessionVariable.ten_days_followup.follow_up, function (item) {
-                var one = true;
-
-                if (currDate && (currDate != $scope.convertFormatOfDate(item['follow_date']))) {
-                    one = false;
-                }//end if
-                if (one) {
-                    output.push(item);
+            try {
+                var finance = undefined;
+                if ($scope.search_filter.finance == 2) {
+                    finance = 'Y';
+                } else if ($scope.search_filter.finance == 3) {
+                    finance = 'N';
                 }
+                var output = [];
+                var currDate = date_picker.convertDateToString(new Date(), 'yyyy-mm-dd');
+                angular.forEach($scope.sessionVariable.ten_days_followup.follow_up, function (item) {
+                    var one = true;
 
-            });//end foreach
+                    if (currDate && (currDate != $scope.convertFormatOfDate(item['follow_date']))) {
+                        one = false;
+                    }//end if
+                    if (one) {
+                        output.push(item);
+                    }
+
+                });//end foreach
 
 
-            $scope.arrayList.follow_up = output;
-            $scope.dataRefreshing = false;
+                $scope.arrayList.follow_up = output;
+                $scope.dataRefreshing = false;
+            } catch (err) {
+                alert(err);
+            }
         }//end filter
         
         

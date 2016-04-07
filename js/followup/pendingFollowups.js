@@ -81,7 +81,7 @@ angular.module('starter.pendingFollowupList', [])
             if (data.success == 1) {
                 $scope.SaveInLocalStorage($scope.localStorageKeys.TEN_DAY_FOLLOW, JSON.stringify(data));
                 $scope.sessionVariable.ten_days_followup = data;
-                 $scope.arrayList.follow_up = data;
+                 $scope.arrayList = data;
             } else {
                 $scope.showAlertWindow_Titled("Error", data.respDescription, null, null);
             }

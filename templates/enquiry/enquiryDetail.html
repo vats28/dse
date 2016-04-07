@@ -11,8 +11,8 @@
                 </div>
                 <div class="col " style="padding: 0px;">
 
-                    <h4><b>Mobile : </b><span ng-bind="sessionVariable.selected_enquiry.CELL_PH_NUM"></span></h4>
-                    <h4><b>Email : </b><span ng-bind="sessionVariable.selected_enquiry.EMAIL_ADDR"></span></h4>
+                    <h4><b>Mobile : </b><span ng-bind="sessionVariable.selected_enquiry.CELL_PH_NUM" ng-click="call(sessionVariable.selected_enquiry.CELL_PH_NUM)"></span></h4>
+                    <h4><b>Email : </b><span ng-bind="sessionVariable.selected_enquiry.EMAIL_ADDR" ng-click="email(sessionVariable.selected_enquiry.EMAIL_ADDR)"></span></h4>
                 </div>
 
             </div>
@@ -41,11 +41,14 @@
         <div class="item item-text-wrap">
             <p><b>Followup comment : </b><span ng-bind="sessionVariable.selected_enquiry.FOLLOWUP_COMMENTS ? sessionVariable.selected_enquiry.FOLLOWUP_COMMENTS : '-NA-'"></span></p>
         </div>
+        <div class="item item-text-wrap">
+            <p><b>Next followup date : </b><span ng-bind="sessionVariable.selected_enquiry.FOLLOW_DATE">27-11-2015</span></p>
+        </div>
 
 
         <div class="item">
-            <div class="button-bar" >
-                <a class="button button-small button-assertive  bolder" ng-click="showCloseEnquiryModal()" >Close</a>
+            <div class="button-bar">
+                <a class="button button-small button-assertive  bolder" ng-click="showCloseEnquiryModal()">Close</a>
                 <a class="button button-dark button-small  bolder" ng-click="showFollowupEnquiryModal()">Followup</a>
             </div>
         </div>

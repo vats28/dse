@@ -11,8 +11,7 @@
                 <a class="item item-icon-right " href="#" ng-click="showDetail(item)" ng-repeat="item in sessionVariable.contact_list.enquiry | unique:'X_CON_SEQ_NUM'">
                     <i class="icon ion-ios-arrow-forward assertive"></i> <span ng-bind="item.FST_NAME + ' ' + item.LAST_NAME">Pawan Kumar</span>
                     <p><span class="margin-r-20" ng-bind="item.CELL_PH_NUM">955571####</span><span ng-bind="item.CITY + ', ' + item.STATE">Gurgaon</span></p>
-                   
-                    
+                    <p>Next followup date : <span ng-bind="item.FOLLOW_DATE">27-11-2015</span></p>
                 </a>
 
                 <div class="item item-divider" ng-if="sessionVariable.contact_list.vin">VIN based contacts</div>

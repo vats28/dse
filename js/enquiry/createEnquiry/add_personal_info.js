@@ -88,9 +88,14 @@ angular.module('starter.add_personal_info', [])
             }
             //
         }
+//sessionVariable.login_data.state_id
 
+        $scope.onStateChange = function () {    //clear earlier data
+            $scope.showConfirm('Are you sure', 'Do you really want to change your district?', $scope.onStateChange_callback);
+        
+        }
 
-        $scope.onStateChange = function () {
+        $scope.onStateChange_callback = function () {
             //clear earlier data
             $scope.RemoveInLocalStorage($scope.localStorageKeys.TEHSIL);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.VILLAGE);
@@ -100,6 +105,11 @@ angular.module('starter.add_personal_info', [])
             //clear variables
             $scope.sessionVariable.login_data.district_id = undefined;
             $scope.sessionVariable.login_data.tehsil_id = undefined;
+            
+            var loginData = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.STATE));
+            loginData.state_id =  $scope.sessionVariable.login_data.state_id ;
+            $scope.SaveInLocalStorage($scope.localStorageKeys.STATE, JSON.stringify(loginData));
+                //$scope.sessionVariable.login_data.state_id = data.state_id;
             // fetch new districts
             $scope.get_district($scope.sessionVariable.login_data.state_id.split(',')[0]);
         }
@@ -121,6 +131,7 @@ angular.module('starter.add_personal_info', [])
             //$scope.get_tehsil();
             $scope.get_full_district_data();
         }
+        
 
 
         $scope.onTehsilChange = function () {
@@ -184,10 +195,10 @@ angular.module('starter.add_personal_info', [])
                 $scope.showAlertWindow_Titled('Error', 'Please select village');
                 return;
             }//sessionVariable.login_data.tehsil_id
-            if (!$scope.sessionVariable.temp_cont_enq.address1) {
-                $scope.showAlertWindow_Titled('Error', 'Please enter address1');
-                return;
-            }
+            // if (!$scope.sessionVariable.temp_cont_enq.address1) {
+            //     $scope.showAlertWindow_Titled('Error', 'Please enter address1');
+            //     return;
+            // }
             // if (!$scope.sessionVariable.temp_cont_enq.pincode) {
             //     $scope.showAlertWindow_Titled('Error', 'Please enter pincode');
             //     return;

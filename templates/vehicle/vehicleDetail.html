@@ -12,9 +12,11 @@
         <div class="col " style="padding: 0px;">
 
 
-          <h4><b>Mobile : </b><span ng-bind="sessionVariable.contact_list.selected_item.CELL_PH_NUM"></span></h4>
+          <h4><b>Mobile : </b><span ng-bind="sessionVariable.contact_list.selected_item.CELL_PH_NUM"
+          ng-click="call(sessionVariable.contact_list.selected_item.CELL_PH_NUM)"></span></h4>
           <!--<h4><b>Home/Office : </b>011-88997678</h4>-->
-          <h4><b>Email : </b><span ng-bind="sessionVariable.contact_list.selected_item.EMAIL_ADDR"></span></h4>
+          <h4><b>Email : </b><span ng-bind="sessionVariable.contact_list.selected_item.EMAIL_ADDR"
+          ng-click="email(sessionVariable.contact_list.selected_item.EMAIL_ADDR)"></span></h4>
 
           <h4><b>state : </b><span ng-bind="sessionVariable.contact_list.selected_item.STATE"></span></h4>
           <h4><b>District : </b><span ng-bind="sessionVariable.contact_list.selected_item.DISTRICT"></span></h4>
@@ -32,8 +34,8 @@
       Goodlife Detail
     </div>
     <div class="item">
-      <p>Card number : <span  ng-bind="sessionVariable.contact_list.selected_item.X_HMGL_CARD_NUM ? sessionVariable.contact_list.selected_item.X_HMGL_CARD_NUM : 'NA'">109977</span></p>
-      <p>Current points : <span  ng-bind="sessionVariable.contact_list.selected_item.X_HMGL_CARD_POINTS ? sessionVariable.contact_list.selected_item.X_HMGL_CARD_POINTS : 'NA'">107</span></p>
+      <p>Card number : <span ng-bind="sessionVariable.contact_list.selected_item.X_HMGL_CARD_NUM ? sessionVariable.contact_list.selected_item.X_HMGL_CARD_NUM : 'NA'">109977</span></p>
+      <p>Current points : <span ng-bind="sessionVariable.contact_list.selected_item.X_HMGL_CARD_POINTS ? sessionVariable.contact_list.selected_item.X_HMGL_CARD_POINTS : 'NA'">107</span></p>
     </div>
     <div class="item item-divider">
       Service Detail

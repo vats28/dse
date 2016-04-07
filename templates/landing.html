@@ -11,7 +11,7 @@
             <div class="list list-inset" style="background: transparent;">
                 <label class="item item-input">
                     <i class="icon ion-person placeholder-icon"></i>
-                    <input type="text" ng-model="sessionVariable.username" placeholder="User Name">
+                    <input type="text" ng-model="sessionVariable.username" ng-change="sessionVariable.username=sessionVariable.username.toUpperCase();" placeholder="User Name">
                 </label>
                 <label class="item item-input">
                     <i class="icon ion-lock-combination placeholder-icon"></i>

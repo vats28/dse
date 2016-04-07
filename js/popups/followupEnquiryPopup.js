@@ -83,7 +83,7 @@ angular.module('starter.followupEnquiryModal', [])
 
                     if (keepGoing) {
                         if (value['ENQUIRY_ID'] == $scope.sessionVariable.selected_enquiry.ENQUIRY_ID) {
-                            $scope.sessionVariable.ten_days_followup.follow_up[index].follow_date = $scope.convertFormatOfDate($scope.page.date);
+                            $scope.sessionVariable.ten_days_followup.follow_up[index].FOLLOW_DATE = $scope.convertFormatOfDate($scope.page.date);
                             $scope.sessionVariable.ten_days_followup.follow_up[index].FOLLOWUP_COMMENTS = $scope.page.remarks;
                             $scope.SaveInLocalStorage($scope.localStorageKeys.TEN_DAY_FOLLOW,
                                 JSON.stringify($scope.sessionVariable.ten_days_followup));
@@ -104,7 +104,7 @@ angular.module('starter.followupEnquiryModal', [])
 
                     if (keepGoing) {
                         if (value['ENQUIRY_ID'] == $scope.sessionVariable.selected_enquiry.ENQUIRY_ID) {
-                            $scope.sessionVariable.contact_list.enquiry[index].follow_date = $scope.convertFormatOfDate($scope.page.date);
+                            $scope.sessionVariable.contact_list.enquiry[index].FOLLOW_DATE = $scope.convertFormatOfDate($scope.page.date);
                             $scope.sessionVariable.contact_list.enquiry[index].FOLLOWUP_COMMENTS = $scope.page.remarks;
                             $rootScope.$broadcast('filterFollowups', 'close');
                                 
@@ -131,8 +131,8 @@ angular.module('starter.followupEnquiryModal', [])
                 "cct", "nov", "dec");
 
             var c = date.split("-");
-            var check = new Date(c[0], c[1], c[2]);
-            retval = padLeftZero(check.getDate()) + "-" + month_names[check.getMonth() - 1] + "-" + check.getFullYear().toString();
+            var check = new Date(c[0], (parseInt( c[1]) -1), c[2]);
+            retval = padLeftZero(check.getDate()) + "-" + month_names[check.getMonth()] + "-" + check.getFullYear().toString();
             return retval;
         }
 
