@@ -228,6 +228,11 @@ p.s_item{	color: #D7E7E9 !important;}
 	color: #000;
 }
 
+.relative_middle {
+    position: relative;
+    top: 25%;
+}
+
 /*
 .landing-bg {
     background: url("img/bg_new.png") no-repeat center center fixed;

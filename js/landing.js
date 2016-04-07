@@ -1,14 +1,14 @@
 angular.module('starter.landing', [])
 
-    .controller('landingCtrl', function ($scope, $cordovaDevice, generic_http_post_service) {
+    .controller('landingCtrl', function($scope, $cordovaDevice, generic_http_post_service) {
 
-        
+
         // Form data for the login modal
 
         //$scope.sessionVariable.username = '10691G01';
         //$scope.sessionVariable.password = 'pass@123';
 
-        $scope.init = function () {
+        $scope.init = function() {
             //if already logged in then  jump to next page
             var loginData = null;
             try {
@@ -22,7 +22,7 @@ angular.module('starter.landing', [])
             }
         }
 
-        $scope.doLogin = function () {
+        $scope.doLogin = function() {
             //alert('wcdw');
             //$scope.jumpTo('app.dashboard');
             //return;
@@ -49,12 +49,12 @@ angular.module('starter.landing', [])
             }
         };//end doLogin
 
-        $scope.doLogin_callback = function (data) {
+        $scope.doLogin_callback = function(data) {
             $scope.hideLoader();
             //$scope.jumpTo('app.dashboard');
             //return;
             //{"result":true,"respDescription":"Valid User","respCode":1}
-            
+
             if (data.result == true) {
                 $scope.sessionVariable.login_data = data;
                 $scope.sessionVariable.state_list = data.state;
@@ -80,6 +80,18 @@ angular.module('starter.landing', [])
                 $scope.showAlertWindow_Titled("Error", data.failure_msg, null, null);
             }
         }
+
+        $scope.showAppDetail = function() {
+            try {
+                var msg = '';
+                msg += "<p><b>Device id : <b>" + $cordovaDevice.getUUID() + "</p>";
+                //msg += "<p><b>Device serial : <b>"+$cordovaDevice.serial()+"</p></br>";
+                msg += "<p><b>version : <b>" + AppVersion.version + "   <b>Build : <b>" + AppVersion.build + "</p>";
+                $scope.showAlertWindow_Titled("App Detail", msg);
+            } catch (error) {
+                alert(error);
+            }
+        }//emd
 
 
     });
