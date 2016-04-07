@@ -101,7 +101,7 @@ angular.module('starter.followupList', [])
                 angular.forEach($scope.sessionVariable.ten_days_followup.follow_up, function (item) {
                     var one = true;
 
-                    if (currDate && (currDate != $scope.convertFormatOfDate(item['follow_date']))) {
+                    if (currDate && (currDate != $scope.convertFormatOfDate(item['FOLLOW_DATE']))) {
                         one = false;
                     }//end if
                     if (one) {

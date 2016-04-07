@@ -114,7 +114,7 @@ angular.module('starter.searchEnquiryList', [])
                 var isMember = false;
                 var one = true, two = true, three = true, four = true, five = true;
 
-                if ($scope.search_filter.NXT && $scope.search_filter.IsNextDate && ($scope.search_filter.NXT != $scope.convertFormatOfDate(item['follow_date']))) {
+                if ($scope.search_filter.NXT && $scope.search_filter.IsNextDate && ($scope.search_filter.NXT != $scope.convertFormatOfDate(item['FOLLOW_DATE']))) {
                     one = false;
                 }//end if
                 if ($scope.search_filter.EXP_FROM && $scope.search_filter.EXP_TO && $scope.search_filter.IsExpDate
