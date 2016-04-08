@@ -1,6 +1,6 @@
 angular.module('starter.landing', [])
 
-    .controller('landingCtrl', function($scope, $cordovaDevice, generic_http_post_service) {
+    .controller('landingCtrl', function($scope, $cordovaDevice, $rootScope, generic_http_post_service) {
 
 
         // Form data for the login modal
@@ -41,6 +41,7 @@ angular.module('starter.landing', [])
                 $scope.requestData = {};
                 $scope.requestData.username = $scope.sessionVariable.username;
                 $scope.requestData.password = $scope.sessionVariable.password;
+                $scope.requestData.version = AppVersion.version;
                 $scope.requestData.imei = '0';// $cordovaDevice.getUUID();
                 //alert(JSON.stringify($scope.requestData));
                 generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().LOGIN, $scope.requestData, $scope.doLogin_callback);
@@ -63,16 +64,7 @@ angular.module('starter.landing', [])
                 $scope.SaveInLocalStorage($scope.localStorageKeys.STATE, JSON.stringify(data));
                 $scope.SaveInLocalStorage($scope.localStorageKeys.STATE_ID, data.state_id);
                 $scope.SaveInLocalStorage($scope.localStorageKeys.USERNAME, $scope.sessionVariable.username);
-                //alert(JSON.stringify($scope.sessionVariable.username));
-                //$scope.sessionVariable.isLoggedIn = false;
-                // $scope.sessionVariable.login_data = data;
 
-                // //store login credentials
-                // try {
-                //     $scope.SaveLoginCredential(JSON.stringify(data))
-                // } catch (error) {
-                //     alert(error)
-                // }
                 $scope.clearHistory();
                 $scope.disableBack();
                 $scope.jumpTo('app.dashboard');
@@ -92,6 +84,7 @@ angular.module('starter.landing', [])
                 alert(error);
             }
         }//emd
+
 
 
     });

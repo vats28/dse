@@ -9,22 +9,24 @@
 angular.module('utils.http_post', [])
 
     .factory('generic_http_post_service', function ($http, $timeout) {
-        var server_host = 'http://tab.hmcl.biz/';//tab.hmcl.biz/dse_app/login.php
+        var server_host = 'http://tab.hmcl.biz/';
         var server_api_path = 'dse_app/';
+        //server_api_path = 'dse_app_live/'; //live server path
         var services_address = Object.freeze({
             LOGIN: server_host + server_api_path + 'login.php',
-            GET_DISTRICT: server_host + server_api_path + 'get_district.php', // state_id
-            GET_TEHSIL: server_host + server_api_path + 'get_tehsil.php', // district_id
-            GET_VILLAGE: server_host + server_api_path + 'get_village.php', // tehsil_id
+            GET_DISTRICT: server_host + server_api_path + 'get_district.php', 
+            GET_TEHSIL: server_host + server_api_path + 'get_tehsil.php', 
+            GET_VILLAGE: server_host + server_api_path + 'get_village.php', 
             BIKE_MAKE_MODEL: server_host + server_api_path + 'bike_make_model.php',
-            GET_DISTRICT_DATA: server_host + server_api_path + 'get_district_data.php',//district_id=563 to fetch whole tehsil and village in one time
-            GET_STATE_DATA: server_host + server_api_path + 'get_state_data.php',// state_id to fetch all district, tehsil and village in one go
+            GET_DISTRICT_DATA: server_host + server_api_path + 'get_district_data.php',
+            GET_STATE_DATA: server_host + server_api_path + 'get_state_data.php',
             LATLONG: server_host + server_api_path + 'latlong.php',
             FETCH_CONTACT: server_host + server_api_path + 'fetch_contact.php',
             SYNC_RECORDS: server_host + server_api_path + 'syncRecords.php',
             SYNC_FOLLOW_UP: server_host + server_api_path + 'sync_follow_up.php',
             GET_FOLLOW_UP: server_host + server_api_path + 'get_follow_up.php',
-            //sync_follow_up.php
+            CHECK_VERSION: server_host + server_api_path + 'check_version.php',
+            //CHECK_VERSION.php
         });
 
         var networkError = {

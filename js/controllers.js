@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $state, $ionicModal, $ionicPopup, $ionicHistory, $ionicScrollDelegate,
+    .controller('AppCtrl', function($scope, $state, $ionicModal, $ionicPopup, $ionicHistory, $ionicScrollDelegate,
         $timeout, $ionicSideMenuDelegate, $ionicLoading, $ionicPlatform, generic_http_post_service, date_picker) {
 
         // With the new view caching in Ionic, Controllers are only called
@@ -9,7 +9,7 @@ angular.module('starter.controllers', [])
         // listen for the $ionicView.enter event:
         $scope.headerButton = {};
 
-        $scope.$on('$ionicView.enter', function (e) {
+        $scope.$on('$ionicView.enter', function(e) {
             var stateId = $ionicHistory.currentView().stateId;
 
             if (stateId == "app.searchEnquiryList") {
@@ -19,14 +19,14 @@ angular.module('starter.controllers', [])
             }
         });
 
-        $ionicPlatform.registerBackButtonAction(function (event) {
+        $ionicPlatform.registerBackButtonAction(function(event) {
             var stateId = $ionicHistory.currentView().stateId;
 
             if (stateId == "app.dashboard") {
                 //do nothing
-                backAsHome.trigger(function () {
+                backAsHome.trigger(function() {
                     //console.log("Success");
-                }, function () {
+                }, function() {
                     //console.log("Error");
                 })
             } else {
@@ -76,7 +76,7 @@ angular.module('starter.controllers', [])
             TEN_DAY_FOLLOW: 'ten_day_follow'
         });
 
-        $scope.SaveLoginCredential = function (data) {
+        $scope.SaveLoginCredential = function(data) {
             try {
                 $scope.SaveInLocalStorage($scope.localStorageKeys.LOGIN, data)
             } catch (err) {
@@ -84,17 +84,17 @@ angular.module('starter.controllers', [])
             }
         }//end func
 
-        $scope.showAlertWindow = function (text) {
+        $scope.showAlertWindow = function(text) {
             $ionicPopup.alert({
                 title: text,
                 //cancelType: 'color_grey',// String (default: 'button-default'). The type of the Cancel button.
                 okType: 'positive'// String (default: 'OK'). The text of the OK button.
-            }).then(function (res) {
+            }).then(function(res) {
                 console.log('Your log ', res);
             });
         }
 
-        $scope.showAlertWindow_Titled = function (title, template, callback, oktext) {
+        $scope.showAlertWindow_Titled = function(title, template, callback, oktext) {
 
 
             $ionicPopup.alert({
@@ -102,7 +102,7 @@ angular.module('starter.controllers', [])
                 template: '<div align="center">' + template + '</div>',
                 okText: oktext != null ? oktext : 'OK',
                 okType: 'button-dark'
-            }).then(function (res) {
+            }).then(function(res) {
                 if (callback != null && callback != undefined) {
                     callback();
                 }
@@ -110,12 +110,12 @@ angular.module('starter.controllers', [])
             });
         }//end
 
-        $scope.testAlertWindow = function (msg) {
+        $scope.testAlertWindow = function(msg) {
             if ($scope.InTesting)
                 alert(msg);
         }// end  testAlertWindow
 
-        $scope.doubleBack = function () {
+        $scope.doubleBack = function() {
             /*$ionicHistory.goBack();
              $ionicHistory.goBack();*/
             var backView = $ionicHistory.viewHistory().views[$ionicHistory.viewHistory().backView.backViewId];//$scope.$viewHistory.views[$scope.$viewHistory.backView.backViewId];
@@ -127,29 +127,29 @@ angular.module('starter.controllers', [])
             backView && backView.go();
         }// end
 
-        $scope.goBackScreen = function () {
+        $scope.goBackScreen = function() {
             $ionicHistory.goBack();
 
         }// end
 
-        $scope.clearCache = function () {
+        $scope.clearCache = function() {
 
             $ionicHistory.clearCache();
 
         }//end
 
-        $scope.clearCacheAndHistory = function () {
+        $scope.clearCacheAndHistory = function() {
             $ionicHistory.clearCache();
             $ionicHistory.clearHistory();
 
         }//end
 
-        $scope.clearHistory = function () {
+        $scope.clearHistory = function() {
             $ionicHistory.clearHistory();
 
         }//end
 
-        $scope.disableBack = function () {
+        $scope.disableBack = function() {
             $ionicHistory.nextViewOptions({
                 disableBack: true
             });
@@ -158,7 +158,7 @@ angular.module('starter.controllers', [])
              });*/
         }// end
 
-        $scope.enableBack = function () {
+        $scope.enableBack = function() {
 
             $ionicHistory.nextViewOptions({
                 disableBack: false
@@ -168,11 +168,11 @@ angular.module('starter.controllers', [])
              });*/
         }// end
 
-        $scope.scrollTop = function () {
+        $scope.scrollTop = function() {
             $ionicScrollDelegate.scrollTop();
         }
 
-        $scope.jumpTo = function (pageName) {
+        $scope.jumpTo = function(pageName) {
             try {
                 $state.go(pageName);
             } catch (err) {
@@ -180,7 +180,7 @@ angular.module('starter.controllers', [])
             }
         }//end
 
-        $scope.jumpTo_cacheFalse = function (pageName) {
+        $scope.jumpTo_cacheFalse = function(pageName) {
             try {
 
                 //$scope.jumpTo(pageName);
@@ -190,30 +190,30 @@ angular.module('starter.controllers', [])
             }
         }//end
 
-        $scope.enableSideMenuDrag = function () {
+        $scope.enableSideMenuDrag = function() {
             $ionicSideMenuDelegate.canDragContent(true);
         }
 
-        $scope.disableSideMenuDrag = function () {
+        $scope.disableSideMenuDrag = function() {
             $ionicSideMenuDelegate.canDragContent(false);
         }
 
-        $scope.resizePage = function () {
+        $scope.resizePage = function() {
             $ionicScrollDelegate.resize();
         }
 
-        $scope.showLoader = function (msg) {
+        $scope.showLoader = function(msg) {
             $ionicLoading.show({
                 template: '<ion-spinner icon="lines" class="spinner-energized" style="float: left;"></ion-spinner>' + '<span style="margin-left: 5px;">' + msg + '</span>'//'<span class="icon spin ion-loading-d"></span> ' + msg
 
             });
         };
-        $scope.hideLoader = function () {
+        $scope.hideLoader = function() {
             $ionicLoading.hide();
         };
 
 
-        $scope.showToast = function (msg) {
+        $scope.showToast = function(msg) {
 
             $ionicLoading.show({
                 template: msg,
@@ -224,13 +224,13 @@ angular.module('starter.controllers', [])
         };
 
         // A confirm dialog
-        $scope.showConfirm = function (title, template, callback) {
+        $scope.showConfirm = function(title, template, callback) {
             $ionicPopup.confirm({
                 title: title,
                 template: template,
                 okType: 'button-assertive',
                 cancelType: 'button-dark'
-            }).then(function (res) {
+            }).then(function(res) {
                 if (res) {
                     console.log('You are sure');
                     if (callback) {
@@ -243,23 +243,23 @@ angular.module('starter.controllers', [])
         };
 
 
-        $scope.SaveInLocalStorage = function (key, value) {
+        $scope.SaveInLocalStorage = function(key, value) {
             window.localStorage.setItem(key, value);
         }//end
 
-        $scope.GetInLocalStorage = function (key) {
+        $scope.GetInLocalStorage = function(key) {
             return window.localStorage.getItem(key);
         }//end
 
-        $scope.RemoveInLocalStorage = function (key) {
+        $scope.RemoveInLocalStorage = function(key) {
             window.localStorage.removeItem(key);
         }//end
 
-        $scope.askLogout = function(){
+        $scope.askLogout = function() {
             $scope.showConfirm('Do you really want to logout?', 'This may discard your pending changes. If you still want to logout then press yes otherwise no', $scope.doLogout);
         }//end            
 
-        $scope.doLogout = function () {
+        $scope.doLogout = function() {
             $scope.disableBack();
             $scope.jumpTo('app.landing');
             $scope.clearHistory();
@@ -280,7 +280,7 @@ angular.module('starter.controllers', [])
 
 
 
-        $scope.get_district = function (state_id) {
+        $scope.get_district = function(state_id) {
             if (!$scope.sessionVariable.login_data.state_id) {
                 $scope.showAlertWindow("Sorry", "Please select a state first");
                 return;
@@ -293,7 +293,7 @@ angular.module('starter.controllers', [])
 
         };//end doLogin
 
-        $scope.get_district_callback = function (data) {
+        $scope.get_district_callback = function(data) {
             $scope.hideLoader();
             //alert(JSON.stringify(data));
             if (data.result != []) {
@@ -306,7 +306,7 @@ angular.module('starter.controllers', [])
         }
 
 
-        $scope.get_tehsil = function () {
+        $scope.get_tehsil = function() {
             if (!$scope.sessionVariable.login_data.district_id) {
                 $scope.showAlertWindow("Sorry", "Please select a district first");
                 return;
@@ -318,7 +318,7 @@ angular.module('starter.controllers', [])
                 $scope.requestData, $scope.get_tehsil_callback);
         };//end doLogin
 
-        $scope.get_tehsil_callback = function (data) {
+        $scope.get_tehsil_callback = function(data) {
             $scope.hideLoader();
             //alert(JSON.stringify(data));
             if (data.result != []) {
@@ -330,7 +330,7 @@ angular.module('starter.controllers', [])
         }
 
 
-        $scope.get_village = function () {
+        $scope.get_village = function() {
             if (!$scope.sessionVariable.login_data.district_id) {
                 $scope.showAlertWindow("Sorry", "Please select a tehsil first");
                 return;
@@ -342,7 +342,7 @@ angular.module('starter.controllers', [])
                 $scope.requestData, $scope.get_village_callback);
         };//end doLogin
 
-        $scope.get_village_callback = function (data) {
+        $scope.get_village_callback = function(data) {
             $scope.hideLoader();
             //alert(JSON.stringify(data));
             if (data.result != []) {
@@ -354,7 +354,7 @@ angular.module('starter.controllers', [])
             }
         }
 
-        $scope.get_fullstate_data = function () {
+        $scope.get_fullstate_data = function() {
             if (!$scope.sessionVariable.login_data.state_id) {
                 $scope.showAlertWindow("Sorry", "Please select a state first");
                 return;
@@ -366,7 +366,7 @@ angular.module('starter.controllers', [])
                 $scope.requestData, $scope.get_fullstate_data_callback);
         };//end doLogin
 
-        $scope.get_fullstate_data_callback = function (data) {
+        $scope.get_fullstate_data_callback = function(data) {
             $scope.hideLoader();
             //alert(JSON.stringify(data));
             if (data.result != []) {
@@ -378,7 +378,7 @@ angular.module('starter.controllers', [])
             }
         }
 
-        $scope.get_full_district_data = function () {
+        $scope.get_full_district_data = function() {
             if (!$scope.sessionVariable.login_data.district_id) {
                 $scope.showAlertWindow("Sorry", "Please select a district first");
                 return;
@@ -390,7 +390,7 @@ angular.module('starter.controllers', [])
                 $scope.requestData, $scope.get_full_district_data_callback);
         };//end doLogin
 
-        $scope.get_full_district_data_callback = function (data) {
+        $scope.get_full_district_data_callback = function(data) {
             $scope.hideLoader();
             //alert(JSON.stringify(data));
             if (data.result != []) {
@@ -404,14 +404,14 @@ angular.module('starter.controllers', [])
         }
 
 
-        $scope.get_make_model = function () {
+        $scope.get_make_model = function() {
             $scope.showLoader("");
             //$scope.requestData = {};
             generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().BIKE_MAKE_MODEL,
                 $scope.requestData, $scope.get_make_model_callback);
         };//end doLogin
 
-        $scope.get_make_model_callback = function (data) {
+        $scope.get_make_model_callback = function(data) {
             $scope.hideLoader();
             //Falert(JSON.stringify(data));
             if (data.result != []) {
@@ -423,12 +423,12 @@ angular.module('starter.controllers', [])
         }
 
 
-        $scope.showCloseEnquiryModal = function (item) {
+        $scope.showCloseEnquiryModal = function(item) {
             if (item)
                 $scope.sessionVariable.selected_enquiry = item;
             $scope.showModal('templates/popups/closeEnquiryModel.html');
         }
-        $scope.showFollowupEnquiryModal = function (item) {
+        $scope.showFollowupEnquiryModal = function(item) {
             if (item)
                 $scope.sessionVariable.selected_enquiry = item;
             $scope.showModal('templates/popups/followupEnquiryPopup.html');
@@ -437,19 +437,19 @@ angular.module('starter.controllers', [])
 
 
 
-        $scope.pickDate = function () {
+        $scope.pickDate = function() {
             var allowOld = true;
             var allowFuture = false;
             date_picker.getDate('date', $scope.pickDob_callback, allowOld, allowFuture);
         };
-        $scope.pickDob_callback = function (data) {
+        $scope.pickDob_callback = function(data) {
             var format = "dd/mm/yyyy";
             //$scope.reg.dob = date_picker.getDateInFormat(data.currDate, format);
             $scope.reg.dob = data.currDate;
         }
 
 
-        $scope.isNumberKey = function (evt) {
+        $scope.isNumberKey = function(evt) {
             var charCode = (evt.which) ? evt.which : event.keyCode;
             if (charCode != 46 && charCode > 31
                 && (charCode < 48 || charCode > 57))
@@ -459,7 +459,7 @@ angular.module('starter.controllers', [])
         }
 
 
-        $scope.ConvertBoolToNumber = function (value) {
+        $scope.ConvertBoolToNumber = function(value) {
             var retval = 0;
             if (value) {
                 retval = 1;
@@ -467,11 +467,11 @@ angular.module('starter.controllers', [])
             return retval;
         }
 
-        $scope.getValueInJson = function (arr, keyvalue, keyname, required_key) {
+        $scope.getValueInJson = function(arr, keyvalue, keyname, required_key) {
             var retval = "";
             var keepGoing = true;
 
-            angular.forEach(arr, function (value, key) {
+            angular.forEach(arr, function(value, key) {
                 if (keepGoing) {
                     if (value[keyname] == keyvalue) {
                         retval = value[required_key];
@@ -484,38 +484,134 @@ angular.module('starter.controllers', [])
         }
 
 
-        $scope.showModal = function (templateUrl) {
+        $scope.showModal = function(templateUrl) {
             $ionicModal.fromTemplateUrl(templateUrl, {
                 scope: $scope,
                 animation: 'slide-in-up'
-            }).then(function (modal) {
+            }).then(function(modal) {
                 $scope.modal = modal;
                 $scope.modal.show();
             });
         }
 
         // Close the modal
-        $scope.closeModal = function () {
+        $scope.closeModal = function() {
             // $ionicBackdrop.release();
             $scope.modal.hide();
             $scope.modal.remove()
         };
-        
-         $scope.call = function (number) {
+
+        $scope.call = function(number) {
             $scope.showConfirm('Are you sure?', 'Call this number<br/>' + number, number, $scope.call_callback);
         }
 
-        $scope.call_callback = function (number) {
+        $scope.call_callback = function(number) {
             launchCall(number);
         }
 
-        $scope.email = function (email) {
+        $scope.email = function(email) {
             $scope.showConfirm('Are you sure?', 'Email this to<br/>' + email, email, $scope.email_callback);
         }
 
-        $scope.email_callback = function (email) {
+        $scope.email_callback = function(email) {
             launchMail(email);
         }
 
+        $scope.$on('check_version', function(event, data) {
+            $scope.check_version();
+        });
 
+        $scope.check_version = function() {
+            $scope.requestData = {};
+            $scope.version = AppVersion.version;
+            generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().CHECK_VERSION,
+                $scope.requestData, $scope.check_version_callback);
+
+            console.log("current apk version : " + AppVersion.version);
+        }//end 
+
+        $scope.version = {};
+        $scope.check_version_callback = function(data) {
+
+            try {
+                $scope.version = data;
+                console.log("current apk version : " + AppVersion.version + ", New version : " + data.version);
+                if (parseFloat(data.version) > parseFloat(AppVersion.version)) {
+                    //app version changed
+                    console.log("current apk version : " + AppVersion.version + ", New version : " + data.version);
+                    $scope.showAlertWindow_Titled("Update",
+                        "New version of this app is available please update to continue", $scope.downloadNewVersion);
+
+                    return;
+                }
+            } catch (error) {
+                alert(error);
+            }
+        }//end 
+
+
+        $scope.downloadNewVersion = function() {
+            $scope.showLoader("Downloading pakage");
+            if ($scope.OS.ANDROID) {
+                $scope.apkPath = $scope.version.path;
+                $scope.directoryPath = cordova.file.externalRootDirectory + 'Download/';
+                window.resolveLocalFileSystemURL($scope.directoryPath, $scope.fileDownload());
+            } else if ($scope.OS.IOS) {
+                //window.open('itms://itunes.apple.com/us/app/vc-rep/id904432520?mt=8');
+            } else {
+
+            }
+        }//end downloadApp
+
+
+
+        $scope.fileDownload = function() {
+            var fileTransfer = new FileTransfer();
+            $scope.apkPath = encodeURI($scope.apkPath);
+            console.log("download path : " + $scope.apkPath);
+            console.log("directory path : " + $scope.directoryPath + 'HeroDse.apk');
+            fileTransfer.onprogress = function(progressEvent) {
+
+                try {
+                    if (progressEvent.lengthComputable) {
+                        var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+
+                        var showDown = perc + "% Downloaded...";
+                        $scope.showLoader(showDown);
+                    } else {
+                        $scope.showLoader("Downloading...");
+                    }
+                }//end try
+                catch (error) {
+                    $scope.hideLoader();
+                    alert(error);
+                }//end catch
+            };
+
+            fileTransfer.download($scope.apkPath, $scope.directoryPath + 'HeroDse.apk', function(HeroProducts) {
+                $scope.installApk();
+            }, function(error) {
+                $scope.hideLoader();
+                $scope.showAlertWindow_Titled("Sorry", "Your download failed.");
+                console.log("download error source " + error.source);
+                console.log("download error target " + error.target);
+                console.log("upload error code" + error.code);
+            }, true, {
+                    headers: {
+                        "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+                    }
+                });
+
+            $scope.installApk = function() {
+                // alert('installing');
+                $scope.hideLoader();
+                cordova.plugins.fileOpener2.open(
+                    $scope.directoryPath + 'HeroDse.apk',
+                    'application/vnd.android.package-archive'
+                );
+                location.reload(true);
+
+            }//installapk
+
+        }//end fileDOwnload
     });

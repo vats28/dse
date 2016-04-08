@@ -11,8 +11,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
     'starter.pendingFollowupList',
     'utils.date_picker', 'ion-fab-button', 'utils.http_post', 'utils.fileTransfer'])
 
-    .run(function ($ionicPlatform, $cordovaFile) {
-        $ionicPlatform.ready(function ($rootScope) {
+    .run(function($ionicPlatform, $cordovaFile, $rootScope, $timeout) {
+        $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -24,16 +24,21 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+
+            $timeout(function() {
+                $rootScope.$broadcast('check_version', 'close');
+            }, 2000);
+
         });
 
     })
 
-    .filter('unique', function () {
-        return function (collection, keyname) {
+    .filter('unique', function() {
+        return function(collection, keyname) {
             var output = [],
                 keys = [];
 
-            angular.forEach(collection, function (item) {
+            angular.forEach(collection, function(item) {
                 var key = item[keyname];
                 if (keys.indexOf(key) === -1) {
                     keys.push(key);
@@ -44,7 +49,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
         };
     })
 
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
 
             .state('app', {
