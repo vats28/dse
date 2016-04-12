@@ -106,7 +106,7 @@
                 </div>
                 <select ng-model="temp_cont_enq.existModel" ng-changed="onExistModel_Change()" ng-disabled="!temp_cont_enq.existMake">
                     <option value="" selected>select</option>
-                    <option ng-repeat="item in sessionVariable.model_list" ng-if="temp_cont_enq.existMake == item.make_id" value="{{item.model_name}}">{{item.model_name}}</option>
+                    <option ng-repeat="item in sessionVariable.model_interested" value="{{item.model_name}}">{{item.model_name}}</option>
                 </select>
             </label>
 

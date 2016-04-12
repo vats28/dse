@@ -418,7 +418,7 @@ angular.module('starter.controllers', [])
                 $scope.sessionVariable.make_model_list = data;
                 $scope.sessionVariable.make_list = data.make;
                 $scope.sessionVariable.model_list = data.model;
-                $scope.sessionVariable.interested_model = data.interested_model;
+                $scope.sessionVariable.model_interested = data.model_interested;
                 $scope.SaveInLocalStorage($scope.localStorageKeys.MAKE_MODEL, JSON.stringify(data));
             } else {
                 $scope.showAlertWindow_Titled("Error", data.respDescription, null, null);

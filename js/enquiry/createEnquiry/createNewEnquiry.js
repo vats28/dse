@@ -5,6 +5,28 @@ angular.module('starter.createNewEnquiry', [])
         $scope.sessionVariable.createEnquiry = {};// for create enquiry
         $scope.temp_cont_enq = {};
         //$scope.temp_cont_enq.exp_purchase_date = '2016-04-10';
+
+        $scope.init = function() {
+            // get make model
+            var make_model_data = null;
+            try {
+                make_model_data = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.MAKE_MODEL));
+                // alert(JSON.stringify(make_model_data));
+
+                //if its already available dont
+                if (make_model_data) {
+                    $scope.sessionVariable.make_list = make_model_data.make;
+                    $scope.sessionVariable.model_list = make_model_data.model;
+                    $scope.sessionVariable.interested_model = make_model_data.interested_model;
+                } else {
+                    $scope.get_make_model();
+                }
+                //$scope.hideLoader();
+            } catch (error) {
+                alert(error);
+            }
+        }//end 
+
         $scope.veh_type_list = [
             {
                 id: 1,
@@ -19,6 +41,8 @@ angular.module('starter.createNewEnquiry', [])
                 type: "First Time Buyer",
             },
         ];
+
+
 
         $scope.selectedModel = '';
         $scope.pickDate = function(model) { //alert('d'); 
