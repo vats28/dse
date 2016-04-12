@@ -29,6 +29,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
                 $rootScope.$broadcast('check_version', 'close');
             }, 2000);
 
+
         });
 
     })

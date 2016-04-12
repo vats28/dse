@@ -27,46 +27,39 @@ angular.module('starter.closeEnquiryModal', [])
 
 
         $scope.mainReason = [
-            "Lost to Other Dealer",
-            "Dropped the Idea",
-            "Lost Sale to Competitive Make",
-            "Customer Deferred Buying",
-            "Bought newvalue",
-            "Purchased from Own Dealership",
-            "Bought used",
-            "Leased new",
-            "Leased used",
-            "Buyout",
             "Others",
-            "Purchased From CoDealer",
+            "Purchased from Own Dealership",
+            "Dropped the Idea",
             "Purchased From Competition",
+            "Purchased From CoDealer",
         ];
 
         $scope.subReason = {
             "Others": [
-                { value: "SKU Non-Availability" },
+
                 { value: "Finance not available" },
-                { value: "Exchange price not suitable" },
-                { value: "Others" },
+                { value: "SKU Non-Availability" },
                 { value: "Secondhand Purchase" },
+                { value: "Others" },
+                { value: "Exchange price not suitable" },
                 { value: "Wrong Contact Number" },
             ],
             "Purchased From CoDealer": [
+                { value: "Better Finance" },
                 { value: "Discount" },
+                { value: "Better exchange value" },
+                { value: "Proximity" },
                 { value: "Others" },
                 { value: "SKU Non-Availability" },
-                { value: "Proximity" },
-                { value: "Better Finance" },
-                { value: "Better exchange value" },
             ],
             "Purchased From Competition": [
-                { value: "First preference" },
-                { value: "SKU Non-Availability" },
                 { value: "Proximity" },
+                { value: "SKU Non-Availability" },
+                { value: "First preference" },
                 { value: "Better Finance" },
-                { value: "Better exchange value" },
-                { value: "Discount" },
                 { value: "Others" },
+                { value: "Discount" },
+                { value: "Better exchange value" },
             ],
         };
 

@@ -37,7 +37,6 @@ angular.module('starter.controllers', [])
 
         // Form data for the login modal
         $scope.sessionVariable = {};
-
         $scope.sessionVariable.temp_cont_enq = {};//when both enq and ontact need to be added
         $scope.sessionVariable.temp_enq = {}; // when only enq need to be added
         $scope.sessionVariable.temp_cont = {}; // when only contact need to be added
@@ -49,6 +48,7 @@ angular.module('starter.controllers', [])
         $scope.OS = {
             ANDROID: true,
             IOS: false,
+            DESKTOP: false,
         }
         $scope.validationClass = Object.freeze({
             ERROR: 'ion-asterisk assertive',
@@ -416,6 +416,9 @@ angular.module('starter.controllers', [])
             //Falert(JSON.stringify(data));
             if (data.result != []) {
                 $scope.sessionVariable.make_model_list = data;
+                $scope.sessionVariable.make_list = data.make;
+                $scope.sessionVariable.model_list = data.model;
+                $scope.sessionVariable.interested_model = data.interested_model;
                 $scope.SaveInLocalStorage($scope.localStorageKeys.MAKE_MODEL, JSON.stringify(data));
             } else {
                 $scope.showAlertWindow_Titled("Error", data.respDescription, null, null);
@@ -523,7 +526,9 @@ angular.module('starter.controllers', [])
 
         $scope.check_version = function() {
             $scope.requestData = {};
-            $scope.version = AppVersion.version;
+            $scope.requestData.version = AppVersion.version;
+            $scope.sessionVariable.version = AppVersion.version;
+
             generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().CHECK_VERSION,
                 $scope.requestData, $scope.check_version_callback);
 

@@ -11,7 +11,7 @@ angular.module('utils.http_post', [])
     .factory('generic_http_post_service', function ($http, $timeout) {
         var server_host = 'http://tab.hmcl.biz/';
         var server_api_path = 'dse_app/';
-        //server_api_path = 'dse_app_live/'; //live server path
+        server_api_path = 'dse_app_live/'; //live server path
         var services_address = Object.freeze({
             LOGIN: server_host + server_api_path + 'login.php',
             GET_DISTRICT: server_host + server_api_path + 'get_district.php', 

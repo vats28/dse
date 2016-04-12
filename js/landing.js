@@ -15,6 +15,7 @@ angular.module('starter.landing', [])
                 loginData = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.STATE));
                 if (loginData) { // do login with previously available data                
                     $scope.sessionVariable.username = $scope.GetInLocalStorage($scope.localStorageKeys.USERNAME);
+                    // $scope.sessionVariable.version = AppVersion.version;
                     $scope.doLogin_callback(loginData);
                 }
             } catch (error) {
@@ -41,8 +42,10 @@ angular.module('starter.landing', [])
                 $scope.requestData = {};
                 $scope.requestData.username = $scope.sessionVariable.username;
                 $scope.requestData.password = $scope.sessionVariable.password;
-                $scope.requestData.version = AppVersion.version;
-                $scope.requestData.imei = '0';// $cordovaDevice.getUUID();
+                if (!$scope.OS.DESKTOP) {
+                    $scope.requestData.version = AppVersion.version;
+                    $scope.requestData.imei = $cordovaDevice.getUUID();
+                }
                 //alert(JSON.stringify($scope.requestData));
                 generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().LOGIN, $scope.requestData, $scope.doLogin_callback);
             } catch (error) {
@@ -65,6 +68,7 @@ angular.module('starter.landing', [])
                 $scope.SaveInLocalStorage($scope.localStorageKeys.STATE_ID, data.state_id);
                 $scope.SaveInLocalStorage($scope.localStorageKeys.USERNAME, $scope.sessionVariable.username);
 
+               
                 $scope.clearHistory();
                 $scope.disableBack();
                 $scope.jumpTo('app.dashboard');
