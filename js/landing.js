@@ -45,6 +45,9 @@ angular.module('starter.landing', [])
                 if (!$scope.OS.DESKTOP) {
                     $scope.requestData.version = AppVersion.version;
                     $scope.requestData.imei = $cordovaDevice.getUUID();
+                }else{
+                    $scope.requestData.version = '1.0';
+                    $scope.requestData.imei = '0';
                 }
                 //alert(JSON.stringify($scope.requestData));
                 generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().LOGIN, $scope.requestData, $scope.doLogin_callback);

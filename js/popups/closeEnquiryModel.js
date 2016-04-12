@@ -89,12 +89,12 @@ angular.module('starter.closeEnquiryModal', [])
                 $scope.showAlertWindow("Please select main reason");
                 return;
             }
-            if (($scope.data.reason == "Others" || $scope.data.reason == "Purchased From CoDealer" ||
-                $scope.data.reason == "Purchased From Competition") && !$scope.data.sub_reason) {
+            // if (($scope.data.reason == "Others" || $scope.data.reason == "Purchased From CoDealer" ||
+            //     $scope.data.reason == "Purchased From Competition") && !$scope.data.sub_reason) {
 
-                $scope.showAlertWindow("Please select sub reason");
-                return;
-            }
+            //     $scope.showAlertWindow("Please select sub reason");
+            //     return;
+            // }
             // if (!$scope.data.remarks) {
             //     $scope.showAlertWindow("Please enter remark");
             //     return;

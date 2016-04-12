@@ -8,6 +8,11 @@ angular.module('starter.controllers', [])
         // To listen for when this page is active (for example, to refresh data),
         // listen for the $ionicView.enter event:
         $scope.headerButton = {};
+        $scope.OS = {
+            ANDROID: true,
+            IOS: false,
+            DESKTOP: true,
+        }
 
         $scope.$on('$ionicView.enter', function(e) {
             var stateId = $ionicHistory.currentView().stateId;
@@ -45,11 +50,7 @@ angular.module('starter.controllers', [])
 
 
         $scope.style = {};
-        $scope.OS = {
-            ANDROID: true,
-            IOS: false,
-            DESKTOP: false,
-        }
+        
         $scope.validationClass = Object.freeze({
             ERROR: 'ion-asterisk assertive',
             OK: 'ion-checkmark balanced'/*'ion-thumbsdown energized'*/
@@ -275,6 +276,7 @@ angular.module('starter.controllers', [])
             $scope.RemoveInLocalStorage($scope.localStorageKeys.ALL_DISTRICT);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.ALL_STATE);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.TEN_DAY_FOLLOW);
+            $scope.RemoveInLocalStorage($scope.localStorageKeys.MAKE_MODEL);
         }
 
 

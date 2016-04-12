@@ -17,7 +17,7 @@ angular.module('starter.createNewEnquiry', [])
                 if (make_model_data) {
                     $scope.sessionVariable.make_list = make_model_data.make;
                     $scope.sessionVariable.model_list = make_model_data.model;
-                    $scope.sessionVariable.interested_model = make_model_data.interested_model;
+                    $scope.sessionVariable.model_interested = make_model_data.model_interested;
                 } else {
                     $scope.get_make_model();
                 }
