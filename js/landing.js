@@ -15,6 +15,10 @@ angular.module('starter.landing', [])
                 loginData = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.STATE));
                 if (loginData) { // do login with previously available data                
                     $scope.sessionVariable.username = $scope.GetInLocalStorage($scope.localStorageKeys.USERNAME);
+                    
+                    var encrypted = rc4($scope.sessionVariable.username);
+                    console.log("encrypted : " + rc4("vats", $scope.sessionVariable.username));
+                    console.log("decrypted : " + rc4("vats", encrypted));
                     // $scope.sessionVariable.version = AppVersion.version;
                     $scope.doLogin_callback(loginData);
                 }
@@ -50,7 +54,7 @@ angular.module('starter.landing', [])
                     $scope.requestData.imei = '0';
                 }
                 //alert(JSON.stringify($scope.requestData));
-                generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().LOGIN, $scope.requestData, $scope.doLogin_callback);
+                generic_http_post_service.getDetails(generic_http_post_service.getServices().LOGIN, $scope.requestData, $scope.doLogin_callback);
             } catch (error) {
                 alert(error);
             }

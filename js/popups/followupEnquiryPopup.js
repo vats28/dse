@@ -57,7 +57,7 @@ angular.module('starter.followupEnquiryModal', [])
             $scope.requestData.fol_date = date_picker.getDateInFormat( $scope.page.date, "mm/dd/yyyy");
             $scope.requestData.user_id = $scope.sessionVariable.username;
             $scope.requestData.dms_enquiry_id = $scope.sessionVariable.selected_enquiry.ENQUIRY_ID;
-            generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().SYNC_FOLLOW_UP,
+            generic_http_post_service.getDetails(generic_http_post_service.getServices().SYNC_FOLLOW_UP,
                 $scope.requestData, $scope.followupEnquiry_callback);
         }
 

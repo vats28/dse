@@ -290,7 +290,7 @@ angular.module('starter.controllers', [])
             $scope.showLoader("");
             $scope.requestData = {};
             $scope.requestData.state_id = state_id.split(',')[0];//$scope.sessionVariable.login_data.state_id;
-            generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().GET_DISTRICT,
+            generic_http_post_service.getDetails(generic_http_post_service.getServices().GET_DISTRICT,
                 $scope.requestData, $scope.get_district_callback);
 
         };//end doLogin
@@ -316,7 +316,7 @@ angular.module('starter.controllers', [])
             $scope.showLoader("");
             $scope.requestData = {};
             $scope.requestData.district_id = $scope.sessionVariable.login_data.district_id.split(',')[0];
-            generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().GET_TEHSIL,
+            generic_http_post_service.getDetails(generic_http_post_service.getServices().GET_TEHSIL,
                 $scope.requestData, $scope.get_tehsil_callback);
         };//end doLogin
 
@@ -340,7 +340,7 @@ angular.module('starter.controllers', [])
             $scope.showLoader("");
             $scope.requestData = {};
             $scope.requestData.tehsil_id = $scope.sessionVariable.login_data.tehsil_id.split(',')[0];
-            generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().GET_VILLAGE,
+            generic_http_post_service.getDetails(generic_http_post_service.getServices().GET_VILLAGE,
                 $scope.requestData, $scope.get_village_callback);
         };//end doLogin
 
@@ -364,7 +364,7 @@ angular.module('starter.controllers', [])
             $scope.showLoader("");
             $scope.requestData = {};
             $scope.requestData.state_id = $scope.sessionVariable.login_data.state_id.split(',')[0];
-            generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().GET_STATE_DATA,
+            generic_http_post_service.getDetails(generic_http_post_service.getServices().GET_STATE_DATA,
                 $scope.requestData, $scope.get_fullstate_data_callback);
         };//end doLogin
 
@@ -388,7 +388,7 @@ angular.module('starter.controllers', [])
             $scope.showLoader("");
             $scope.requestData = {};
             $scope.requestData.district_id = $scope.sessionVariable.login_data.district_id.split(',')[0];
-            generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().GET_DISTRICT_DATA,
+            generic_http_post_service.getDetails(generic_http_post_service.getServices().GET_DISTRICT_DATA,
                 $scope.requestData, $scope.get_full_district_data_callback);
         };//end doLogin
 
@@ -409,7 +409,7 @@ angular.module('starter.controllers', [])
         $scope.get_make_model = function() {
             $scope.showLoader("");
             //$scope.requestData = {};
-            generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().BIKE_MAKE_MODEL,
+            generic_http_post_service.getDetails(generic_http_post_service.getServices().BIKE_MAKE_MODEL,
                 $scope.requestData, $scope.get_make_model_callback);
         };//end doLogin
 
@@ -531,7 +531,7 @@ angular.module('starter.controllers', [])
             $scope.requestData.version = AppVersion.version;
             $scope.sessionVariable.version = AppVersion.version;
 
-            generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().CHECK_VERSION,
+            generic_http_post_service.getDetails(generic_http_post_service.getServices().CHECK_VERSION,
                 $scope.requestData, $scope.check_version_callback);
 
             console.log("current apk version : " + AppVersion.version);

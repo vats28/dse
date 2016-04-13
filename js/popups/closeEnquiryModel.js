@@ -115,7 +115,7 @@ angular.module('starter.closeEnquiryModal', [])
             if ($scope.data.existMake)
                 $scope.requestData.existMake = $scope.data.existMake.split(',')[1];//$scope.getValueInJson($scope.sessionVariable.make_list, $scope.data.existMake, "id", "make_name");
 
-            generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().SYNC_FOLLOW_UP,
+            generic_http_post_service.getDetails(generic_http_post_service.getServices().SYNC_FOLLOW_UP,
                 $scope.requestData, $scope.closeEnquiry_callback);
         }
 

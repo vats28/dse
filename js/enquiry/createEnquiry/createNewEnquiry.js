@@ -138,7 +138,7 @@ angular.module('starter.createNewEnquiry', [])
 
                 //  alert($scope.temp_cont_enq.fol_date);
                 console.log(JSON.stringify($scope.requestData));
-                generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().SYNC_RECORDS,
+                generic_http_post_service.getDetails(generic_http_post_service.getServices().SYNC_RECORDS,
                     $scope.requestData, $scope.saveTempEnquiry_callback);
             } catch (error) {
                 alert(error);

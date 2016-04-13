@@ -69,7 +69,7 @@ angular.module('starter.dashboard', [])
             $scope.requestData.reg_no = $scope.sessionVariable.search.regno ? $scope.sessionVariable.search.regno : "";
 
             // alert(JSON.stringify($scope.requestData));
-            generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().FETCH_CONTACT,
+            generic_http_post_service.getDetails(generic_http_post_service.getServices().FETCH_CONTACT,
                 $scope.requestData, $scope.fetch_contact_callback);
 
         };//end doLogin

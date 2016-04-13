@@ -1,10 +1,31 @@
 angular.module('starter.createEnquiry', [])
 
-    .controller('createEnquiryCtrl', function ($scope, date_picker, generic_http_post_service) {
+    .controller('createEnquiryCtrl', function($scope, date_picker, generic_http_post_service) {
 
 
         $scope.sessionVariable.createEnquiry = {};// for create enquiry
         //$scope.sessionVariable.temp_cont_enq.exp_purchase_date = '2016-03-27';
+        $scope.init = function() {
+            // get make model
+            var make_model_data = null;
+            try {
+                make_model_data = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.MAKE_MODEL));
+                // alert(JSON.stringify(make_model_data));
+
+                //if its already available dont
+                if (make_model_data) {
+                    $scope.sessionVariable.make_list = make_model_data.make;
+                    $scope.sessionVariable.model_list = make_model_data.model;
+                    $scope.sessionVariable.model_interested = make_model_data.model_interested;
+                } else {
+                    $scope.get_make_model();
+                }
+                //$scope.hideLoader();
+            } catch (error) {
+                alert(error);
+            }
+        }//end 
+
 
         $scope.veh_type_list = [
             {
@@ -22,31 +43,31 @@ angular.module('starter.createEnquiry', [])
         ];
 
         $scope.selectedModel = '';
-        $scope.pickDate = function (model) { //alert('d'); 
+        $scope.pickDate = function(model) { //alert('d'); 
             $scope.selectedModel = model;
             date_picker.getDate('date', $scope.pickDate_callback, false);
         }
-        $scope.pickDate_callback = function (data) {
+        $scope.pickDate_callback = function(data) {
             if ($scope.selectedModel == 'exp') {
                 $scope.sessionVariable.temp_cont_enq.exp_purchase_date = data.currDate;
             } else if ($scope.selectedModel == 'fol') {
                 $scope.sessionVariable.temp_cont_enq.fol_date = data.currDate;
             }
         }
-        $scope.pickTime = function () { //alert('t');  
+        $scope.pickTime = function() { //alert('t');  
             date_picker.getDate('time', $scope.pickTime_callback);
         }
-        $scope.pickTime_callback = function (data) {
+        $scope.pickTime_callback = function(data) {
             if ($scope.selectedModel == 'folTime') {
                 $scope.data.folTime = data.currTime;
             }
         }
 
-        $scope.getDateWithMonthName = function (dateString) {
+        $scope.getDateWithMonthName = function(dateString) {
             return date_picker.getDateWithMonthName(dateString);
         }
 
-        $scope.getFolDateWithMonthName = function (dateString) {
+        $scope.getFolDateWithMonthName = function(dateString) {
 
             if (!dateString) {
                 var nextDate = date_picker.addDays(new Date(), 1);
@@ -57,7 +78,7 @@ angular.module('starter.createEnquiry', [])
             $scope.sessionVariable.temp_cont_enq.fol_date = dateString;//date_picker.getDateWithMonthName(dateString);
         }
 
-        $scope.saveTempEnquiry = function () {
+        $scope.saveTempEnquiry = function() {
             try {
                 if (!$scope.sessionVariable.temp_cont_enq.model_interested) {
                     $scope.showAlertWindow_Titled('Error', 'Please select a model');
@@ -76,8 +97,8 @@ angular.module('starter.createEnquiry', [])
                     $scope.showAlertWindow_Titled('Error', 'Please select existing vehical type');
                     return;
                 }
-                
-                 if ($scope.sessionVariable.temp_cont_enq.exp_purchase_date) {
+
+                if ($scope.sessionVariable.temp_cont_enq.exp_purchase_date) {
                     var smaller = $scope.sessionVariable.temp_cont_enq.fol_date;
                     var bigger = $scope.sessionVariable.temp_cont_enq.exp_purchase_date;
                     if (date_picker.isGreaterDate(smaller, bigger) == 2) {//2 means not smaller but greater 1 smaller 3 equal
@@ -110,7 +131,7 @@ angular.module('starter.createEnquiry', [])
                 //}
 
                 // $scope.jumpTo('app.add_vehicle_info');
-                
+
                 $scope.showLoader("Please wait...");
                 $scope.requestData = {};
                 $scope.requestData = $scope.sessionVariable.temp_cont_enq;
@@ -129,12 +150,12 @@ angular.module('starter.createEnquiry', [])
                 var exp_purchase_d = $scope.sessionVariable.temp_cont_enq.exp_purchase_date;
                 $scope.requestData.fol_date = date_picker.getDateInFormat(fol_d, "mm/dd/yyyy");
                 $scope.requestData.exp_purchase_date = date_picker.getDateInFormat(exp_purchase_d, "mm/dd/yyyy");
-            $scope.requestData.dealer_code = $scope.sessionVariable.login_data.dealer_code;
+                $scope.requestData.dealer_code = $scope.sessionVariable.login_data.dealer_code;
 
 
-              //  alert($scope.sessionVariable.temp_cont_enq.fol_date);
-               // alert(JSON.stringify($scope.requestData));
-                generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().SYNC_RECORDS,
+                //  alert($scope.sessionVariable.temp_cont_enq.fol_date);
+                // alert(JSON.stringify($scope.requestData));
+                generic_http_post_service.getDetails(generic_http_post_service.getServices().SYNC_RECORDS,
                     $scope.requestData, $scope.saveTempEnquiry_callback);
             } catch (error) {
                 alert(error);
@@ -143,7 +164,7 @@ angular.module('starter.createEnquiry', [])
             //
         }
 
-        $scope.saveTempEnquiry_callback = function (data) {
+        $scope.saveTempEnquiry_callback = function(data) {
             $scope.hideLoader();
             //make it again in same format
             $scope.sessionVariable.temp_cont_enq.fol_date = "";
@@ -155,7 +176,7 @@ angular.module('starter.createEnquiry', [])
             }
         }
 
-        $scope.after_saveTempVehicle = function () {
+        $scope.after_saveTempVehicle = function() {
             $scope.sessionVariable.temp_cont_enq = {};
             $scope.disableBack();
             $scope.jumpTo('app.dashboard');

@@ -49,7 +49,7 @@ angular.module('starter.followupList', [])
         $scope.Fetch_10_days_Enquiry = function () {
             $scope.requestData = {};
             $scope.requestData.user_id = $scope.sessionVariable.username;
-            generic_http_post_service.getDetails_httpget(generic_http_post_service.getServices().GET_FOLLOW_UP,
+            generic_http_post_service.getDetails(generic_http_post_service.getServices().GET_FOLLOW_UP,
                 $scope.requestData, $scope.Fetch_10_days_Enquiry_callback);
         }
         
