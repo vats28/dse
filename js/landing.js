@@ -5,8 +5,6 @@ angular.module('starter.landing', [])
 
         // Form data for the login modal
 
-        //$scope.sessionVariable.username = '10691G01';
-        //$scope.sessionVariable.password = 'pass@123';
 
         $scope.init = function() {
             //if already logged in then  jump to next page
@@ -16,14 +14,14 @@ angular.module('starter.landing', [])
                 if (loginData) { // do login with previously available data                
                     $scope.sessionVariable.username = $scope.GetInLocalStorage($scope.localStorageKeys.USERNAME);
                     
-                    var encrypted = rc4($scope.sessionVariable.username);
-                    console.log("encrypted : " + rc4("vats", $scope.sessionVariable.username));
-                    console.log("decrypted : " + rc4("vats", encrypted));
+                   // var encrypted = rc4("vats", $scope.sessionVariable.username);
+                  //  console.log("encrypted : " + encrypted);
+                   // console.log("decrypted : " + rc4("vats", encrypted));
                     // $scope.sessionVariable.version = AppVersion.version;
                     $scope.doLogin_callback(loginData);
                 }
             } catch (error) {
-                alert(error);
+                console.log("init : " + error );
             }
         }
 

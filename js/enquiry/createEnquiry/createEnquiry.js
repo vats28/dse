@@ -22,6 +22,8 @@ angular.module('starter.createEnquiry', [])
                 }
                 //$scope.hideLoader();
             } catch (error) {
+               // alert(error);
+               console.log("make model not found  " +  error);
                 alert(error);
             }
         }//end 

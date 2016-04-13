@@ -48,7 +48,8 @@ angular.module('starter.dashboard', [])
                 }
                 //$scope.hideLoader();
             } catch (error) {
-                alert(error);
+               // alert(error);
+               console.log("make model not found  " +  error);
             }
 
         }

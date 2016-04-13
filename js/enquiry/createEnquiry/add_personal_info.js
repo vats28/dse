@@ -1,32 +1,32 @@
 angular.module('starter.add_personal_info', [])
 
-    .controller('add_personal_infoCtrl', function ($scope, date_picker, generic_http_post_service) {
+    .controller('add_personal_infoCtrl', function($scope, date_picker, generic_http_post_service) {
 
 
         $scope.data = {};
         $scope.data.age = 'dd-mm-yyyy';
         $scope.selectedModel = '';
-        $scope.pickDate = function (model) { //alert('d');
+        $scope.pickDate = function(model) { //alert('d');
             $scope.selectedModel = model;
             date_picker.getDate('date', $scope.pickDate_callback);
         }
-        $scope.pickDate_callback = function (data) {
+        $scope.pickDate_callback = function(data) {
             if ($scope.selectedModel == 'age') {
                 $scope.data.age = data.currDate;
             }
         }
-        $scope.pickTime = function () { //alert('t');
+        $scope.pickTime = function() { //alert('t');
             date_picker.getDate('time', $scope.pickTime_callback);
         }
 
-        $scope.getDateWithMonthName = function (dateString) {
+        $scope.getDateWithMonthName = function(dateString) {
             return date_picker.getDateWithMonthName(dateString);
         }
 
-        $scope.init = function () {
+        $scope.init = function() {
             $scope.showLoader("");
             try {
-                
+
 
 
                 $scope.showLoader('Please wait...');
@@ -42,7 +42,9 @@ angular.module('starter.add_personal_info', [])
 
 
                 } catch (error) {
-                    alert(error);
+
+                    // alert(error);
+                    console.log("make model not found  " + error);
                     $scope.hideLoader();
                 }
                 if (districtData) {
@@ -59,7 +61,9 @@ angular.module('starter.add_personal_info', [])
                             $scope.sessionVariable.village_list = fullDistrictData.village;
                         }
                     } catch (error) {
-                        alert(error);
+
+                        // alert(error);
+                        console.log("make model not found  " + error);
                         $scope.hideLoader();
                     }
                 } else {
@@ -71,32 +75,36 @@ angular.module('starter.add_personal_info', [])
                     make_model_data = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.MAKE_MODEL));
 
                 } catch (error) {
-                    alert(error);
+
+                    // alert(error);
+                    console.log("make model not found  " + error);
                     $scope.hideLoader();
                 }
                 //if its already available dont
                 if (make_model_data) {
-                     $scope.sessionVariable.make_list = make_model_data.make;
+                    $scope.sessionVariable.make_list = make_model_data.make;
                     $scope.sessionVariable.model_list = make_model_data.model;
                     $scope.sessionVariable.model_interested = make_model_data.model_interested;
                 } else {
                     $scope.get_make_model();
                 }
                 $scope.hideLoader();
-            }catch(error){
-                alert(error);
+            } catch (error) {
+
+                // alert(error);
+                console.log("make model not found  " + error);
                 $scope.hideLoader();
             }
             //
         }
-//sessionVariable.login_data.state_id
+        //sessionVariable.login_data.state_id
 
-        $scope.onStateChange = function () {    //clear earlier data
+        $scope.onStateChange = function() {    //clear earlier data
             $scope.showConfirm('Are you sure', 'Do you really want to change your district?', $scope.onStateChange_callback);
-        
+
         }
 
-        $scope.onStateChange_callback = function () {
+        $scope.onStateChange_callback = function() {
             //clear earlier data
             $scope.RemoveInLocalStorage($scope.localStorageKeys.TEHSIL);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.VILLAGE);
@@ -106,21 +114,21 @@ angular.module('starter.add_personal_info', [])
             //clear variables
             $scope.sessionVariable.login_data.district_id = undefined;
             $scope.sessionVariable.login_data.tehsil_id = undefined;
-            
+
             var loginData = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.STATE));
-            loginData.state_id =  $scope.sessionVariable.login_data.state_id ;
+            loginData.state_id = $scope.sessionVariable.login_data.state_id;
             $scope.SaveInLocalStorage($scope.localStorageKeys.STATE, JSON.stringify(loginData));
-                //$scope.sessionVariable.login_data.state_id = data.state_id;
+            //$scope.sessionVariable.login_data.state_id = data.state_id;
             // fetch new districts
             $scope.get_district($scope.sessionVariable.login_data.state_id.split(',')[0]);
         }
 
-        $scope.onDistrictChange = function () {
+        $scope.onDistrictChange = function() {
             //clear earlier data
             $scope.showConfirm('Are you sure', 'Do you really want to change your district?', $scope.onDistrictChange_callback);
         }
 
-        $scope.onDistrictChange_callback = function () {
+        $scope.onDistrictChange_callback = function() {
             //clear earlier data
 
             $scope.SaveInLocalStorage($scope.localStorageKeys.DISTRICT_ID, $scope.sessionVariable.login_data.district_id);
@@ -132,10 +140,10 @@ angular.module('starter.add_personal_info', [])
             //$scope.get_tehsil();
             $scope.get_full_district_data();
         }
-        
 
 
-        $scope.onTehsilChange = function () {
+
+        $scope.onTehsilChange = function() {
             /*//clear earlier data
              $scope.RemoveInLocalStorage($scope.localStorageKeys.VILLAGE);
              $scope.RemoveInLocalStorage($scope.localStorageKeys.TEHSIL_ID);
@@ -143,7 +151,7 @@ angular.module('starter.add_personal_info', [])
              $scope.get_village();*/
         }
 
-        $scope.checkNumberLength = function (event) {
+        $scope.checkNumberLength = function(event) {
             var value = "" + $scope.sessionVariable.temp_cont_enq.age;
             if (value.length == 2) {
                 event.preventDefault();
@@ -151,7 +159,7 @@ angular.module('starter.add_personal_info', [])
         }
 
         //$scope.sessionVariable.temp_cont_enq.dob = '2015-09-28';
-        $scope.saveTempPerInfo = function () {
+        $scope.saveTempPerInfo = function() {
             if (!$scope.sessionVariable.temp_cont_enq.fname) {
                 $scope.showAlertWindow_Titled('Error', 'Please enter first name');
                 return;

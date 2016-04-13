@@ -21,7 +21,7 @@ angular.module('starter.closeEnquiryModal', [])
                 }
                 //$scope.hideLoader();
             } catch (error) {
-                alert(error);
+                console.log("closeEnquiryModal make_model_data : " + error);
             }
 
         }

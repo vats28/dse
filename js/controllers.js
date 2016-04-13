@@ -11,7 +11,7 @@ angular.module('starter.controllers', [])
         $scope.OS = {
             ANDROID: true,
             IOS: false,
-            DESKTOP: true,
+            DESKTOP: false,
         }
 
         $scope.$on('$ionicView.enter', function(e) {
@@ -47,10 +47,11 @@ angular.module('starter.controllers', [])
         $scope.sessionVariable.temp_cont = {}; // when only contact need to be added
         $scope.search_filter = {};
         $scope.InTesting = false;
+        $scope.mkey = "vats";
 
 
         $scope.style = {};
-        
+
         $scope.validationClass = Object.freeze({
             ERROR: 'ion-asterisk assertive',
             OK: 'ion-checkmark balanced'/*'ion-thumbsdown energized'*/
@@ -245,11 +246,17 @@ angular.module('starter.controllers', [])
 
 
         $scope.SaveInLocalStorage = function(key, value) {
-            window.localStorage.setItem(key, value);
+            var encryptValue = rc4($scope.mkey, value);
+            window.localStorage.setItem(key, encryptValue.toString());
         }//end
 
         $scope.GetInLocalStorage = function(key) {
-            return window.localStorage.getItem(key);
+            var encryptValue = window.localStorage.getItem(key);
+            var decryptValue = null;
+            if (encryptValue) {
+                decryptValue = rc4($scope.mkey, window.localStorage.getItem(key));
+            }
+            return decryptValue;
         }//end
 
         $scope.RemoveInLocalStorage = function(key) {
@@ -267,16 +274,21 @@ angular.module('starter.controllers', [])
 
             //now clear localstorage and variables of past user.
             $scope.sessionVariable = {};
-            $scope.RemoveInLocalStorage($scope.localStorageKeys.STATE);
+            
+            
+            $scope.RemoveInLocalStorage($scope.localStorageKeys.LOGIN);
+            $scope.RemoveInLocalStorage($scope.localStorageKeys.DISTRICT);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.TEHSIL);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.VILLAGE);
+            $scope.RemoveInLocalStorage($scope.localStorageKeys.STATE);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.STATE_ID);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.DISTRICT_ID);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.TEHSIL_ID);
-            $scope.RemoveInLocalStorage($scope.localStorageKeys.ALL_DISTRICT);
-            $scope.RemoveInLocalStorage($scope.localStorageKeys.ALL_STATE);
-            $scope.RemoveInLocalStorage($scope.localStorageKeys.TEN_DAY_FOLLOW);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.MAKE_MODEL);
+            $scope.RemoveInLocalStorage($scope.localStorageKeys.ALL_STATE);
+            $scope.RemoveInLocalStorage($scope.localStorageKeys.ALL_DISTRICT);
+            $scope.RemoveInLocalStorage($scope.localStorageKeys.USERNAME);
+            $scope.RemoveInLocalStorage($scope.localStorageKeys.TEN_DAY_FOLLOW);
         }
 
 
