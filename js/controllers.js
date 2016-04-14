@@ -226,7 +226,7 @@ angular.module('starter.controllers', [])
         };
 
         // A confirm dialog
-        $scope.showConfirm = function(title, template, callback) {
+        $scope.showConfirm = function(title, template, data,  callback) {
             $ionicPopup.confirm({
                 title: title,
                 template: template,
@@ -236,7 +236,7 @@ angular.module('starter.controllers', [])
                 if (res) {
                     console.log('You are sure');
                     if (callback) {
-                        callback();
+                        callback(data);
                     }
                 } else {
                     console.log('You are not sure');
@@ -274,8 +274,8 @@ angular.module('starter.controllers', [])
 
             //now clear localstorage and variables of past user.
             $scope.sessionVariable = {};
-            
-            
+
+
             $scope.RemoveInLocalStorage($scope.localStorageKeys.LOGIN);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.DISTRICT);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.TEHSIL);
@@ -420,7 +420,8 @@ angular.module('starter.controllers', [])
 
         $scope.get_make_model = function() {
             $scope.showLoader("");
-            //$scope.requestData = {};
+            $scope.requestData = {};
+            $scope.requestData.user_id = $scope.sessionVariable.username;
             generic_http_post_service.getDetails(generic_http_post_service.getServices().BIKE_MAKE_MODEL,
                 $scope.requestData, $scope.get_make_model_callback);
         };//end doLogin
@@ -523,11 +524,12 @@ angular.module('starter.controllers', [])
         }
 
         $scope.call_callback = function(number) {
+            
             launchCall(number);
         }
 
         $scope.email = function(email) {
-            $scope.showConfirm('Are you sure?', 'Email this to<br/>' + email, email, $scope.email_callback);
+            $scope.showConfirm('Are you sure?', 'Email this to<br/>' + email,email, $scope.email_callback);
         }
 
         $scope.email_callback = function(email) {
@@ -542,7 +544,6 @@ angular.module('starter.controllers', [])
             $scope.requestData = {};
             $scope.requestData.version = AppVersion.version;
             $scope.sessionVariable.version = AppVersion.version;
-
             generic_http_post_service.getDetails(generic_http_post_service.getServices().CHECK_VERSION,
                 $scope.requestData, $scope.check_version_callback);
 

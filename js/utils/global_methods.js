@@ -18,10 +18,11 @@ function launchMail(email) {
     window.location.href = "mailto:" + email + "?subject=";
 }
 
-function launchCall(number) {
+function launchCall(phone_no) {
     //alert("number : " + number);
     //window.open('tel:' + number);
-    window.location.href = 'tel:' + number;
+    alert(phone_no);
+    window.location.href = 'tel:' + phone_no;
 }
 
 function scope_search() {

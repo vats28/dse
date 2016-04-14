@@ -13,11 +13,7 @@ angular.module('starter.landing', [])
                 loginData = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.STATE));
                 if (loginData) { // do login with previously available data                
                     $scope.sessionVariable.username = $scope.GetInLocalStorage($scope.localStorageKeys.USERNAME);
-                    
-                   // var encrypted = rc4("vats", $scope.sessionVariable.username);
-                  //  console.log("encrypted : " + encrypted);
-                   // console.log("decrypted : " + rc4("vats", encrypted));
-                    // $scope.sessionVariable.version = AppVersion.version;
+                   
                     $scope.doLogin_callback(loginData);
                 }
             } catch (error) {
