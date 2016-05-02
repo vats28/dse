@@ -8,15 +8,15 @@
 
 angular.module('utils.http_post', [])
 
-    .factory('generic_http_post_service', function ($http, $timeout) {
+    .factory('generic_http_post_service', function($http, $timeout) {
         var server_host = 'http://tab.hmcl.biz/';
-        var server_api_path = 'dse_app/';
-        server_api_path = 'dse_app_live/'; //live server path
+        var server_api_path = 'dse_app_UAT/';
+        //server_api_path = 'dse_app_live/'; //live server path
         var services_address = Object.freeze({
             LOGIN: server_host + server_api_path + 'login.php',
-            GET_DISTRICT: server_host + server_api_path + 'get_district.php', 
-            GET_TEHSIL: server_host + server_api_path + 'get_tehsil.php', 
-            GET_VILLAGE: server_host + server_api_path + 'get_village.php', 
+            GET_DISTRICT: server_host + server_api_path + 'get_district.php',
+            GET_TEHSIL: server_host + server_api_path + 'get_tehsil.php',
+            GET_VILLAGE: server_host + server_api_path + 'get_village.php',
             BIKE_MAKE_MODEL: server_host + server_api_path + 'bike_make_model.php',
             GET_DISTRICT_DATA: server_host + server_api_path + 'get_district_data.php',
             GET_STATE_DATA: server_host + server_api_path + 'get_state_data.php',
@@ -41,14 +41,21 @@ angular.module('utils.http_post', [])
             failure_msg: 'Something went wrong',
             error_code: 101
         };
+        var code = "punar";
         var isTimedOut = false;
         return {
-            getServices: function () { return services_address },
-            getDetails: function (API, requestData, callback) {
-                isTimedOut = true;
+            getServices: function() { return services_address },
+            getDetails: function(API, requestData, callback) {
 
-                $http.post(API, requestData).
-                    success(function (data, status, headers, config) {
+                isTimedOut = true;
+                var encrypt_data = {};
+                var encrypted = CryptoJS.AES.encrypt(JSON.stringify(JSON.stringify(requestData)), "dse", { format: CryptoJSAesJson }).toString();
+                //var decrypted = JSON.parse(CryptoJS.AES.decrypt(encrypted, "dse", { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8));
+              
+                
+                encrypt_data.data = encrypted;
+                $http.post(API, encrypt_data).
+                    success(function(data, status, headers, config) {
                         //alert("data" + JSON.stringify(data));
                         isTimedOut = false;
                         try {
@@ -58,7 +65,7 @@ angular.module('utils.http_post', [])
                         }
                         callback(data);
                     }).
-                    error(function (data, status, headers, config) {
+                    error(function(data, status, headers, config) {
                         // alert("data" + JSON.stringify(data));
                         //alert("status : " + JSON.stringify(status));
                         //  alert("headers" + JSON.stringify(headers));
@@ -68,28 +75,24 @@ angular.module('utils.http_post', [])
                         callback(networkError);
                     });
 
-                //call timeout if gets late in calling
-                /* $timeout(function () {
-                 if(isTimedOut)
-                 callback(networkTimeout);
-                 }, 10000);// five seconds timeout*/
             },
-            getDetails_httpget: function (API, requestData, callback) {
+            getDetails_httpget: function(API, requestData, callback) {
                 isTimedOut = true;
                 // alert("data" + JSON.stringify(requestData));
                 API += '?';
-                angular.forEach(requestData, function (value, key) {
-                    API += key + '=' + value + '&';
-                });
+                // angular.forEach(requestData, function (value, key) {
+                //     API += key + '=' + value + '&';
+                // });
+                API += 'data=' + rc4(code, "hello dsc");
 
                 //alert(API);
-                $http.get(API, {timeout: 1000 * 20}).
-                    success(function (data, status, headers, config) {
+                $http.get(API, { timeout: 1000 * 20 }).
+                    success(function(data, status, headers, config) {
 
                         isTimedOut = false;
                         callback(data);
                     }).
-                    error(function (data, status, headers, config) {
+                    error(function(data, status, headers, config) {
                         //alert("data" + JSON.stringify(data));
                         //alert("status : " + JSON.stringify(status));
                         //alert("headers" + JSON.stringify(headers));

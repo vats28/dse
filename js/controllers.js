@@ -264,7 +264,7 @@ angular.module('starter.controllers', [])
         }//end
 
         $scope.askLogout = function() {
-            $scope.showConfirm('Do you really want to logout?', 'This may discard your pending changes. If you still want to logout then press yes otherwise no', $scope.doLogout);
+            $scope.showConfirm('Do you really want to logout?', 'This may discard your pending changes. If you still want to logout then press yes otherwise no', null, $scope.doLogout);
         }//end            
 
         $scope.doLogout = function() {

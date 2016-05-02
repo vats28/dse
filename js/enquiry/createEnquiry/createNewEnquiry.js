@@ -91,6 +91,14 @@ angular.module('starter.createNewEnquiry', [])
                     $scope.showAlertWindow_Titled('Error', 'Please select a followup date');
                     return;
                 }
+                // if (!$scope.sessionVariable.contact_list.selected_item.AGE) {
+                //     $scope.showAlertWindow_Titled('Error', 'Please enter age');
+                //     return;
+                // }
+                // if (!$scope.sessionVariable.contact_list.selected_item.GENDER) {
+                //     $scope.showAlertWindow_Titled('Error', 'Please select gender');
+                //     return;
+                // }
 
                 if ($scope.temp_cont_enq.exp_purchase_date) {
                     var smaller = $scope.temp_cont_enq.fol_date;

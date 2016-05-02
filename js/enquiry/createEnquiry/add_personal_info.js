@@ -100,7 +100,7 @@ angular.module('starter.add_personal_info', [])
         //sessionVariable.login_data.state_id
 
         $scope.onStateChange = function() {    //clear earlier data
-            $scope.showConfirm('Are you sure', 'Do you really want to change your district?', $scope.onStateChange_callback);
+            $scope.showConfirm('Are you sure', 'Do you really want to change your district?',null, $scope.onStateChange_callback);
 
         }
 
@@ -125,7 +125,7 @@ angular.module('starter.add_personal_info', [])
 
         $scope.onDistrictChange = function() {
             //clear earlier data
-            $scope.showConfirm('Are you sure', 'Do you really want to change your district?', $scope.onDistrictChange_callback);
+            $scope.showConfirm('Are you sure', 'Do you really want to change your district?', null, $scope.onDistrictChange_callback);
         }
 
         $scope.onDistrictChange_callback = function() {

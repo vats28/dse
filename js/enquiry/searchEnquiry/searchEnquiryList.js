@@ -199,7 +199,7 @@ angular.module('starter.searchEnquiryList', [])
 
 
         $scope.clear_filter = function () {
-            $scope.showConfirm('Are you sure', 'Do you really want to clear filter from search list?', $scope.clear_filter_callback);
+            $scope.showConfirm('Are you sure', 'Do you really want to clear filter from search list?', null, $scope.clear_filter_callback);
 
         }//ned clear_filter
         
