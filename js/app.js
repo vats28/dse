@@ -8,7 +8,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
     'starter.addVehicleInfo', 'starter.add_personal_info', 'starter.enquiryList', 'starter.enquiryDetail', 'starter.searchFilter',
     'starter.dashboard', 'starter.contactList', 'starter.contactDetail', 'starter.vehicleDetail', 'starter.createNewEnquiry',
     'starter.followupList', 'starter.searchEnquiryList', 'starter.closeEnquiryModal', 'starter.followupEnquiryModal',
-    'starter.pendingFollowupList',
+    'starter.pendingFollowupList','starter.emiCalc',
     'utils.date_picker', 'ion-fab-button', 'utils.http_post', 'utils.fileTransfer'], function ($httpProvider) {
         // Use x-www-form-urlencoded Content-Type
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
@@ -235,6 +235,15 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/enquiry/searchEnquiry/searchEnquiryList.html'
+                    }
+                }
+            })
+
+            .state('app.emi_calc', {
+                url: '/emi_calc',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/emi_calc/emi_calc.html'
                     }
                 }
             });

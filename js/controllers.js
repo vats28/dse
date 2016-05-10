@@ -11,7 +11,7 @@ angular.module('starter.controllers', [])
         $scope.OS = {
             ANDROID: true,
             IOS: false,
-            DESKTOP: false,
+            DESKTOP: true,
         }
 
         $scope.$on('$ionicView.enter', function(e) {
@@ -226,7 +226,7 @@ angular.module('starter.controllers', [])
         };
 
         // A confirm dialog
-        $scope.showConfirm = function(title, template, data,  callback) {
+        $scope.showConfirm = function(title, template, data, callback) {
             $ionicPopup.confirm({
                 title: title,
                 template: template,
@@ -519,17 +519,21 @@ angular.module('starter.controllers', [])
             $scope.modal.remove()
         };
 
+        $scope.closeKeyBoard = function() {
+            cordova.plugins.Keyboard.close();
+        }//edn
+
         $scope.call = function(number) {
             $scope.showConfirm('Are you sure?', 'Call this number<br/>' + number, number, $scope.call_callback);
         }
 
         $scope.call_callback = function(number) {
-            
+
             launchCall(number);
         }
 
         $scope.email = function(email) {
-            $scope.showConfirm('Are you sure?', 'Email this to<br/>' + email,email, $scope.email_callback);
+            $scope.showConfirm('Are you sure?', 'Email this to<br/>' + email, email, $scope.email_callback);
         }
 
         $scope.email_callback = function(email) {
