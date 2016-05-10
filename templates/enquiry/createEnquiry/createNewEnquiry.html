@@ -25,25 +25,14 @@
                     </div>
                 </div>
             </div>
-
-            <!--<div class="item padding-0" ng-if="!sessionVariable.contact_list.selected_item.GENDER || !sessionVariable.contact_list.selected_item.AGE">
+            
+            <div class="item padding-0 item-text-wrap">
                 <div class="row">
-                    <div class="col r-border date-col">
-                        <h2 class="dark">Age </h2>
-                        <input ng-model="sessionVariable.contact_list.selected_item.AGE" type="number" min="1" max="99" placeholder="eg: 23" ng-keypress="checkNumberLength($event)"
-                        style="width: 100%;">
-                    </div>
                     <div class="col date-col">
-
-                        <h2 class="dark">Gender </h2>
-                        <select ng-model="sessionVariable.contact_list.selected_item.GENDER" class="v-select" style="font-size: 14px" ng-model="temp.gender">
-                            <option value="">--select--</option>
-                            <option value="M">Male</option>
-                            <option value="F">Female</option>
-                        </select>
+                        <ion-checkbox ng-model="temp_cont_enq.test_ride">Testride Required</ion-checkbox>
                     </div>
                 </div>
-            </div>-->
+            </div>
 
             <div class="item padding-0 item-text-wrap">
                 <div class="row">

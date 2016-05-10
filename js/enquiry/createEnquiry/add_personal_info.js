@@ -137,7 +137,6 @@ angular.module('starter.add_personal_info', [])
             //clear variables
             $scope.sessionVariable.login_data.tehsil_id = undefined;
             // fetch new districts
-            //$scope.get_tehsil();
             $scope.get_full_district_data();
         }
 

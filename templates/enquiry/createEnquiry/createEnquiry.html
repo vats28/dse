@@ -14,7 +14,7 @@
                 </div>
                 <select class="red-select" ng-model="sessionVariable.temp_cont_enq.model_interested" style="width: 50% !important; align:center">
                     <option value="">--select--</option>
-                    <option ng-repeat="item in sessionVariable.model_interested"  value="{{item.model_name}}">{{item.model_name}}
+                    <option ng-repeat="item in sessionVariable.model_interested" value="{{item.model_name}}">{{item.model_name}}
                     </option>
                 </select>
             </div>
@@ -27,6 +27,13 @@
                     </div>
                     <div class="col date-col">
                         <ion-checkbox ng-model="sessionVariable.temp_cont_enq.finance_req">Finance Required</ion-checkbox>
+                    </div>
+                </div>
+            </div>
+            <div class="item padding-0 item-text-wrap">
+                <div class="row">
+                    <div class="col date-col">
+                        <ion-checkbox ng-model="sessionVariable.temp_cont_enq.test_ride">Testride Required</ion-checkbox>
                     </div>
                 </div>
             </div>

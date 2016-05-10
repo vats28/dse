@@ -21,6 +21,11 @@
                 <i class="  {{validationClass.ERROR}}  input_icon_right"></i>
                 <!--ng-if ="!sessionVariable.temp_cont_enq.mobile"-->
             </label>
+            <label class="item item-input">
+                <span class="input-label">Email</span>
+                <input ng-model="sessionVariable.temp_cont_enq.email"  type="email"
+                       placeholder="eg. abc@xyz.com">
+            </label>
 
             <div class="item padding-0">
                 <div class="row">
@@ -118,17 +123,6 @@
 
             </label>
 
-            <!--<div class="item">-->
-            <!--<div ng-model="sessionVariable.login_data.village_id"-->
-            <!--combo-box="sessionVariable.village_list"-->
-            <!--cbx-placeholder="Item"-->
-            <!--cbx-filter-caption="used items:"-->
-            <!--cbxEmptyFilterCaption="No items found"-->
-            <!--cbx-close-on-select-->
-            <!--cbxHeaderClass="bar-royal"-->
-            <!--cbxOkCaption="Select">-->
-            <!--</div>-->
-            <!--</div>-->
 
 
             <label class="item item-input">

@@ -135,6 +135,7 @@ angular.module('starter.createNewEnquiry', [])
                 $scope.requestData.village = $scope.sessionVariable.contact_list.selected_item.CITY;
                 $scope.requestData.exchange_req = $scope.temp_cont_enq.exchange_req ? "Y" : "N";
                 $scope.requestData.finance_req = $scope.temp_cont_enq.finance_req ? "Y" : "N";
+                $scope.requestData.test_ride = $scope.temp_cont_enq.test_ride ? "Y" : "N";
                 $scope.requestData.existVeh = $scope.getValueInJson($scope.veh_type_list, $scope.temp_cont_enq.existVeh, "id", "type");
                 $scope.requestData.existMake = $scope.getValueInJson($scope.sessionVariable.make_list, $scope.temp_cont_enq.existMake, "id", "make_name");
 
