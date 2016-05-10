@@ -125,6 +125,7 @@ angular.module('starter.createNewEnquiry', [])
                 $scope.requestData.fname = $scope.sessionVariable.contact_list.selected_item.FST_NAME;
                 $scope.requestData.lname = $scope.sessionVariable.contact_list.selected_item.LAST_NAME;
                 $scope.requestData.mobile = $scope.sessionVariable.contact_list.selected_item.CELL_PH_NUM;
+                $scope.requestData.email = $scope.sessionVariable.contact_list.selected_item.EMAIL_ADDR;
                 $scope.requestData.gender = $scope.sessionVariable.contact_list.selected_item.GENDER;
                 $scope.requestData.age = $scope.sessionVariable.contact_list.selected_item.AGE;
                 if ($scope.sessionVariable.contact_list.selected_item.ADDR)
