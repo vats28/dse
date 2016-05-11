@@ -1,0 +1,230 @@
+<ion-view ng-controller="add_personal_infoCtrl" view-title="Add Personal Info" class="black-bg">
+    <fab-button target-id="" class="animated zoomInDown" ng-click="saveTempPerInfo()">
+        <i class="icon ion ion-ios-arrow-forward "></i>
+    </fab-button>
+    <ion-content class="  has-header" ng-init="init()">
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">First Name</span>
+                <input type="text" ng-model="sessionVariable.temp_cont_enq.fname" placeholder="eg: Pradeep">
+                <i class="  {{validationClass.ERROR}}  input_icon_right"></i>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Last Name</span>
+                <input type="text" ng-model="sessionVariable.temp_cont_enq.lname" placeholder="eg : sharma">
+                <i class="  {{validationClass.ERROR}}  input_icon_right"></i>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Mobile</span>
+                <input ng-model="sessionVariable.temp_cont_enq.mobile" maxlength="10" type="tel" placeholder="10 digit mobile no.">
+                <i class="  {{validationClass.ERROR}}  input_icon_right"></i>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Email</span>
+                <input ng-model="sessionVariable.temp_cont_enq.email" type="text" placeholder="eg. abc@xyz.com">
+            </label>
+
+            <div class="item padding-0">
+                <div class="row">
+                    <div class="col r-border date-col">
+                        <h2 class="dark">Age </h2>
+                        <input ng-model="sessionVariable.temp_cont_enq.age" type="number" min="1" max="99" placeholder="eg: 23" ng-keypress="checkNumberLength($event)"
+                        style="width: 100%;">
+                    </div>
+                    <div class="col date-col">
+
+                        <h2 class="dark">Gender </h2>
+                        <select ng-model="sessionVariable.temp_cont_enq.gender" class="v-select" style="font-size: 14px" ng-model="temp.gender">
+                            <option value="">--select--</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item item-divider">Address Detail</div>
+
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    State
+                </div>
+                <select ng-model="sessionVariable.login_data.state_id" ng-change="onStateChange()">
+                    <option ng-repeat="item in sessionVariable.state_list" value="{{item.id}}" ng-selected="{{item.id == sessionVariable.login_data.state_id}}">
+                        {{item.state_name}}
+                    </option>
+                </select>
+            </label>
+
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    District
+                </div>
+                <select ng-model="sessionVariable.login_data.district_id" ng-change="onDistrictChange()">
+                    <option value="">-- select --</option>
+                    <option ng-repeat="item in sessionVariable.district_list" ng-selected="{{item.id == sessionVariable.login_data.district_id}}"
+                    value="{{item.id}}">
+                        {{item.district_name}}
+                    </option>
+                </select>
+            </label>
+
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Tehsil
+                </div>
+                <select ng-model="sessionVariable.login_data.tehsil_id" ng-change="onTehsilChange()">
+                    <option value="">-- select --</option>
+                    <option ng-repeat="item in sessionVariable.tehsil_list" ng-if="item.district_id == sessionVariable.login_data.district_id"
+                    ng-selected="{{item.id == sessionVariable.login_data.tehsil_id}}" value="{{item.id}}">
+                        {{item.tehsil_name}}
+                    </option>
+                </select>
+            </label>
+
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    City/Village/Town
+                </div>
+
+                <select ng-model="sessionVariable.login_data.village_id">
+                    <option value="">-- select --</option>
+                    <option ng-if="item.tehsil_id == sessionVariable.login_data.tehsil_id" ng-repeat="item in sessionVariable.village_list" value="{{item.id}}">
+                        {{item.village_name}}
+                    </option>
+                </select>
+
+
+            </label>
+
+
+
+            <label class="item item-input">
+                <span class="input-label">Address 1</span>
+                <input type="text" ng-model="sessionVariable.temp_cont_enq.address1" placeholder="eg : your primary address">
+                <!--<i class="  {{validationClass.ERROR}}  input_icon_right"></i>-->
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Address 2</span>
+                <input type="text" ng-model="sessionVariable.temp_cont_enq.address2" placeholder="eg : any other address">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Pincode</span>
+                <input type="tel" maxlength="6" ng-model="sessionVariable.temp_cont_enq.pincode" placeholder="eg : 1109018">
+            </label>
+
+
+
+
+        </div>
+        <!--enquiry info from here-->
+
+        <div class="card">
+
+
+            <div class="item item-input item-select item-text-wrap " style="background-color: #CBCBCB; font-weight: bold">
+                <div class="input-label">
+                    Model
+                    <!--Model interested in-->
+                </div>
+                <select class="red-select" ng-model="sessionVariable.temp_cont_enq.model_interested" style="width: 50% !important; align:center">
+                    <option value="">--select--</option>
+                    <option ng-repeat="item in sessionVariable.model_interested" value="{{item.model_name}}">{{item.model_name}}
+                    </option>
+                </select>
+            </div>
+
+
+            <div class="item padding-0 item-text-wrap">
+                <div class="row">
+                    <div class="col r-border date-col">
+                        <ion-checkbox ng-model="sessionVariable.temp_cont_enq.exchange_req">Exchange Required</ion-checkbox>
+                    </div>
+                    <div class="col date-col">
+                        <ion-checkbox ng-model="sessionVariable.temp_cont_enq.finance_req">Finance Required</ion-checkbox>
+                    </div>
+                </div>
+            </div>
+            <div class="item padding-0 item-text-wrap">
+                <div class="row">
+                    <div class="col date-col">
+                        <ion-checkbox ng-model="sessionVariable.temp_cont_enq.test_ride">Testride Required</ion-checkbox>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item padding-0 item-text-wrap">
+                <div class="row">
+                    <div class="col r-border date-col" ng-click="pickDate('fol')">
+                        <h2 class="dark">Next followup date</h2>
+
+                        <p ng-bind="getDateWithMonthName(sessionVariable.temp_cont_enq.fol_date)">23 oct, 2015</p>
+                        <p ng-bind="getFolDateWithMonthName(sessionVariable.temp_cont_enq.fol_date)" ng-if="!sessionVariable.temp_cont_enq.fol_date">-- select --</p>
+                    </div>
+
+                    <div class="col date-col" ng-click="pickDate('exp')">
+                        <h2 class="dark">Expected date of purchase </h2>
+
+                        <p ng-bind="getDateWithMonthName(sessionVariable.temp_cont_enq.exp_purchase_date)">23 oct, 2015</p>
+
+                        <p ng-if="!sessionVariable.temp_cont_enq.exp_purchase_date">-- select --</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Remark</span>
+                <input type="text" ng-model="sessionVariable.temp_cont_enq.remarks" placeholder="eg. anything worth noting">
+            </label>
+        </div>
+
+
+
+        <div class="card">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Existing Vehicle
+                </div>
+                <select ng-model="sessionVariable.temp_cont_enq.existVeh" ng-changed="onExistVeh_Change()">
+                    <option value="" selected>Select</option>
+                    <!--<option value="Two Wheeler">Two Wheeler</option>
+                        <option value="Four Wheeler">Four Wheeler</option>
+                        <option value="First Time Buyer">First Time Buyer</option>-->
+                    <option ng-repeat="item in veh_type_list" value="{{item.id}}">{{item.type}}</option>
+                </select>
+            </label>
+
+
+            <label ng-if="sessionVariable.temp_cont_enq.existVeh == 1" class="item item-input item-select" ng-class="{'item-stable' : !sessionVariable.temp_cont_enq.existVeh}">
+                <div class="input-label">
+                    Make
+                </div>
+                <select ng-model="sessionVariable.temp_cont_enq.existMake" ng-changed="onExistMake_Change()" ng-disabled="!sessionVariable.temp_cont_enq.existVeh">
+                    <option value="" selected>select</option>
+                    <option ng-repeat="item in sessionVariable.make_list" value="{{item.id}}">{{item.make_name}}</option>
+                </select>
+            </label>
+
+            <label ng-if="sessionVariable.temp_cont_enq.existVeh == 1" class="item item-input item-select" ng-class="{'item-stable' : !sessionVariable.temp_cont_enq.existMake}">
+                <div class="input-label">
+                    Model
+
+                    <!--{{sessionVariable.model_list}}-->
+                </div>
+                <select ng-model="sessionVariable.temp_cont_enq.existModel" ng-changed="onExistModel_Change()" ng-disabled="!sessionVariable.temp_cont_enq.existMake">
+                    <option value="" selected>select</option>
+                    <option ng-repeat="item in sessionVariable.model_list" ng-if="sessionVariable.temp_cont_enq.existMake == item.make_id" value="{{item.model_name}}">{{item.model_name}}</option>
+                </select>
+            </label>
+
+
+        </div>
+        <br/>
+        <br/>
+    </ion-content>
+</ion-view>
