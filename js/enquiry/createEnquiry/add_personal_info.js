@@ -1,6 +1,6 @@
 angular.module('starter.add_personal_info', [])
 
-    .controller('add_personal_infoCtrl', function($scope, date_picker, generic_http_post_service) {
+    .controller('add_personal_infoCtrl', function($scope, date_picker, generic_http_post_service, form_validator) {
 
 
         $scope.data = {};
@@ -25,6 +25,7 @@ angular.module('starter.add_personal_info', [])
 
         $scope.init = function() {
             $scope.showLoader("");
+            $scope.sessionVariable.temp_cont_enq.email = "";
             try {
 
 
@@ -100,7 +101,7 @@ angular.module('starter.add_personal_info', [])
         //sessionVariable.login_data.state_id
 
         $scope.onStateChange = function() {    //clear earlier data
-            $scope.showConfirm('Are you sure', 'Do you really want to change your district?',null, $scope.onStateChange_callback);
+            $scope.showConfirm('Are you sure', 'Do you really want to change your district?', null, $scope.onStateChange_callback);
 
         }
 
@@ -187,6 +188,17 @@ angular.module('starter.add_personal_info', [])
             //    $scope.showAlertWindow_Titled('Error', 'Please enter email');
             //    return;
             //}
+            //alert($scope.sessionVariable.temp_cont_enq.email);
+            if($scope.sessionVariable.temp_cont_enq.email){
+                if(!form_validator.IsValidEmail($scope.sessionVariable.temp_cont_enq.email)){
+                     $scope.showAlertWindow_Titled('Error', 'Please enter valid email address');
+                     return;
+                }
+            }
+            // if (!$scope.sessionVariable.temp_cont_enq.email) {
+            //     $scope.showAlertWindow_Titled('Error', 'Please enter valid email address');
+            //     return;
+            // }
             if (!$scope.sessionVariable.login_data.state_id) {
                 $scope.showAlertWindow_Titled('Error', 'Please select state');
                 return;

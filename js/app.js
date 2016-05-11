@@ -9,7 +9,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
     'starter.dashboard', 'starter.contactList', 'starter.contactDetail', 'starter.vehicleDetail', 'starter.createNewEnquiry',
     'starter.followupList', 'starter.searchEnquiryList', 'starter.closeEnquiryModal', 'starter.followupEnquiryModal',
     'starter.pendingFollowupList','starter.emiCalc',
-    'utils.date_picker', 'ion-fab-button', 'utils.http_post', 'utils.fileTransfer'], function ($httpProvider) {
+    'utils.date_picker', 'ion-fab-button', 'utils.http_post', 'utils.fileTransfer', 'utils.validations'], function ($httpProvider) {
         // Use x-www-form-urlencoded Content-Type
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 

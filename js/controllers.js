@@ -11,7 +11,7 @@ angular.module('starter.controllers', [])
         $scope.OS = {
             ANDROID: true,
             IOS: false,
-            DESKTOP: true,
+            DESKTOP: false,
         }
 
         $scope.$on('$ionicView.enter', function(e) {
