@@ -1,34 +1,34 @@
-<ion-view cache-view="false" view-title="Home" ng-cloak>
+<ion-view cache-view="false" view-title="Emi calculator" ng-cloak>
 
 
 
     <ion-content ng-controller="emiCalcCtrl" ng-init="init()">
         <div class="list">
-            <!--<label class="item item-input">
-                <span class="input-label">Loan Amount</span>
-                <input type="text" ng-model="temp.amount">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Loan length in months</span>
-                <input type="tel" ng-model="temp.months">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Interest Rate</span>
-                <input type="tel" ng-model="temp.rate">
-            </label>-->
 
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Loan Amount</span>
-                <input type="tel" ng-model="temp.amount" ng-change="calculate()" placeholder="Enter Loan Amount">
+            <label class="item item-input " style="border-bottom: 0px; padding: 0px 0px 0px 16px">
+                <input type="tel" ng-model="temp.amount" ng-bind="''" ng-change="calculate(4)" placeholder="Loan Amount">
+                <p style="position:absolute;right:16px;top:0px;font-size:25px; color:red;">₹</p>
             </label>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Loan length in months</span>
-                <input type="tel" ng-model="temp.months" ng-change="calculate()" placeholder="Enter months">
+            <div class="range range-assertive">
+                <input type="range" style="height:32px;" name="volume" min="0" max="500000" ng-change="calculate(1)" ng-model="temp.amount1">
+            </div>
+
+
+            <label class="item item-input " style="border-bottom: 0px; padding: 0px 0px 0px 16px">
+                <input type="tel" ng-model="temp.months" ng-change="calculate(5)" placeholder="Tenure (Months)">
             </label>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Interest Rate</span>
-                <input type="tel" ng-model="temp.rate" ng-change="calculate()" placeholder="Enter interest Rate">
+            <div class="range range-assertive">
+                <input type="range" style="height:32px;" name="volume" min="0" max="84" ng-change="calculate(2)" ng-model="temp.months1">
+            </div>
+
+
+            <label class="item item-input" style="border-bottom: 0px; padding: 0px 0px 0px 16px">
+                <input type="tel" ng-model="temp.rate" ng-change="calculate(6)" placeholder="Interest Rate (%)">
+                <p style="position:absolute;right:16px;top:0px;font-size:25px; color:red;">%</p>
             </label>
+            <div class="item range range-assertive" style="border-width: 0px 0px 1px;">
+                <input type="range" style="height:32px;" name="volume" min="0" max="30" ng-change="calculate(3)" ng-model="temp.rate1">
+            </div>
 
             <div ng-if="temp.amount || temp.months || temp.rate">
                 <div align="center" style="text-align: -moz-center;">
@@ -36,15 +36,15 @@
                         <canvas id="chart-area" />
                     </div>
                 </div>
-                <div class="item" align="center">
+                <div class="item padding-10" align="center">
                     <p>Loan EMI</p>
                     <h2 class="dark bold" ng-bind="'₹ ' + temp.calculated"></h2>
                 </div>
-                <div class="item" align="center">
+                <div class="item padding-10" align="center">
                     <p>Total Interest Payable</p>
                     <h2 class="dark bold" ng-bind="'₹ ' + temp.total_interest"></h2>
                 </div>
-                <div class="item item-text-wrap" align="center">
+                <div class="item item-text-wrap padding-10" align="center">
                     <p>Total of Payments (Principal + Interest)</p>
                     <h2 class="dark bold" ng-bind="'₹ ' + temp.amount_to_pay"></h2>
                 </div>
@@ -58,8 +58,8 @@
     </ion-content>
 
     <div class="v-tab-item" id="keyboardButton" style="position:absolute; right:0px; bottom:-10px;">
-        <button ng-click="closeKeyBoard()"  class="animated fadeInUpBig fab-button-new  size-56 red-bg light" style="position:relative;animation-duration: 1s;">
-            <i class="icon ion ion-chevron-down" ></i>
+        <button ng-click="closeKeyBoard()" class="animated fadeInUpBig fab-button-new  size-56 red-bg light" style="position:relative;animation-duration: 1s;">
+            <i class="icon ion ion-chevron-down"></i>
         </button>
         <br/> Hero Products
     </div>

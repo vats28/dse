@@ -46,7 +46,7 @@ angular.module('utils.http_post', [])
         return {
             getServices: function() { return services_address },
             getDetails: function(API, requestData, callback) {
-
+                //alert(JSON.stringify(requestData));
                 isTimedOut = true;
                 var encrypt_data = {};
                 var encrypted = CryptoJS.AES.encrypt(JSON.stringify(JSON.stringify(requestData)), "dse", { format: CryptoJSAesJson }).toString();

@@ -138,7 +138,7 @@ angular.module('starter.add_personal_info', [])
             //clear variables
             $scope.sessionVariable.login_data.tehsil_id = undefined;
             // fetch new districts
-            $scope.get_full_district_data();
+            $scope.get_full_district_data($scope.sessionVariable.login_data.district_id);
         }
 
 
@@ -168,16 +168,24 @@ angular.module('starter.add_personal_info', [])
                 $scope.showAlertWindow_Titled('Error', 'Please enter last name');
                 return;
             }
+            
+            if (!$scope.sessionVariable.temp_cont_enq.mobile) {
+                $scope.showAlertWindow_Titled('Error', 'Please enter mobile');
+                return;
+            }
+            
+            if($scope.sessionVariable.temp_cont_enq.email){
+                if(!form_validator.IsValidEmail($scope.sessionVariable.temp_cont_enq.email)){
+                     $scope.showAlertWindow_Titled('Error', 'Please enter valid email address');
+                     return;
+                }
+            }
             if (!$scope.sessionVariable.temp_cont_enq.age) {
                 $scope.showAlertWindow_Titled('Error', 'Please enter age');
                 return;
             }
             if (!$scope.sessionVariable.temp_cont_enq.gender) {
                 $scope.showAlertWindow_Titled('Error', 'Please select gender');
-                return;
-            }
-            if (!$scope.sessionVariable.temp_cont_enq.mobile) {
-                $scope.showAlertWindow_Titled('Error', 'Please enter mobile');
                 return;
             }
             //if(!$scope.sessionVariable.temp_cont_enq.phone){
@@ -189,12 +197,6 @@ angular.module('starter.add_personal_info', [])
             //    return;
             //}
             //alert($scope.sessionVariable.temp_cont_enq.email);
-            if($scope.sessionVariable.temp_cont_enq.email){
-                if(!form_validator.IsValidEmail($scope.sessionVariable.temp_cont_enq.email)){
-                     $scope.showAlertWindow_Titled('Error', 'Please enter valid email address');
-                     return;
-                }
-            }
             // if (!$scope.sessionVariable.temp_cont_enq.email) {
             //     $scope.showAlertWindow_Titled('Error', 'Please enter valid email address');
             //     return;

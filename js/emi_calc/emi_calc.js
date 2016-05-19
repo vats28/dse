@@ -16,10 +16,27 @@ angular.module('starter.emiCalc', [])
         });
         
         $scope.init = function() {
-            $scope.temp = {};
+            $scope.temp = {
+                amount1:0,
+                months1:0,
+                rate1:0,
+            };
             document.getElementById('keyboardButton').style.display = 'none';
         }
-        $scope.calculate = function() {
+        $scope.calculate = function(val) {
+            if(val == 1){
+                $scope.temp.amount = $scope.temp.amount1;
+            }else if(val == 2){
+                $scope.temp.months = $scope.temp.months1;
+            }else if(val == 3){
+                $scope.temp.rate = $scope.temp.rate1;
+            }else if(val == 4){
+                $scope.temp.amount1 = $scope.temp.amount;
+            }else if(val == 5){
+                $scope.temp.months1 = $scope.temp.months;
+            }else if(val == 6){
+                $scope.temp.rate1 = $scope.temp.rate;
+            }
             if (!$scope.temp.amount || !$scope.temp.months || !$scope.temp.rate) {
                 //$scope.temp.calculated = "Incomplete data";
             }

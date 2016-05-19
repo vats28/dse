@@ -294,16 +294,19 @@ angular.module('starter.controllers', [])
 
 
 
-        $scope.get_district = function(state_id) {
-            if (!$scope.sessionVariable.login_data.state_id) {
-                $scope.showAlertWindow("Sorry", "Please select a state first");
+        $scope.get_district = function(state_id, callback) {
+            if (!state_id) {
+                $scope.showAlertWindow_Titled("Sorry", "Please select a state first");
                 return;
+            }
+            if(!callback){
+                callback =  $scope.get_district_callback;
             }
             $scope.showLoader("");
             $scope.requestData = {};
             $scope.requestData.state_id = state_id.split(',')[0];//$scope.sessionVariable.login_data.state_id;
             generic_http_post_service.getDetails(generic_http_post_service.getServices().GET_DISTRICT,
-                $scope.requestData, $scope.get_district_callback);
+                $scope.requestData, callback);
 
         };//end doLogin
 
@@ -322,7 +325,7 @@ angular.module('starter.controllers', [])
 
         $scope.get_tehsil = function() {
             if (!$scope.sessionVariable.login_data.district_id) {
-                $scope.showAlertWindow("Sorry", "Please select a district first");
+                $scope.showAlertWindow_Titled("Sorry", "Please select a district first");
                 return;
             }
             $scope.showLoader("");
@@ -346,7 +349,7 @@ angular.module('starter.controllers', [])
 
         $scope.get_village = function() {
             if (!$scope.sessionVariable.login_data.district_id) {
-                $scope.showAlertWindow("Sorry", "Please select a tehsil first");
+                $scope.showAlertWindow_Titled("Sorry", "Please select a tehsil first");
                 return;
             }
             $scope.showLoader("");
@@ -370,7 +373,7 @@ angular.module('starter.controllers', [])
 
         $scope.get_fullstate_data = function() {
             if (!$scope.sessionVariable.login_data.state_id) {
-                $scope.showAlertWindow("Sorry", "Please select a state first");
+                $scope.showAlertWindow_Titled("Sorry", "Please select a state first");
                 return;
             }
             $scope.showLoader("");
@@ -392,16 +395,19 @@ angular.module('starter.controllers', [])
             }
         }
 
-        $scope.get_full_district_data = function() {
-            if (!$scope.sessionVariable.login_data.district_id) {
-                $scope.showAlertWindow("Sorry", "Please select a district first");
+        $scope.get_full_district_data = function(district_id, callback) {
+            if (!district_id) {
+                $scope.showAlertWindow_Titled("Sorry", "Please select a district first");
                 return;
+            }
+            if(!callback){
+                callback = $scope.get_full_district_data_callback;
             }
             $scope.showLoader("");
             $scope.requestData = {};
-            $scope.requestData.district_id = $scope.sessionVariable.login_data.district_id.split(',')[0];
+            $scope.requestData.district_id = district_id.split(',')[0];
             generic_http_post_service.getDetails(generic_http_post_service.getServices().GET_DISTRICT_DATA,
-                $scope.requestData, $scope.get_full_district_data_callback);
+                $scope.requestData, callback);
         };//end doLogin
 
         $scope.get_full_district_data_callback = function(data) {

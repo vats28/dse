@@ -1,5 +1,8 @@
 
-
+.scroll-bar-indicator
+{
+	display: none;
+}
 .login-container {
     display: -webkit-flex;
     -webkit-flex-direction: column;
@@ -71,6 +74,10 @@
 }
 .bolder{
     font-weight: bolder;
+}
+
+.text_center{
+    text-align: center;
 }
 
 .assertive-bg{
@@ -231,6 +238,11 @@ p.s_item{	color: #D7E7E9 !important;}
 .relative_middle {
     position: relative;
     top: 25%;
+}
+
+.edit_enquiry_disable_input {
+	direction: rtl;
+	padding-right: 50px !important;
 }
 
 /*
