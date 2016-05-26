@@ -26,6 +26,7 @@ angular.module('utils.http_post', [])
             SYNC_FOLLOW_UP: server_host + server_api_path + 'sync_follow_up.php',
             GET_FOLLOW_UP: server_host + server_api_path + 'get_follow_up.php',
             CHECK_VERSION: server_host + server_api_path + 'check_version.php',
+            FETCH_CAMPAIGN_DATA: server_host + server_api_path + 'fetch_campaign_data.php',
             //CHECK_VERSION.php
         });
 
@@ -51,8 +52,8 @@ angular.module('utils.http_post', [])
                 var encrypt_data = {};
                 var encrypted = CryptoJS.AES.encrypt(JSON.stringify(JSON.stringify(requestData)), "dse", { format: CryptoJSAesJson }).toString();
                 //var decrypted = JSON.parse(CryptoJS.AES.decrypt(encrypted, "dse", { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8));
-              
-                
+
+
                 encrypt_data.data = encrypted;
                 $http.post(API, encrypt_data).
                     success(function(data, status, headers, config) {

@@ -1,19 +1,19 @@
 <ion-view  cache-view="false" ng-controller="editEnquiryCtrl" view-title="Add Personal Info" class="black-bg">
-    <fab-button target-id="" class="animated zoomInDown" ng-click="saveTempEnquiry()">
+    <fab-button ng-if="tab3" class="animated zoomInDown" ng-click="saveTempEnquiry()">
         <i class="icon ion ion-ios-arrow-forward "></i>
     </fab-button>
 
-
-    <div class="tabs-striped  tabs-top tabs-background-dark tabs-color-assertive">
+ <div class="tabs-striped  tabs-top tabs-background-assertive tabs-color-light">
+    <!--<div class="tabs-striped  tabs-top tabs-background-dark tabs-color-assertive">-->
         <div class="tabs tabs-icon-top">
             <a class="tab-item " ng-class="tab1 ? 'active' : ''" ng-click="onTab1_click()">
-                <i class="icon ion-person red-color"></i> <span class="red-color">Contact</span>
+                <i class="icon ion-person"></i> <span class="">Contact</span>
             </a>
             <a class="tab-item" ng-class="tab2 ? 'active' : ''" ng-click="onTab2_click()">
-                <i class="icon ion-location red-color"></i> <span class="red-color">Address</span>
+                <i class="icon ion-location "></i> <span class="">Address</span>
             </a>
             <a class="tab-item" ng-class="tab3 ? 'active' : ''" ng-click="onTab3_click()">
-                <i class="icon ion-ios-paper red-color"></i> <span class="red-color">Enquiry</span>
+                <i class="icon ion-ios-paper "></i> <span class="">Enquiry</span>
             </a>
         </div>
     </div>

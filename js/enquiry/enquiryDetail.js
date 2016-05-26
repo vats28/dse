@@ -14,6 +14,7 @@ angular.module('starter.enquiryDetail', [])
         });
 
         $scope.editEnquiry = function() {
+            $scope.sessionVariable.createNewEnquiry = false;
             $scope.sessionVariable.selected_enquiry_edit = $scope.sessionVariable.selected_enquiry;
             $scope.jumpTo('app.editEnquiry');
         }//end

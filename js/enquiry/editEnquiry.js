@@ -461,11 +461,12 @@ angular.module('starter.editEnquiry', [])
             //$scope.sessionVariable.temp_cont_enq.exp_purchase_date = "";
             if (data.success == 1) {
                 var msg = "";
-                if($scope.isExisitingEnquiry){
+                if(!$scope.isExisitingEnquiry){
                     msg = 'Enquiry has been edited successfully';
-                    $scope.isExisitingEnquiry = false;
+                  //  $scope.isExisitingEnquiry = false;
                 }else{
                     msg = 'Enquiry has been created successfully';
+                    $scope.isExisitingEnquiry = false;
                 }
                 $scope.showAlertWindow_Titled('Success', msg, $scope.after_saveTempVehicle);
             } else {

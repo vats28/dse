@@ -1,8 +1,11 @@
 
-.scroll-bar-indicator
+/*.scroll-bar-indicator
 {
 	display: none;
-}
+}*/
+/*.scroll-content {
+     -webkit-overflow-scrolling:  touch;
+  }*/
 .login-container {
     display: -webkit-flex;
     -webkit-flex-direction: column;
@@ -252,3 +255,10 @@ p.s_item{	color: #D7E7E9 !important;}
     -moz-background-size: cover;
     background-size: cover;
 }*/
+
+.underline{
+    text-decoration: underline;
+}
+.tabs-background-assertive{
+    background-color:  red !important;
+}
