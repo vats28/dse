@@ -13,15 +13,10 @@ function showMap(address) {
 }
 
 function launchMail(email) {
-    //alert("email : " + email);
-    //window.open("mailto:?subject=Something to share with you...");
     window.location.href = "mailto:" + email + "?subject=";
 }
 
 function launchCall(phone_no) {
-    //alert("number : " + number);
-    //window.open('tel:' + number);
-    alert(phone_no);
     window.location.href = 'tel:' + phone_no;
 }
 

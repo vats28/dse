@@ -43,7 +43,7 @@
 }
 .header-bg {
     /*background-image: url("../img/header_red_bg2.jpg");*/
-    background-color: red;
+    background-color: red !important;
     /*-webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -58,18 +58,18 @@
 }
 
 .black-bg{
-    background-color: black;
+    background-color: black !important;
 }
 
 .black-color{
-    color: black;
+    color: black !important;
 }
 .red-bg{
-    background-color: red;
+    background-color: red !important;
 }
 
 .red-color{
-    color: red;
+    color: red !important;
 }
 
 .bold{
@@ -84,20 +84,20 @@
 }
 
 .assertive-bg{
-    background-color: red;
+    background-color: red !important;
 }
 
 .assertive{
-    color:red;
+    color:red !important;
 }
 
 .bar{
-    border-bottom: red;
-    background-color: red;
+    border-bottom: red !important;
+    background-color: red !important;
 }
 .item-bg-new {
     /*background-image: url("../img/item-bg.jpg");*/
-    background-color: black;
+    background-color: black  !important;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -107,35 +107,38 @@
     font-weight: bold;
 }
 
-.item-bg-new p, h2, h4 { color: white;}
+/*item-bg-new p, h2, h4 { color: white !important;}*/
+p.item-bg-new  { color: white !important;}
+h2.item-bg-new  { color: white !important;}
+h4.item-bg-new{ color: white !important;}
 
-.s_item{	color: #D7E7E9;}
+.s_item{	color: #D7E7E9 !important;}
 p.s_item{	color: #D7E7E9 !important;}
 /*.sidepanel h2{	color: #D7E7E9;}*/
 /*.sidepanel p{	color: #D7E7E9;}*/
 /*.sidepanel a{	color: #D7E7E9;}*/
 .padding-10{
-    padding: 10px;
+    padding: 10px !important;
 }
 
 .padding-0{
-    padding: 0px;
+    padding: 0px !important;
 }
 
 .margin-r-20{
-    margin-right: 20px;
+    margin-right: 20px !important;
 }
 
 .dark-grey-subtitle{
-    margin-right: 16px;
-    color: black;
+    margin-right: 16px !important;
+    color: black !important;;
 }
 
 .row-col-pad-0 .row{
-    padding: 0px;
+    padding: 0px !important;
 }
 .row-col-pad-0 .col{
-    padding: 0px;
+    padding: 0px !important;
 }
 
 .font-22{
@@ -152,7 +155,7 @@ p.s_item{	color: #D7E7E9 !important;}
 }
 
 .add_box{
-    padding: 5px;
+    padding: 5px !important;
 }
 
 .ico-text{
@@ -181,7 +184,7 @@ p.s_item{	color: #D7E7E9 !important;}
 }
 
 .date-col{
-    padding: 0px 5px 0 10px;
+    padding: 0px 5px 0 10px !important;
 }
 
 .r-border{
@@ -215,7 +218,7 @@ p.s_item{	color: #D7E7E9 !important;}
 
 
 .popup-head {
-    background-color: red;
+    background-color: red !important;
 }
 
 .popup-title {
@@ -246,6 +249,14 @@ p.s_item{	color: #D7E7E9 !important;}
 .edit_enquiry_disable_input {
 	direction: rtl;
 	padding-right: 50px !important;
+}
+
+.in-black h2{
+    color: white !important;
+}
+
+.in-black h4{
+    color: white !important;
 }
 
 /*

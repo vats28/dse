@@ -2,14 +2,14 @@
     <ion-content ng-cloak ng-controller="enquiryDetailCtrl">
         <div class="item item-text-wrap  item-bg-new ">
             <div class="row " style="padding: 0px; ">
-                <div class="col" style="padding: 0px;">
+                <div class="col in-black" style="padding: 0px;">
 
 
                     <h2><span ng-bind="sessionVariable.selected_enquiry.FST_NAME +' '+ sessionVariable.selected_enquiry.LAST_NAME">Pulkit Bhardwaj</span></h2>
                     <p class="s_item"><span ng-if="sessionVariable.selected_enquiry.AGE" ng-bind="sessionVariable.selected_enquiry.AGE + 'yrs / '">32</span>
                         <span ng-bind="sessionVariable.selected_enquiry.GENDER">M</span></p>
                 </div>
-                <div class="col " style="padding: 0px;">
+                <div class="col in-black" style="padding: 0px;">
 
                     <h4><b>Mobile : </b><span class="underline" ng-bind="sessionVariable.selected_enquiry.CELL_PH_NUM" ng-click="call(sessionVariable.selected_enquiry.CELL_PH_NUM)"></span></h4>
                     <h4><b>Email : </b><span ng-bind="sessionVariable.selected_enquiry.EMAIL_ADDR" ng-click="email(sessionVariable.selected_enquiry.EMAIL_ADDR)"></span></h4>
