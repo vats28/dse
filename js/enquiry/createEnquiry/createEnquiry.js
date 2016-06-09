@@ -2,7 +2,6 @@ angular.module('starter.createEnquiry', [])
 
     .controller('createEnquiryCtrl', function($scope, date_picker, generic_http_post_service) {
 
-
         $scope.sessionVariable.createEnquiry = {};// for create enquiry
         //$scope.sessionVariable.temp_cont_enq.exp_purchase_date = '2016-03-27';
         $scope.init = function() {
@@ -22,8 +21,8 @@ angular.module('starter.createEnquiry', [])
                 }
                 //$scope.hideLoader();
             } catch (error) {
-               // alert(error);
-               console.log("make model not found  " +  error);
+                // alert(error);
+                console.log("make model not found  " + error);
                 alert(error);
             }
         }//end 
@@ -144,7 +143,7 @@ angular.module('starter.createEnquiry', [])
                 $scope.requestData.tehsil = $scope.getValueInJson($scope.sessionVariable.tehsil_list, $scope.sessionVariable.login_data.tehsil_id, "id", "tehsil_name");//$scope.sessionVariable.tehsil_list[$scope.sessionVariable.login_data.tehsil_id];//.split(',')[1];
                 $scope.requestData.village = $scope.getValueInJson($scope.sessionVariable.village_list, $scope.sessionVariable.login_data.village_id, "id", "village_name");//$scope.sessionVariable.village_list[$scope.sessionVariable.login_data.village_id];//.split(',')[1];
                 $scope.requestData.exchange_req = $scope.sessionVariable.temp_cont_enq.exchange_req ? "Y" : "N";
-                $scope.requestData.finance_req = $scope.sessionVariable.temp_cont_enq.finance_req ? "Y" : "N";                
+                $scope.requestData.finance_req = $scope.sessionVariable.temp_cont_enq.finance_req ? "Y" : "N";
                 $scope.requestData.test_ride = $scope.sessionVariable.temp_cont_enq.test_ride ? "Y" : "N";
                 $scope.requestData.existVeh = $scope.getValueInJson($scope.veh_type_list, $scope.sessionVariable.temp_cont_enq.existVeh, "id", "type");
                 $scope.requestData.existMake = $scope.getValueInJson($scope.sessionVariable.make_list, $scope.sessionVariable.temp_cont_enq.existMake, "id", "make_name");
@@ -154,8 +153,11 @@ angular.module('starter.createEnquiry', [])
                 $scope.requestData.fol_date = date_picker.getDateInFormat(fol_d, "mm/dd/yyyy");
                 $scope.requestData.exp_purchase_date = date_picker.getDateInFormat(exp_purchase_d, "mm/dd/yyyy");
                 $scope.requestData.dealer_code = $scope.sessionVariable.login_data.dealer_code;
-
-
+                var camp_counter = 1;
+                for (i = 0; i < $scope.sessionVariable.campaign.campaign_data.length; i++) {
+                    if ($scope.sessionVariable.campaign.campaign_data[i].check == true)
+                        $scope.requestData["campid" + (camp_counter++)] = $scope.sessionVariable.campaign.campaign_data[i].camp_id;
+                }
                 //  alert($scope.sessionVariable.temp_cont_enq.fol_date);
                 // alert(JSON.stringify($scope.requestData));
                 generic_http_post_service.getDetails(generic_http_post_service.getServices().SYNC_RECORDS,
@@ -187,7 +189,22 @@ angular.module('starter.createEnquiry', [])
 
 
 
+        $scope.onChangeCampaign = function(index) {
+            var checkVal = $scope.sessionVariable.campaign.campaign_data[index].check;
+            /*already max seleted can't select more 
+            but as user already seleted it we need to deselect it again*/
+            var memberCount = 0;
+            for (i = 0; i < $scope.sessionVariable.campaign.campaign_data.length; i++) {
+                if ($scope.sessionVariable.campaign.campaign_data[i].check == true)
+                    memberCount++;
+            }
+            if (memberCount == 4 && checkVal == true) {
+                $scope.sessionVariable.campaign.campaign_data[index].check = !checkVal;
+                $scope.showAlertWindow_Titled("oops!", "Can't choose more then 3 campaigns")
+                return;
+            }
 
+        }//end onChangeCampaign
 
 
 

@@ -27,7 +27,8 @@ angular.module('utils.http_post', [])
             GET_FOLLOW_UP: server_host + server_api_path + 'get_follow_up.php',
             CHECK_VERSION: server_host + server_api_path + 'check_version.php',
             FETCH_CAMPAIGN_DATA: server_host + server_api_path + 'fetch_campaign_data.php',
-            //CHECK_VERSION.php
+            FETCH_ORDER_DATA: server_host + server_api_path + 'fetch_order_data.php',
+            FETCH_TEST_RIDE: server_host + server_api_path + 'fetch_test_ride.php',
         });
 
         var networkError = {

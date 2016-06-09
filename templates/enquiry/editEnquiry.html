@@ -1,10 +1,10 @@
-<ion-view  cache-view="false" ng-controller="editEnquiryCtrl" view-title="Add Personal Info" class="black-bg">
+<ion-view cache-view="false" ng-controller="editEnquiryCtrl" view-title="Add Personal Info" class="black-bg">
     <fab-button ng-if="tab3" class="animated zoomInDown" ng-click="saveTempEnquiry()">
         <i class="icon ion ion-ios-arrow-forward "></i>
     </fab-button>
 
- <div class="tabs-striped  tabs-top tabs-background-assertive tabs-color-light">
-    <!--<div class="tabs-striped  tabs-top tabs-background-dark tabs-color-assertive">-->
+    <div class="tabs-striped  tabs-top tabs-background-assertive tabs-color-light">
+        <!--<div class="tabs-striped  tabs-top tabs-background-dark tabs-color-assertive">-->
         <div class="tabs tabs-icon-top">
             <a class="tab-item " ng-class="tab1 ? 'active' : ''" ng-click="onTab1_click()">
                 <i class="icon ion-person"></i> <span class="">Contact</span>
@@ -67,7 +67,7 @@
                 <div class="item item-divider">Address Detail</div>
                 <li class="item item-toggle">
                     Allow Edit Below
-                    <label class="toggle toggle-assertive" >
+                    <label class="toggle toggle-assertive">
                         <input type="checkbox" ng-model="disableCase.TWO" ng-change="toggleAddressEdit()">
                         <div class="track">
                             <div class="handle"></div>
@@ -179,7 +179,8 @@
                         Model
                         <!--Model interested in-->
                     </div>
-                    <select class="red-select" ng-model="sessionVariable.temp_cont_enq.X_MODEL_INTERESTED" style="width: 50% !important; align:center">
+                    <select class="red-select" ng-model="sessionVariable.temp_cont_enq.X_MODEL_INTERESTED" ng-change="fetchCampaign(sessionVariable.temp_cont_enq.X_MODEL_INTERESTED)"
+                    ng-init="fetchCampaign(sessionVariable.temp_cont_enq.X_MODEL_INTERESTED)" style="width: 50% !important; align:center">
                         <option value="">--select--</option>
                         <option ng-repeat="item in sessionVariable.temp_cont_enq.model_interested" ng-selected="item.model_name == sessionVariable.temp_cont_enq.X_MODEL_INTERESTED"
                         value="{{item.model_name}}">{{item.model_name}}
@@ -271,6 +272,21 @@
                 </label>
 
 
+            </div>
+
+            <div class="card" ng-if="sessionVariable.temp_cont_enq.X_MODEL_INTERESTED">
+                <div class="item item-divider" style="background-color: #CBCBCB; font-weight: bold">
+                    Campaigns
+                </div>
+
+                <div class="item item-text-wrap padding-0" ng-repeat="item in sessionVariable.campaign.campaign_data ">
+                    <ion-checkbox ng-model="item.check" ng-change="onChangeCampaign($index)" ng-checked="item.check" ng-if="!item.model || item.model == sessionVariable.temp_cont_enq.X_MODEL_INTERESTED">
+                        <p ng-bind="item.campaign_name + ' ('+ item.camp_type +')' "></p>
+                        <p ng-bind="'Source: ' + item.camp_source + ', Status: ' + item.status"></p>
+                        <p ng-bind="'Date: ' + item.start_date +' to '+ (item.end_date?item.end_date:'-NA-')"></p>
+                        <p ng-bind="'Category: ' + item.category + ', Sub-Category: ' + item.sub_category"></p>
+                    </ion-checkbox>
+                </div>
             </div>
         </div>
         <br/>

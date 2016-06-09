@@ -5,11 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.controllers', 'starter.landing', 'starter.createEnquiry',
-    'starter.addVehicleInfo', 'starter.add_personal_info', 'starter.enquiryList', 'starter.enquiryDetail', 'starter.searchFilter',
-    'starter.dashboard', 'starter.contactList', 'starter.contactDetail', 'starter.vehicleDetail', 'starter.createNewEnquiry',
+    'starter.add_personal_info', 'starter.enquiryDetail', 'starter.searchFilter',
+    'starter.dashboard', 'starter.contactList', 'starter.contactDetail', 'starter.vehicleDetail',
     'starter.followupList', 'starter.searchEnquiryList', 'starter.closeEnquiryModal', 'starter.followupEnquiryModal',
-    'starter.pendingFollowupList','starter.emiCalc', 'starter.editEnquiry',
-    'utils.date_picker', 'ion-fab-button', 'utils.http_post', 'utils.fileTransfer', 'utils.validations'], function ($httpProvider) {
+    'starter.pendingFollowupList', 'starter.emiCalc', 'starter.editEnquiry', 'starter.pendingOrderList',
+    'utils.date_picker', 'ion-fab-button', 'utils.http_post', 'utils.fileTransfer', 'utils.validations'], function($httpProvider) {
         // Use x-www-form-urlencoded Content-Type
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
@@ -18,7 +18,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
          * @param {Object} obj
          * @return {String}
          */
-        var param = function (obj) {
+        var param = function(obj) {
             var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
 
             for (name in obj) {
@@ -50,7 +50,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
         };
 
         // Override $http service's default transformRequest
-        $httpProvider.defaults.transformRequest = [function (data) {
+        $httpProvider.defaults.transformRequest = [function(data) {
             return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
         }];
     })
@@ -131,29 +131,11 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
                 }
             })
 
-            .state('app.createNewEnquiry', {
-                url: '/createNewEnquiry',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/enquiry/createEnquiry/createNewEnquiry.html'
-                    }
-                }
-            })
-
             .state('app.add_personal_info', {
                 url: '/add_personal_info',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/enquiry/createEnquiry/add_personal_info.html'
-                    }
-                }
-            })
-
-            .state('app.add_vehicle_info', {
-                url: '/add_vehicle_info',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/enquiry/createEnquiry/add_vehicle_info.html'
                     }
                 }
             })
@@ -235,6 +217,15 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/enquiry/searchEnquiry/searchEnquiryList.html'
+                    }
+                }
+            })
+
+            .state('app.pendingOrderList', {
+                url: '/pendingOrderList',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/order/pendingOrderList.html'
                     }
                 }
             })

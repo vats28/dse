@@ -112,8 +112,8 @@ p.item-bg-new  { color: white !important;}
 h2.item-bg-new  { color: white !important;}
 h4.item-bg-new{ color: white !important;}
 
-.s_item{	color: #D7E7E9 !important;}
-p.s_item{	color: #D7E7E9 !important;}
+.s_item {	color: #D7E7E9 !important;}
+.s_item p{	color: #D7E7E9 !important;}
 /*.sidepanel h2{	color: #D7E7E9;}*/
 /*.sidepanel p{	color: #D7E7E9;}*/
 /*.sidepanel a{	color: #D7E7E9;}*/
@@ -238,7 +238,7 @@ p.s_item{	color: #D7E7E9 !important;}
 }
 
 .item p {
-	color: #000;
+	color: #000 !important;
 }
 
 .relative_middle {
@@ -272,4 +272,9 @@ p.s_item{	color: #D7E7E9 !important;}
 }
 .tabs-background-assertive{
     background-color:  red !important;
+}
+
+.break-word {
+  /*word-wrap: break-word;*/
+  word-spacing: 30000px; 
 }

@@ -136,7 +136,7 @@ angular.module('starter.editEnquiry', [])
             if ($scope.sessionVariable.createNewEnquiry) {
                 $scope.tab3 = true;
                 $scope.sessionVariable.createNewEnquiry = false;
-                 $scope.isExisitingEnquiry = true;
+                $scope.isExisitingEnquiry = true;
             } else {
 
                 $scope.tab1 = true;
@@ -442,7 +442,11 @@ angular.module('starter.editEnquiry', [])
                 $scope.requestData.exp_purchase_date = date_picker.getDateInFormat(exp_purchase_d, "mm/dd/yyyy");
                 $scope.requestData.dealer_code = $scope.sessionVariable.login_data.dealer_code;
 
-
+                var camp_counter = 1;
+                for (i = 0; i < $scope.sessionVariable.campaign.campaign_data.length; i++) {
+                    if ($scope.sessionVariable.campaign.campaign_data[i].check == true)
+                        $scope.requestData["campid" + (camp_counter++)] = $scope.sessionVariable.campaign.campaign_data[i].camp_id;
+                }
                 //  alert($scope.sessionVariable.temp_cont_enq.fol_date);
 
                 generic_http_post_service.getDetails(generic_http_post_service.getServices().SYNC_RECORDS,
@@ -461,10 +465,10 @@ angular.module('starter.editEnquiry', [])
             //$scope.sessionVariable.temp_cont_enq.exp_purchase_date = "";
             if (data.success == 1) {
                 var msg = "";
-                if(!$scope.isExisitingEnquiry){
+                if (!$scope.isExisitingEnquiry) {
                     msg = 'Enquiry has been edited successfully';
-                  //  $scope.isExisitingEnquiry = false;
-                }else{
+                    //  $scope.isExisitingEnquiry = false;
+                } else {
                     msg = 'Enquiry has been created successfully';
                     $scope.isExisitingEnquiry = false;
                 }
@@ -480,4 +484,24 @@ angular.module('starter.editEnquiry', [])
             $scope.disableBack();
             $scope.jumpTo('app.dashboard');
         }
+
+
+        $scope.onChangeCampaign = function(index) {
+            var checkVal = $scope.sessionVariable.campaign.campaign_data[index].check;
+            /*already max seleted can't select more 
+            but as user already seleted it we need to deselect it again*/
+            var memberCount = 0;
+            for (i = 0; i < $scope.sessionVariable.campaign.campaign_data.length; i++) {
+                if ($scope.sessionVariable.campaign.campaign_data[i].check == true)
+                    memberCount++;
+            }
+            if (memberCount == 4 && checkVal == true) {
+                $scope.sessionVariable.campaign.campaign_data[index].check = !checkVal;
+                $scope.showAlertWindow_Titled("oops!", "Can't choose more then 3 campaigns")
+                return;
+            }
+
+        }//end onChangeCampaign
+        
+        
     });

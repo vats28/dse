@@ -1,0 +1,30 @@
+<ion-view cache-view="false" view-title="Pending Orders">
+
+  <ion-content ng-controller="pendingOrderListCtrl" ng-init="init()">
+
+    <div class="item stable-bg padding-10" align="center" ng-hide="!dataRefreshing">
+      <div class="col v-tab-item ">
+        <ion-spinner icon="spiral " style="stroke:red;"></ion-spinner>
+        <br/> <span class="dark">Refreshing Data</span>
+      </div>
+    </div>
+    <!--order_no,dealer_code,order_date,cust_name,mobile,model_cd,dse_name,reason,campaign,expected_date,financer_name-->
+    <ion-list >
+      <ion-item class=" item-text-wrap item-icon-right"  ng-repeat="item in arrayList.order_data">
+        <i class="icon ion ion-alert assertive"></i>
+        <p><span class="red-color" ng-bind="item.cust_name" class="margin-r-20">Pulkit</span></p>
+        <p class="bold" ng-bind="item.model_cd ? ('Model: ' + item.model_cd) : ('Model: -NA-')"></p>  
+        <p>Order No: <span ng-bind="item.order_no"></span></p>  
+        <p>Mobile: <span class="underline" ng-bind="item.mobile" ng-click="call(item.mobile)"></span>, Date: <span ng-bind="item.order_date"></span></p>
+        <p>DSE Name: <span ng-bind="item.dse_name"></span>, Expt Date: <span ng-bind="item.expected_date"></span></p>
+        <p>Reason : <span ng-bind="item.reason"></span></p>
+        <p>Campaign : <span ng-bind="item.campaign ? item.campaign : '-NA-'"></span>, financer_name : <span ng-bind="item.financer_name ? item.financer_name : '-NA-'"></span></p>
+      </ion-item>
+
+      <ion-item class="item-icon-left item-text-wrap assertive" ng-click="jumpTo('app.dashboard')" ng-if="!arrayList.order_data">
+        <i class="icon ion ion-android-happy"></i> Enjoy !!
+        <p>No pending orders found</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

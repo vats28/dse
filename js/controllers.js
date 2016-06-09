@@ -11,7 +11,7 @@ angular.module('starter.controllers', [])
         $scope.OS = {
             ANDROID: true,
             IOS: false,
-            DESKTOP: false,
+            DESKTOP: true,
         }
 
         $scope.$on('$ionicView.enter', function(e) {
@@ -75,7 +75,8 @@ angular.module('starter.controllers', [])
             ALL_STATE: 'dse_all_state',
             ALL_DISTRICT: 'dse_all_district',
             USERNAME: 'username',
-            TEN_DAY_FOLLOW: 'ten_day_follow'
+            TEN_DAY_FOLLOW: 'ten_day_follow',
+            PENDING_ORDERS: 'pending_orders'
         });
 
         $scope.SaveLoginCredential = function(data) {
@@ -289,6 +290,7 @@ angular.module('starter.controllers', [])
             $scope.RemoveInLocalStorage($scope.localStorageKeys.ALL_DISTRICT);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.USERNAME);
             $scope.RemoveInLocalStorage($scope.localStorageKeys.TEN_DAY_FOLLOW);
+            $scope.RemoveInLocalStorage($scope.localStorageKeys.PENDING_ORDERS);
         }
 
 
@@ -299,8 +301,8 @@ angular.module('starter.controllers', [])
                 $scope.showAlertWindow_Titled("Sorry", "Please select a state first");
                 return;
             }
-            if(!callback){
-                callback =  $scope.get_district_callback;
+            if (!callback) {
+                callback = $scope.get_district_callback;
             }
             $scope.showLoader("");
             $scope.requestData = {};
@@ -400,7 +402,7 @@ angular.module('starter.controllers', [])
                 $scope.showAlertWindow_Titled("Sorry", "Please select a district first");
                 return;
             }
-            if(!callback){
+            if (!callback) {
                 callback = $scope.get_full_district_data_callback;
             }
             $scope.showLoader("");
@@ -441,6 +443,28 @@ angular.module('starter.controllers', [])
                 $scope.sessionVariable.model_list = data.model;
                 $scope.sessionVariable.model_interested = data.model_interested;
                 $scope.SaveInLocalStorage($scope.localStorageKeys.MAKE_MODEL, JSON.stringify(data));
+            } else {
+                $scope.showAlertWindow_Titled("Error", data.respDescription, null, null);
+            }
+        }
+
+
+        $scope.fetchCampaign = function(model) {
+            if (!model) {
+                return;
+            }
+            $scope.showLoader("");
+            $scope.requestData = {};
+            $scope.requestData.user_id = $scope.sessionVariable.username;
+            $scope.requestData.dealer_code = $scope.sessionVariable.login_data.dealer_code;
+            generic_http_post_service.getDetails(generic_http_post_service.getServices().FETCH_CAMPAIGN_DATA,
+                $scope.requestData, $scope.fetchCampaign_callback);
+        }
+
+        $scope.fetchCampaign_callback = function(data) {
+            $scope.hideLoader();
+            if (data.success == 1) {
+                $scope.sessionVariable.campaign = data;
             } else {
                 $scope.showAlertWindow_Titled("Error", data.respDescription, null, null);
             }
