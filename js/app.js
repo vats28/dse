@@ -5,11 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.controllers', 'starter.landing', 'starter.createEnquiry',
-    'starter.add_personal_info', 'starter.enquiryDetail', 'starter.searchFilter',
+    'starter.add_personal_info', 'starter.enquiryDetail', 'starter.searchFilter', 'starter.testride',
     'starter.dashboard', 'starter.contactList', 'starter.contactDetail', 'starter.vehicleDetail',
     'starter.followupList', 'starter.searchEnquiryList', 'starter.closeEnquiryModal', 'starter.followupEnquiryModal',
     'starter.pendingFollowupList', 'starter.emiCalc', 'starter.editEnquiry', 'starter.pendingOrderList',
-    'utils.date_picker', 'ion-fab-button', 'utils.http_post', 'utils.fileTransfer', 'utils.validations'], function($httpProvider) {
+    'utils.date_picker', 'ion-fab-button', 'utils.http_post', 'utils.fileTransfer', 'utils.validations'], function ($httpProvider) {
         // Use x-www-form-urlencoded Content-Type
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
@@ -18,7 +18,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
          * @param {Object} obj
          * @return {String}
          */
-        var param = function(obj) {
+        var param = function (obj) {
             var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
 
             for (name in obj) {
@@ -50,13 +50,13 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
         };
 
         // Override $http service's default transformRequest
-        $httpProvider.defaults.transformRequest = [function(data) {
+        $httpProvider.defaults.transformRequest = [function (data) {
             return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
         }];
     })
 
-    .run(function($ionicPlatform, $cordovaFile, $rootScope, $timeout) {
-        $ionicPlatform.ready(function() {
+    .run(function ($ionicPlatform, $cordovaFile, $rootScope, $timeout) {
+        $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -69,21 +69,28 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
                 StatusBar.styleDefault();
             }
 
-            $timeout(function() {
+            $timeout(function () {
                 $rootScope.$broadcast('check_version', 'close');
             }, 2000);
+
+            try {
+                $rootScope.IMEI = cordova.plugins.uid.IMEI;
+                console.log('device imei ' + $rootScope.IMEI);
+            } catch (error) {
+                console.log('device imei : no imei; Error : ' + error);
+            }
 
 
         });
 
     })
 
-    .filter('unique', function() {
-        return function(collection, keyname) {
+    .filter('unique', function () {
+        return function (collection, keyname) {
             var output = [],
                 keys = [];
 
-            angular.forEach(collection, function(item) {
+            angular.forEach(collection, function (item) {
                 var key = item[keyname];
                 if (keys.indexOf(key) === -1) {
                     keys.push(key);
@@ -94,7 +101,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
         };
     })
 
-    .config(function($stateProvider, $urlRouterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
 
             .state('app', {
@@ -236,6 +243,16 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngCordovaOauth', 'starter.cont
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/enquiry/editEnquiry.html'
+                    }
+                }
+            })
+
+
+            .state('app.testride', {
+                url: '/testride',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/testride/testride.html'
                     }
                 }
             })

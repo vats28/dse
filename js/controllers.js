@@ -9,7 +9,7 @@ angular.module('starter.controllers', [])
         // listen for the $ionicView.enter event:
         $scope.headerButton = {};
         $scope.OS = {
-            ANDROID: true,
+            ANDROID: false,
             IOS: false,
             DESKTOP: true,
         }

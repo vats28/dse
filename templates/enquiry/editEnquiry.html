@@ -6,13 +6,13 @@
     <div class="tabs-striped  tabs-top tabs-background-assertive tabs-color-light">
         <!--<div class="tabs-striped  tabs-top tabs-background-dark tabs-color-assertive">-->
         <div class="tabs tabs-icon-top">
-            <a class="tab-item " ng-class="tab1 ? 'active' : ''" ng-click="onTab1_click()">
+            <a class="tab-item " ng-class="tab1 ? 'active' : ''" style="max-width:none !important;" ng-click="onTab1_click()">
                 <i class="icon ion-person"></i> <span class="">Contact</span>
             </a>
-            <a class="tab-item" ng-class="tab2 ? 'active' : ''" ng-click="onTab2_click()">
+            <a class="tab-item" ng-class="tab2 ? 'active' : ''" style="max-width:none !important;" ng-click="onTab2_click()">
                 <i class="icon ion-location "></i> <span class="">Address</span>
             </a>
-            <a class="tab-item" ng-class="tab3 ? 'active' : ''" ng-click="onTab3_click()">
+            <a class="tab-item" ng-class="tab3 ? 'active' : ''" style="max-width:none !important;" ng-click="onTab3_click()">
                 <i class="icon ion-ios-paper "></i> <span class="">Enquiry</span>
             </a>
         </div>
@@ -47,7 +47,7 @@
                         <div class="col r-border date-col">
                             <h2 class="dark">Age </h2>
                             <input ng-model="sessionVariable.temp_cont_enq.AGE" type="number" min="1" max="99" placeholder="eg: 23" ng-keypress="checkNumberLength($event)"
-                            style="width: 100%;">
+                                style="width: 100%;">
                         </div>
                         <div class="col date-col">
 
@@ -179,8 +179,9 @@
                         Model
                         <!--Model interested in-->
                     </div>
-                    <select class="red-select" ng-model="sessionVariable.temp_cont_enq.X_MODEL_INTERESTED" ng-change="fetchCampaign(sessionVariable.temp_cont_enq.X_MODEL_INTERESTED)"
-                    ng-init="fetchCampaign(sessionVariable.temp_cont_enq.X_MODEL_INTERESTED)" style="width: 50% !important; align:center">
+                    <!--<select class="red-select" ng-model="sessionVariable.temp_cont_enq.X_MODEL_INTERESTED" ng-change="fetchCampaign(sessionVariable.temp_cont_enq.X_MODEL_INTERESTED)"
+                    ng-init="fetchCampaign(sessionVariable.temp_cont_enq.X_MODEL_INTERESTED)" style="width: 50% !important; align:center">-->
+                    <select class="red-select" ng-model="sessionVariable.temp_cont_enq.X_MODEL_INTERESTED" style="width: 50% !important; align:center">
                         <option value="">--select--</option>
                         <option ng-repeat="item in sessionVariable.temp_cont_enq.model_interested" ng-selected="item.model_name == sessionVariable.temp_cont_enq.X_MODEL_INTERESTED"
                         value="{{item.model_name}}">{{item.model_name}}
@@ -274,7 +275,7 @@
 
             </div>
 
-            <div class="card" ng-if="sessionVariable.temp_cont_enq.X_MODEL_INTERESTED">
+            <div class="card" ng-if="sessionVariable.campaign.campaign_data.length > 0">
                 <div class="item item-divider" style="background-color: #CBCBCB; font-weight: bold">
                     Campaigns
                 </div>

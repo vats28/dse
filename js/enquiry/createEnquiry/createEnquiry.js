@@ -1,10 +1,10 @@
 angular.module('starter.createEnquiry', [])
 
-    .controller('createEnquiryCtrl', function($scope, date_picker, generic_http_post_service) {
+    .controller('createEnquiryCtrl', function ($scope, date_picker, generic_http_post_service, $ionicPopup) {
 
         $scope.sessionVariable.createEnquiry = {};// for create enquiry
         //$scope.sessionVariable.temp_cont_enq.exp_purchase_date = '2016-03-27';
-        $scope.init = function() {
+        $scope.init = function () {
             // get make model
             var make_model_data = null;
             try {
@@ -44,31 +44,31 @@ angular.module('starter.createEnquiry', [])
         ];
 
         $scope.selectedModel = '';
-        $scope.pickDate = function(model) { //alert('d'); 
+        $scope.pickDate = function (model) { //alert('d'); 
             $scope.selectedModel = model;
             date_picker.getDate('date', $scope.pickDate_callback, false);
         }
-        $scope.pickDate_callback = function(data) {
+        $scope.pickDate_callback = function (data) {
             if ($scope.selectedModel == 'exp') {
                 $scope.sessionVariable.temp_cont_enq.exp_purchase_date = data.currDate;
             } else if ($scope.selectedModel == 'fol') {
                 $scope.sessionVariable.temp_cont_enq.fol_date = data.currDate;
             }
         }
-        $scope.pickTime = function() { //alert('t');  
+        $scope.pickTime = function () { //alert('t');  
             date_picker.getDate('time', $scope.pickTime_callback);
         }
-        $scope.pickTime_callback = function(data) {
+        $scope.pickTime_callback = function (data) {
             if ($scope.selectedModel == 'folTime') {
                 $scope.data.folTime = data.currTime;
             }
         }
 
-        $scope.getDateWithMonthName = function(dateString) {
+        $scope.getDateWithMonthName = function (dateString) {
             return date_picker.getDateWithMonthName(dateString);
         }
 
-        $scope.getFolDateWithMonthName = function(dateString) {
+        $scope.getFolDateWithMonthName = function (dateString) {
 
             if (!dateString) {
                 var nextDate = date_picker.addDays(new Date(), 1);
@@ -79,8 +79,10 @@ angular.module('starter.createEnquiry', [])
             $scope.sessionVariable.temp_cont_enq.fol_date = dateString;//date_picker.getDateWithMonthName(dateString);
         }
 
-        $scope.saveTempEnquiry = function() {
+        $scope.saveTempEnquiry = function () {
             try {
+                $scope.sessionVariable.selected_enquiry = null; //just to be safe
+
                 if (!$scope.sessionVariable.temp_cont_enq.model_interested) {
                     $scope.showAlertWindow_Titled('Error', 'Please select a model');
                     return;
@@ -137,6 +139,8 @@ angular.module('starter.createEnquiry', [])
                 $scope.requestData = {};
                 $scope.requestData = $scope.sessionVariable.temp_cont_enq;
                 $scope.requestData.user_id = $scope.sessionVariable.username;
+                $scope.sessionVariable.testride_key = randomString(7);
+                $scope.requestData.key = $scope.sessionVariable.testride_key; //this key will be used in saving testride feedback for new enquiry.
                 //alert($scope.sessionVariable.login_data.state_id);
                 $scope.requestData.state = $scope.getValueInJson($scope.sessionVariable.state_list, $scope.sessionVariable.login_data.state_id, "id", "state_name");//$scope.sessionVariable.state_list[$scope.sessionVariable.login_data.state_id];//.split(',')[1];
                 $scope.requestData.district = $scope.getValueInJson($scope.sessionVariable.district_list, $scope.sessionVariable.login_data.district_id, "id", "district_name");//$scope.sessionVariable.district_list[$scope.sessionVariable.login_data.district_id];//.split(',')[1];
@@ -153,13 +157,15 @@ angular.module('starter.createEnquiry', [])
                 $scope.requestData.fol_date = date_picker.getDateInFormat(fol_d, "mm/dd/yyyy");
                 $scope.requestData.exp_purchase_date = date_picker.getDateInFormat(exp_purchase_d, "mm/dd/yyyy");
                 $scope.requestData.dealer_code = $scope.sessionVariable.login_data.dealer_code;
+
                 var camp_counter = 1;
                 for (i = 0; i < $scope.sessionVariable.campaign.campaign_data.length; i++) {
                     if ($scope.sessionVariable.campaign.campaign_data[i].check == true)
                         $scope.requestData["campid" + (camp_counter++)] = $scope.sessionVariable.campaign.campaign_data[i].camp_id;
                 }
                 //  alert($scope.sessionVariable.temp_cont_enq.fol_date);
-                // alert(JSON.stringify($scope.requestData));
+                console.log(JSON.stringify($scope.requestData));
+
                 generic_http_post_service.getDetails(generic_http_post_service.getServices().SYNC_RECORDS,
                     $scope.requestData, $scope.saveTempEnquiry_callback);
             } catch (error) {
@@ -169,27 +175,49 @@ angular.module('starter.createEnquiry', [])
             //
         }
 
-        $scope.saveTempEnquiry_callback = function(data) {
+        $scope.saveTempEnquiry_callback = function (data) {
             $scope.hideLoader();
             //make it again in same format
             $scope.sessionVariable.temp_cont_enq.fol_date = "";
             $scope.sessionVariable.temp_cont_enq.exp_purchase_date = "";
             if (data.success == 1) {
-                $scope.showAlertWindow_Titled('Success', 'Enquiry has been created successfully', $scope.after_saveTempVehicle);
+                $scope.showAlertWindow_Titled('Success', 'Enquiry has been created successfully', $scope.after_saveTestRide);
             } else {
                 $scope.showAlertWindow_Titled('Error', data.resDescription);
             }
         }
 
-        $scope.after_saveTempVehicle = function() {
-            $scope.sessionVariable.temp_cont_enq = {};
-            $scope.disableBack();
-            $scope.jumpTo('app.dashboard');
+        $scope.after_saveTestRide = function () {
+            var template = "Do you like to provide test-ride feedback?";
+            $ionicPopup.confirm({
+                title: 'Testride',
+                template: '<div align="center">' + template + '</div>',
+                okType: 'button-assertive',
+                cancelType: 'button-dark',
+                okText: 'Yes',
+                cancelText: 'No Thanks'
+            }).then(function (res) {
+                $scope.sessionVariable.temp_cont_enq = {};
+                //$scope.disableBack();
+                $scope.jumpTo('app.dashboard');
+                $timeout(function () {
+                    if (res) {
+                        $scope.jumpTo('app.testride');
+                    } else {
+                        console.log('You are not sure');
+                        $scope.sessionVariable.testride_key = undefined;
+                    }
+                }, 200);
+            });
+        }
+
+        $scope.after_confirm = function () {
+
         }
 
 
 
-        $scope.onChangeCampaign = function(index) {
+        $scope.onChangeCampaign = function (index) {
             var checkVal = $scope.sessionVariable.campaign.campaign_data[index].check;
             /*already max seleted can't select more 
             but as user already seleted it we need to deselect it again*/

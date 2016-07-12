@@ -1,0 +1,38 @@
+<ion-view view-title="Test Ride Feedback" ng-controller="testrideCtrl">
+
+    <ion-content  ng-init="init()">
+
+        <div class="list">
+            <!--{{temp_data}}-->
+            <div ng-repeat="question in arrayList.test_ride_ques">
+                <div class="item item-divider item-text-wrap">
+                    {{question.question}}
+                </div>
+                <!--<div ng-repeat="answer in arrayList.test_ride_answer">
+
+                </div>-->
+
+                <li class="item" ng-class="answer.answer ? ' item-checkbox checkbox-positive' : ''" ng-if="answer.id == question.id" ng-repeat="answer in arrayList.test_ride_ans">
+                    <div ng-if="answer.answer">
+                        <label class="checkbox">
+                            <input ng-model="temp_data[question.id]" type="radio" value="{{answer.answer}}">
+                        </label>
+                        {{answer.answer}}
+                    </div>
+                    <div ng-if="!answer.answer">
+                        <label class="item item-input">
+                            <input type="text" ng-model="temp_data[question.id]" placeholder="Please provide your input">
+                        </label>
+                    </div>
+                </li>
+            </div>
+        </div>
+
+    </ion-content>
+    
+    <ion-footer-bar style="background-color:black;">
+        <center style="width:100%;">
+            <a ng-click="submit_test_ride()" class="button button-clear light">Submit</a>
+        </center>
+    </ion-footer-bar>
+</ion-view>

@@ -15,8 +15,8 @@ angular.module('utils.http_post', [])
         var services_address = Object.freeze({
             LOGIN: server_host + server_api_path + 'login.php',
             GET_DISTRICT: server_host + server_api_path + 'get_district.php',
-            GET_TEHSIL: server_host + server_api_path + 'get_tehsil.php',
-            GET_VILLAGE: server_host + server_api_path + 'get_village.php',
+            // GET_TEHSIL: server_host + server_api_path + 'get_tehsil.php',
+            // GET_VILLAGE: server_host + server_api_path + 'get_village.php',
             BIKE_MAKE_MODEL: server_host + server_api_path + 'bike_make_model.php',
             GET_DISTRICT_DATA: server_host + server_api_path + 'get_district_data.php',
             GET_STATE_DATA: server_host + server_api_path + 'get_state_data.php',
@@ -29,6 +29,7 @@ angular.module('utils.http_post', [])
             FETCH_CAMPAIGN_DATA: server_host + server_api_path + 'fetch_campaign_data.php',
             FETCH_ORDER_DATA: server_host + server_api_path + 'fetch_order_data.php',
             FETCH_TEST_RIDE: server_host + server_api_path + 'fetch_test_ride.php',
+            SYNC_TEST_RIDE: server_host + server_api_path + 'sync_test_ride.php',
         });
 
         var networkError = {

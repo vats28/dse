@@ -23,13 +23,13 @@
             <!--<button ng-click="jumpTo('app.editEnquiry')" class="animated fadeInUpBig fab-button-new t-20 r-20 size-48 red-bg ">
                 <i class="icon ion ion-funnel"></i></button>-->
         </div>
-        <div class="item">
+        <div class="item item-text-wrap">
             <p><b>Interested in: </b><span ng-bind="sessionVariable.selected_enquiry.X_MODEL_INTERESTED"></span></p>
             <p><b>Expected date of purchase : </b><span ng-bind="sessionVariable.selected_enquiry.EXPCTD_DT_PURCHASE"></span></p>
             <h4>
         <a  class="dark-grey-subtitle"><b>Exchange required: </b><span ng-bind="sessionVariable.selected_enquiry.X_EXCHANGE_REQUIRED"></span></a>
         <a  class="dark-grey-subtitle"><b>Finance required: </b><span ng-bind="sessionVariable.selected_enquiry.X_FINANCE_REQUIRED"></span></a>
-       <a  class="dark-grey-subtitle"><b>Testride required: </b><span ng-bind="sessionVariable.selected_enquiry.X_TEST_RIDE_REQ"></span></a>
+       <a  class="dark-grey-subtitle"><b>Testride required:</b><span ng-bind="sessionVariable.selected_enquiry.X_TEST_RIDE_REQ"></span></a>
       </h4>
         </div>
         <div class="item">
@@ -53,6 +53,9 @@
                 <a class="button button-dark button-small  bolder" ng-click="showFollowupEnquiryModal()">Followup</a>
                 <a class="button button-small button-assertive  bolder" ng-click="editEnquiry()">Edit</a>
             </div>
+        </div>
+        <div class="item">
+            <a class="button button-small button-block button-assertive  bolder" ng-click="jumpTo('app.testride')">Enter Test Ride Feedback</a>
         </div>
     </ion-content>
 </ion-view>

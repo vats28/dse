@@ -442,12 +442,11 @@ angular.module('starter.editEnquiry', [])
                 $scope.requestData.exp_purchase_date = date_picker.getDateInFormat(exp_purchase_d, "mm/dd/yyyy");
                 $scope.requestData.dealer_code = $scope.sessionVariable.login_data.dealer_code;
 
-                var camp_counter = 1;
-                for (i = 0; i < $scope.sessionVariable.campaign.campaign_data.length; i++) {
-                    if ($scope.sessionVariable.campaign.campaign_data[i].check == true)
-                        $scope.requestData["campid" + (camp_counter++)] = $scope.sessionVariable.campaign.campaign_data[i].camp_id;
-                }
-                //  alert($scope.sessionVariable.temp_cont_enq.fol_date);
+                // var camp_counter = 1;
+                // for (i = 0; i < $scope.sessionVariable.campaign.campaign_data.length; i++) {
+                //     if ($scope.sessionVariable.campaign.campaign_data[i].check == true)
+                //         $scope.requestData["campid" + (camp_counter++)] = $scope.sessionVariable.campaign.campaign_data[i].camp_id;
+                // }
 
                 generic_http_post_service.getDetails(generic_http_post_service.getServices().SYNC_RECORDS,
                     $scope.requestData, $scope.saveTempEnquiry_callback);

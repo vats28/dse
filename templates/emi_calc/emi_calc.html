@@ -10,15 +10,20 @@
                 <p style="position:absolute;right:16px;top:0px;font-size:25px; color:red;">₹</p>
             </label>
             <div class="range range-assertive">
+                <a class="button button-icon assertive ion-plus" ng-click="onAdd(1)"></a>
                 <input type="range" style="height:32px;" name="volume" min="0" max="500000" ng-change="calculate(1)" ng-model="temp.amount1">
+                <a class="button button-icon assertive ion-minus" ng-click="onMinus(1)"></a>
             </div>
 
 
             <label class="item item-input " style="border-bottom: 0px; padding: 0px 0px 0px 16px">
+                  <p style="position:absolute;right:16px;top:0px;font-size:25px; color:red;">M</p>
                 <input type="tel" ng-model="temp.months" ng-change="calculate(5)" placeholder="Tenure (Months)">
             </label>
             <div class="range range-assertive">
+                <a class="button button-icon assertive ion-plus" ng-click="onAdd(2)"></a>
                 <input type="range" style="height:32px;" name="volume" min="0" max="84" ng-change="calculate(2)" ng-model="temp.months1">
+                <a class="button button-icon assertive ion-minus" ng-click="onMinus(2)"></a>
             </div>
 
 
@@ -27,7 +32,9 @@
                 <p style="position:absolute;right:16px;top:0px;font-size:25px; color:red;">%</p>
             </label>
             <div class="item range range-assertive" style="border-width: 0px 0px 1px;">
+                <a class="button button-icon assertive ion-plus" ng-click="onAdd(3)"></a>
                 <input type="range" style="height:32px;" name="volume" min="0" max="30" ng-change="calculate(3)" ng-model="temp.rate1">
+                <a class="button button-icon assertive ion-minus" ng-click="onMinus(3)"></a>
             </div>
 
             <div ng-if="temp.amount || temp.months || temp.rate">
