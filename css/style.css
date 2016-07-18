@@ -227,7 +227,7 @@ h4.item-bg-new{ color: white !important;}
 }
 
 .popup-container .popup {
-    background-color: white;
+    background-color: white !important;
 }
 
 
@@ -280,6 +280,6 @@ h4.item-bg-new{ color: white !important;}
 }
 
 .tabs-striped.tabs-background-assertive .tabs {
-	background-color: red;
+	background-color: red !important;
 	background-image: none;
 }

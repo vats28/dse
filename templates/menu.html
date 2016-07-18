@@ -32,9 +32,9 @@
             <ion-list class="dark-bg sidepanel">
                 <a class="item  item-avatar  dark-bg">
                     <img src="{{sessionVariable.login_data.pic?sessionVariable.login_data.pic:'img/profile-empty.jpg'}}">
-                    <h2 ng-bind="sessionVariable.username">Hritik</h2>
+                    <h2 style="color:#D7E7E9"  ng-bind="sessionVariable.username">Hritik</h2>
                     <!--<p class="s_item">Last login : 23/07/2015</p>-->
-                    <p class="s_item" ng-bind="'version : '+ sessionVariable.version"></p>
+                    <h3 style="color:#D7E7E9"  ng-bind="'version : '+ sessionVariable.version"></h3>
                 </a>
                 <ion-item menu-close ng-click="jumpTo('app.dashboard')" class="s_item dark-bg item-icon-left">
                     <i class="icon ion ion-home"></i> Home

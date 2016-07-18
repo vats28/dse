@@ -1,8 +1,9 @@
 
 angular.module('starter.editEnquiry', [])
 
-    .controller('editEnquiryCtrl', function($scope, $timeout, date_picker, form_validator, generic_http_post_service) {
+    .controller('editEnquiryCtrl', function ($scope, $timeout, date_picker, form_validator, generic_http_post_service) {
 
+        $scope.previous_selectedModel = "";
         $scope.disableCase = {
             ONE: true, // means fname , lname , mobile will remain disabled
             TWO: false
@@ -22,21 +23,21 @@ angular.module('starter.editEnquiry', [])
             },
         ];
 
-        $scope.onTab1_click = function() {
+        $scope.onTab1_click = function () {
             if (!$scope.tabs_validation())
                 return;
             $scope.tab1 = true;
             $scope.tab2 = false;
             $scope.tab3 = false;
         }//edn
-        $scope.onTab2_click = function() {
+        $scope.onTab2_click = function () {
             if (!$scope.tabs_validation())
                 return;
             $scope.tab1 = false;
             $scope.tab2 = true;
             $scope.tab3 = false;
         }//edn
-        $scope.onTab3_click = function() {
+        $scope.onTab3_click = function () {
             if (!$scope.tabs_validation())
                 return;
             $scope.tab1 = false;
@@ -44,7 +45,7 @@ angular.module('starter.editEnquiry', [])
             $scope.tab3 = true;
         }//edn
 
-        $scope.tabs_validation = function() {
+        $scope.tabs_validation = function () {
             if ($scope.tab1) {
                 return $scope.tab1_validation();
             }
@@ -56,7 +57,7 @@ angular.module('starter.editEnquiry', [])
             }
         }
 
-        $scope.tab1_validation = function() {
+        $scope.tab1_validation = function () {
             if ($scope.sessionVariable.temp_cont_enq.EMAIL_ADDR) {
                 if (!form_validator.IsValidEmail($scope.sessionVariable.temp_cont_enq.EMAIL_ADDR)) {
                     $scope.showAlertWindow_Titled('Error', 'Please enter valid email address');
@@ -75,7 +76,7 @@ angular.module('starter.editEnquiry', [])
             return true;
         }//end
 
-        $scope.tab2_validation = function() {
+        $scope.tab2_validation = function () {
             if ($scope.disableCase.TWO) {
                 if (!$scope.sessionVariable.temp_cont_enq.state_id) {
                     $scope.showAlertWindow_Titled('Error', 'Please select state');
@@ -98,7 +99,7 @@ angular.module('starter.editEnquiry', [])
             return true;
         }//end
 
-        $scope.tab3_validation = function() {
+        $scope.tab3_validation = function () {
             if (!$scope.sessionVariable.temp_cont_enq.X_MODEL_INTERESTED) {
                 $scope.showAlertWindow_Titled('Error', 'Please select a model');
                 return false;
@@ -124,15 +125,16 @@ angular.module('starter.editEnquiry', [])
             return true;
         }//end
 
-        $scope.toggleAddressEdit = function() {
+        $scope.toggleAddressEdit = function () {
             if ($scope.disableCase.TWO) {
                 $scope.getStateList();
             }
         }//
 
         $scope.isExisitingEnquiry = false;
-        $scope.init = function() {
+        $scope.init = function () {
             //$scope.sessionVariable.enquiryError = false;
+            $scope.previous_selectedModel = $scope.sessionVariable.temp_cont_enq.X_MODEL_INTERESTED;
             if ($scope.sessionVariable.createNewEnquiry) {
                 $scope.tab3 = true;
                 $scope.sessionVariable.createNewEnquiry = false;
@@ -145,7 +147,7 @@ angular.module('starter.editEnquiry', [])
 
         }//end init
 
-        $scope.init_part2 = function() {
+        $scope.init_part2 = function () {
             $scope.sessionVariable.temp_cont_enq = {};
             // $scope.sessionVariable.selected_enquiry_edit = {
             //      "FST_NAME":"DEEPANSHU.","LAST_NAME":"SINGH",
@@ -169,7 +171,7 @@ angular.module('starter.editEnquiry', [])
 
 
 
-        $scope.getStateList = function() {
+        $scope.getStateList = function () {
             var stateData = null;
             try {
                 stateData = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.STATE));
@@ -186,7 +188,7 @@ angular.module('starter.editEnquiry', [])
 
 
 
-        $scope.setState = function() {
+        $scope.setState = function () {
             $scope.sessionVariable.temp_cont_enq.state_id = $scope.getValueInJson(
                 $scope.sessionVariable.temp_cont_enq.state_list,
                 $scope.sessionVariable.temp_cont_enq.STATE,
@@ -195,7 +197,7 @@ angular.module('starter.editEnquiry', [])
             $scope.get_district($scope.sessionVariable.temp_cont_enq.state_id, $scope.get_district_callback);
         }
 
-        $scope.get_district_callback = function(data) {
+        $scope.get_district_callback = function (data) {
 
             $scope.hideLoader();
             if (data.success == "true") {
@@ -206,7 +208,7 @@ angular.module('starter.editEnquiry', [])
             }
         }
 
-        $scope.setDistrict = function() {
+        $scope.setDistrict = function () {
             $scope.sessionVariable.temp_cont_enq.district_id = $scope.getValueInJson(
                 $scope.sessionVariable.temp_cont_enq.district_list,
                 $scope.sessionVariable.temp_cont_enq.DISTRICT,
@@ -216,7 +218,7 @@ angular.module('starter.editEnquiry', [])
                 $scope.get_full_district_data($scope.sessionVariable.temp_cont_enq.district_id, $scope.get_full_district_data_callback);
         }
 
-        $scope.get_full_district_data_callback = function(data) {
+        $scope.get_full_district_data_callback = function (data) {
             $scope.hideLoader();
             if (data.result != []) {
                 $scope.sessionVariable.temp_cont_enq.tehsil_list = data.tehsil;
@@ -229,7 +231,7 @@ angular.module('starter.editEnquiry', [])
         }
 
 
-        $scope.setTehsil = function() {
+        $scope.setTehsil = function () {
             $scope.sessionVariable.temp_cont_enq.tehsil_id = $scope.getValueInJson(
                 $scope.sessionVariable.temp_cont_enq.tehsil_list,
                 $scope.sessionVariable.temp_cont_enq.TEHSIL,
@@ -237,7 +239,7 @@ angular.module('starter.editEnquiry', [])
             );
         }
 
-        $scope.setCity = function() {
+        $scope.setCity = function () {
             $scope.sessionVariable.temp_cont_enq.village_id = $scope.getValueInJson(
                 $scope.sessionVariable.temp_cont_enq.village_list,
                 $scope.sessionVariable.temp_cont_enq.CITY,
@@ -248,12 +250,12 @@ angular.module('starter.editEnquiry', [])
 
 
 
-        $scope.onStateChange = function() {    //clear earlier data
+        $scope.onStateChange = function () {    //clear earlier data
             $scope.showConfirm('Are you sure', 'Do you really want to change your district?', null, $scope.onStateChange_callback);
 
         }
 
-        $scope.onStateChange_callback = function() {
+        $scope.onStateChange_callback = function () {
             //clear variables
             $scope.sessionVariable.temp_cont_enq.district_id = "";
             $scope.sessionVariable.temp_cont_enq.tehsil_id = "";
@@ -262,12 +264,12 @@ angular.module('starter.editEnquiry', [])
             $scope.get_district($scope.sessionVariable.temp_cont_enq.state_id, $scope.get_district_callback);
         }
 
-        $scope.onDistrictChange = function() {
+        $scope.onDistrictChange = function () {
             //clear earlier data
             $scope.showConfirm('Are you sure', 'Do you really want to change your district?', null, $scope.onDistrictChange_callback);
         }
 
-        $scope.onDistrictChange_callback = function() {
+        $scope.onDistrictChange_callback = function () {
             //clear variables
             $scope.sessionVariable.temp_cont_enq.tehsil_id = "";
             $scope.sessionVariable.temp_cont_enq.village_id = "";
@@ -277,7 +279,7 @@ angular.module('starter.editEnquiry', [])
 
 
 
-        $scope.onTehsilChange = function() {
+        $scope.onTehsilChange = function () {
 
             //clear variables
             $scope.sessionVariable.temp_cont_enq.village_id = "";
@@ -286,7 +288,7 @@ angular.module('starter.editEnquiry', [])
 
 
 
-        $scope.getMakeModel = function() {
+        $scope.getMakeModel = function () {
             var make_model_data = null;
             try {
                 make_model_data = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.MAKE_MODEL));
@@ -307,7 +309,7 @@ angular.module('starter.editEnquiry', [])
             }
         }//end 
 
-        $scope.setExistingVehicle = function() {
+        $scope.setExistingVehicle = function () {
             $scope.sessionVariable.temp_cont_enq.existVeh = $scope.getValueInJson(
                 $scope.veh_type_list,
                 $scope.sessionVariable.selected_enquiry_edit.EXISTING_VEHICLE,
@@ -315,7 +317,7 @@ angular.module('starter.editEnquiry', [])
             );
             $scope.setExistingMake();
         }
-        $scope.setExistingMake = function() {
+        $scope.setExistingMake = function () {
             $scope.sessionVariable.temp_cont_enq.existMake = $scope.getValueInJson(
                 $scope.sessionVariable.temp_cont_enq.make_list,
                 $scope.sessionVariable.selected_enquiry_edit.MAKE_CD,
@@ -324,25 +326,25 @@ angular.module('starter.editEnquiry', [])
             $scope.setExistingModel();
         }
 
-        $scope.setExistingModel = function() {
+        $scope.setExistingModel = function () {
             $scope.sessionVariable.temp_cont_enq.existModel = $scope.sessionVariable.selected_enquiry_edit.MODEL_CD;
         }
 
-        $scope.onExistVeh_Change = function() {
+        $scope.onExistVeh_Change = function () {
             $scope.sessionVariable.temp_cont_enq.existMake = "";
             $scope.sessionVariable.temp_cont_enq.existModel = "";
         }
-        $scope.onExistMake_Change = function() {
+        $scope.onExistMake_Change = function () {
             $scope.sessionVariable.temp_cont_enq.existModel = "";
         }
 
 
         $scope.selectedModel = '';
-        $scope.pickDate = function(model) { //alert('d'); 
+        $scope.pickDate = function (model) { //alert('d'); 
             $scope.selectedModel = model;
             date_picker.getDate('date', $scope.pickDate_callback, false);
         }
-        $scope.pickDate_callback = function(data) {
+        $scope.pickDate_callback = function (data) {
             if ($scope.selectedModel == 'exp') {
                 $scope.sessionVariable.temp_cont_enq.EXPCTD_DT_PURCHASE = data.currDate;
             } else if ($scope.selectedModel == 'fol') {
@@ -350,7 +352,7 @@ angular.module('starter.editEnquiry', [])
             }
         }
 
-        $scope.getDateWithMonthName = function(dateString) {
+        $scope.getDateWithMonthName = function (dateString) {
             if (!dateString) {
                 return;
             }
@@ -358,7 +360,7 @@ angular.module('starter.editEnquiry', [])
             return date_picker.getDateWithMonthName(dateString, format);
         }
 
-        $scope.getFolDateWithMonthName = function(dateString) {
+        $scope.getFolDateWithMonthName = function (dateString) {
 
             if (!dateString) {
                 var nextDate = date_picker.addDays(new Date(), 1);
@@ -369,7 +371,7 @@ angular.module('starter.editEnquiry', [])
             $scope.sessionVariable.temp_cont_enq.FOLLOW_DATE = dateString;//date_picker.getDateWithMonthName(dateString);
         }
 
-        $scope.changeDateFormat = function(dateString) {
+        $scope.changeDateFormat = function (dateString) {
             if (!dateString)
                 return;
             var month_names = new Array("jan", "feb", "mar",
@@ -382,7 +384,7 @@ angular.module('starter.editEnquiry', [])
         }//edn
 
 
-        $scope.saveTempEnquiry = function() {
+        $scope.saveTempEnquiry = function () {
             try {
                 if (!$scope.tab1_validation() || !$scope.tab2_validation() || !$scope.tab3_validation()) {
                     return;
@@ -442,11 +444,21 @@ angular.module('starter.editEnquiry', [])
                 $scope.requestData.exp_purchase_date = date_picker.getDateInFormat(exp_purchase_d, "mm/dd/yyyy");
                 $scope.requestData.dealer_code = $scope.sessionVariable.login_data.dealer_code;
 
-                // var camp_counter = 1;
-                // for (i = 0; i < $scope.sessionVariable.campaign.campaign_data.length; i++) {
-                //     if ($scope.sessionVariable.campaign.campaign_data[i].check == true)
-                //         $scope.requestData["campid" + (camp_counter++)] = $scope.sessionVariable.campaign.campaign_data[i].camp_id;
-                // }
+                var camp_counter = 1; //open campaigns
+                for (i = 0; i < $scope.sessionVariable.campaign.campaign_data.length; i++) {
+                    if ($scope.sessionVariable.campaign.campaign_data[i].check == true)
+                        $scope.requestData["campid" + (camp_counter++)] = $scope.sessionVariable.campaign.campaign_data[i].camp_id;
+                }
+
+                //previous_selected campaigns without open campaigns
+                if ($scope.sessionVariable.contact_list.campaign) {
+                    for (i = 0; i < $scope.sessionVariable.contact_list.campaign.length; i++) {
+                        var campaign = $scope.sessionVariable.contact_list.campaign[i];
+                        if (!$scope.isCampaignOpen(i) && $scope.taggedWithEnquiry(i)) {
+                            $scope.requestData["campid" + (camp_counter++)] = campaign.ROW_ID;
+                        }//end if
+                    }//end for
+                }//end if
 
                 generic_http_post_service.getDetails(generic_http_post_service.getServices().SYNC_RECORDS,
                     $scope.requestData, $scope.saveTempEnquiry_callback);
@@ -457,7 +469,7 @@ angular.module('starter.editEnquiry', [])
             //
         }
 
-        $scope.saveTempEnquiry_callback = function(data) {
+        $scope.saveTempEnquiry_callback = function (data) {
             $scope.hideLoader();
             //make it again in same format
             //$scope.sessionVariable.temp_cont_enq.fol_date = "";
@@ -477,7 +489,7 @@ angular.module('starter.editEnquiry', [])
             }
         }
 
-        $scope.after_saveTempVehicle = function() {
+        $scope.after_saveTempVehicle = function () {
             $scope.sessionVariable.temp_cont_enq = {};
             $scope.sessionVariable.selected_enquiry_edit = {};
             $scope.disableBack();
@@ -485,11 +497,19 @@ angular.module('starter.editEnquiry', [])
         }
 
 
-        $scope.onChangeCampaign = function(index) {
+        $scope.onChangeCampaign = function (index) {
             var checkVal = $scope.sessionVariable.campaign.campaign_data[index].check;
             /*already max seleted can't select more 
             but as user already seleted it we need to deselect it again*/
             var memberCount = 0;
+            //get count of already selected previous campaigns
+            for (i = 0; i < $scope.sessionVariable.contact_list.campaign.length; i++) {
+                var campaign = $scope.sessionVariable.contact_list.campaign[i];
+                if (!$scope.isCampaignOpen(i) && $scope.taggedWithEnquiry(i)) {
+                    memberCount++;
+                }//end if
+            }//end for
+
             for (i = 0; i < $scope.sessionVariable.campaign.campaign_data.length; i++) {
                 if ($scope.sessionVariable.campaign.campaign_data[i].check == true)
                     memberCount++;
@@ -501,6 +521,59 @@ angular.module('starter.editEnquiry', [])
             }
 
         }//end onChangeCampaign
-        
-        
+
+        $scope.isCampaignSeleted = function (index) {
+            var retval = false;
+            var item = $scope.sessionVariable.campaign.campaign_data[index];
+            for (i = 0; i < $scope.sessionVariable.contact_list.campaign.length; i++) {
+                if (item.ENQUIRY_ID == $scope.sessionVariable.contact_list.campaign[i].OPTY_ID) {
+                    $scope.sessionVariable.campaign.campaign_data[index].check = true;
+                    retval = true;
+                    $scope.onChangeCampaign(index); // checked true
+                }//END IF
+            }//end for
+            return retval;
+        }//end func
+
+        $scope.isCampaignOpen = function (index) {
+            var retval = false;
+            var item = $scope.sessionVariable.contact_list.campaign[index];
+            for (i = 0; i < $scope.sessionVariable.campaign.campaign_data.length; i++) {
+                if (item.ROW_ID == $scope.sessionVariable.campaign.campaign_data[i].camp_id) {
+                    retval = true;
+                }//END IF
+            }//end for
+            return retval;
+        }//end func
+
+        $scope.taggedWithEnquiry = function (index) {
+            var retval = false;
+            var item = $scope.sessionVariable.contact_list.campaign[index];
+            if (item.OPTY_ID == $scope.sessionVariable.selected_enquiry_edit.ENQUIRY_ID) {
+                retval = true;
+            }//END IF
+            return retval;
+        }//end func
+
+        $scope.onModelChange = function (model, onLoad) {
+            var data = model;
+
+            if (onLoad) {
+                $scope.previous_selectedModel = data;
+                $scope.fetchCampaign(data);
+            } else {
+                $scope.showConfirm2("Change model !!", "Be careful, changing model will permanantly removed previously added campaigns with this enquiry", data, $scope.onModelChange_callback, null, null)
+            }
+        }
+
+        $scope.onModelChange_callback = function (res, data) {
+            if (res) {
+                $scope.previous_selectedModel = data;
+                $scope.sessionVariable.contact_list.campaign = [];
+                $scope.fetchCampaign(data);
+            } else {
+                $scope.sessionVariable.temp_cont_enq.X_MODEL_INTERESTED = $scope.previous_selectedModel;
+            }
+        }
+
     });

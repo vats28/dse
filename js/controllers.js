@@ -9,9 +9,9 @@ angular.module('starter.controllers', [])
         // listen for the $ionicView.enter event:
         $scope.headerButton = {};
         $scope.OS = {
-            ANDROID: false,
+            ANDROID: true,
             IOS: false,
-            DESKTOP: true,
+            DESKTOP: false,
         }
 
         $scope.$on('$ionicView.enter', function(e) {
@@ -242,6 +242,20 @@ angular.module('starter.controllers', [])
                 } else {
                     console.log('You are not sure');
                 }
+            });
+        };
+
+        // A confirm dialog
+        $scope.showConfirm2 = function(title, template, data, callback, oktext, canceltext) {
+            $ionicPopup.confirm({
+                title: title,
+                template: template,
+                okType: 'button-assertive',
+                cancelType: 'button-dark',
+                okText: oktext ? oktext : 'OK',
+                cancelText: canceltext ? canceltext : 'CANCEL'
+            }).then(function(res) {
+                callback(res, data);
             });
         };
 

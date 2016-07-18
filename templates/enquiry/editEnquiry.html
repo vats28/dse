@@ -179,9 +179,9 @@
                         Model
                         <!--Model interested in-->
                     </div>
-                    <!--<select class="red-select" ng-model="sessionVariable.temp_cont_enq.X_MODEL_INTERESTED" ng-change="fetchCampaign(sessionVariable.temp_cont_enq.X_MODEL_INTERESTED)"
-                    ng-init="fetchCampaign(sessionVariable.temp_cont_enq.X_MODEL_INTERESTED)" style="width: 50% !important; align:center">-->
-                    <select class="red-select" ng-model="sessionVariable.temp_cont_enq.X_MODEL_INTERESTED" style="width: 50% !important; align:center">
+                    <select class="red-select" ng-model="sessionVariable.temp_cont_enq.X_MODEL_INTERESTED" ng-change="onModelChange(sessionVariable.temp_cont_enq.X_MODEL_INTERESTED, false)"
+                    ng-init="onModelChange(sessionVariable.temp_cont_enq.X_MODEL_INTERESTED, true)" style="width: 50% !important; align:center">
+                    <!--<select class="red-select" ng-model="sessionVariable.temp_cont_enq.X_MODEL_INTERESTED" style="width: 50% !important; align:center">-->
                         <option value="">--select--</option>
                         <option ng-repeat="item in sessionVariable.temp_cont_enq.model_interested" ng-selected="item.model_name == sessionVariable.temp_cont_enq.X_MODEL_INTERESTED"
                         value="{{item.model_name}}">{{item.model_name}}
@@ -279,13 +279,22 @@
                 <div class="item item-divider" style="background-color: #CBCBCB; font-weight: bold">
                     Campaigns
                 </div>
-
+                    <!--ng repeat for new campaigns   isCampaignSeleted($index)  -->
                 <div class="item item-text-wrap padding-0" ng-repeat="item in sessionVariable.campaign.campaign_data ">
-                    <ion-checkbox ng-model="item.check" ng-change="onChangeCampaign($index)" ng-checked="item.check" ng-if="!item.model || item.model == sessionVariable.temp_cont_enq.X_MODEL_INTERESTED">
+                    <ion-checkbox ng-model="item.check" ng-change="onChangeCampaign($index)"  ng-checked="item.check || isCampaignSeleted($index)"  
+                    ng-if="!item.model || item.model == sessionVariable.temp_cont_enq.X_MODEL_INTERESTED ">
                         <p ng-bind="item.campaign_name + ' ('+ item.camp_type +')' "></p>
                         <p ng-bind="'Source: ' + item.camp_source + ', Status: ' + item.status"></p>
                         <p ng-bind="'Date: ' + item.start_date +' to '+ (item.end_date?item.end_date:'-NA-')"></p>
                         <p ng-bind="'Category: ' + item.category + ', Sub-Category: ' + item.sub_category"></p>
+                    </ion-checkbox>
+                </div>
+
+
+                 <!--ng repeat for already included campaign campaigns-->
+                 <div class="item item-text-wrap padding-0" ng-repeat="item in sessionVariable.contact_list.campaign ">
+                    <ion-checkbox ng-model="item.check" ng-disabled="true" ng-if="!isCampaignOpen($index) && taggedWithEnquiry($index)" ng-checked="true" >
+                        <p ng-bind="item.CAMPAIGN_NAME"></p>
                     </ion-checkbox>
                 </div>
             </div>
