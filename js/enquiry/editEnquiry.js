@@ -385,87 +385,87 @@ angular.module('starter.editEnquiry', [])
 
 
         $scope.saveTempEnquiry = function () {
-            try {
-                if (!$scope.tab1_validation() || !$scope.tab2_validation() || !$scope.tab3_validation()) {
-                    return;
-                }
-
-                $scope.showLoader("Please wait...");
-                $scope.requestData = {};
-                //$scope.requestData = $scope.sessionVariable.temp_cont_enq;
-
-                // {"mobile":"3768623623","email":"dbc@hsdbch.com","fname":"sdcsd",
-                // "lname":"sdcsd","age":12,"gender":"M","address1":"dc",
-                // "address2":"dc","pincode":"dc","fol_date":"05/14/2016",
-                // "model_interested":"GLAMOUR","finance_req":"Y","test_ride":"Y",
-                // "remarks":"sdc","existVeh":"Two Wheeler","existMake":"BAJAJ",
-                // "existModel":"PULSAR","user_id":"10866S20","state":"HARYANA",
-                // "district":"BHIWANI","tehsil":"BAWANI KHERA","village":"LOHARI JATU",
-                // "exchange_req":"N","exp_purchase_date":"","dealer_code":"10866"}
-
-
-                $scope.requestData.mobile = $scope.sessionVariable.temp_cont_enq.CELL_PH_NUM;
-                $scope.requestData.email = $scope.sessionVariable.temp_cont_enq.EMAIL_ADDR;
-                $scope.requestData.fname = $scope.sessionVariable.temp_cont_enq.FST_NAME;
-                $scope.requestData.lname = $scope.sessionVariable.temp_cont_enq.LAST_NAME;
-                $scope.requestData.age = $scope.sessionVariable.temp_cont_enq.AGE;
-                $scope.requestData.gender = $scope.sessionVariable.temp_cont_enq.GENDER;
-                $scope.requestData.address1 = $scope.sessionVariable.temp_cont_enq.ADDR;
-                $scope.requestData.address2 = $scope.sessionVariable.temp_cont_enq.ADDR_LINE_2;
-                $scope.requestData.pincode = $scope.sessionVariable.temp_cont_enq.pincode;
-                if ($scope.sessionVariable.selected_enquiry_edit.ENQUIRY_ID)
-                    $scope.requestData.exist_enq_id = $scope.sessionVariable.selected_enquiry_edit.ENQUIRY_ID;
-
-                $scope.requestData.user_id = $scope.sessionVariable.username;
-                if (!$scope.disableCase.TWO) {
-                    $scope.requestData.state = $scope.sessionVariable.selected_enquiry_edit.STATE;
-                    $scope.requestData.district = $scope.sessionVariable.selected_enquiry_edit.DISTRICT;
-                    $scope.requestData.tehsil = $scope.sessionVariable.selected_enquiry_edit.TEHSIL;
-                    $scope.requestData.village = $scope.sessionVariable.selected_enquiry_edit.CITY;
-                } else {
-                    $scope.requestData.state = $scope.getValueInJson($scope.sessionVariable.temp_cont_enq.state_list, $scope.sessionVariable.temp_cont_enq.state_id, "id", "state_name");//$scope.sessionVariable.state_list[$scope.sessionVariable.login_data.state_id];//.split(',')[1];
-                    $scope.requestData.district = $scope.getValueInJson($scope.sessionVariable.temp_cont_enq.district_list, $scope.sessionVariable.temp_cont_enq.district_id, "id", "district_name");//$scope.sessionVariable.district_list[$scope.sessionVariable.login_data.district_id];//.split(',')[1];
-                    $scope.requestData.tehsil = $scope.getValueInJson($scope.sessionVariable.temp_cont_enq.tehsil_list, $scope.sessionVariable.temp_cont_enq.tehsil_id, "id", "tehsil_name");//$scope.sessionVariable.tehsil_list[$scope.sessionVariable.login_data.tehsil_id];//.split(',')[1];
-                    $scope.requestData.village = $scope.getValueInJson($scope.sessionVariable.temp_cont_enq.village_list, $scope.sessionVariable.temp_cont_enq.village_id, "id", "village_name");//$scope.sessionVariable.village_list[$scope.sessionVariable.login_data.village_id];//.split(',')[1];
-
-                }
-                $scope.requestData.exchange_req = $scope.sessionVariable.temp_cont_enq.exchange_req ? "Y" : "N";
-                $scope.requestData.finance_req = $scope.sessionVariable.temp_cont_enq.finance_req ? "Y" : "N";
-                $scope.requestData.test_ride = $scope.sessionVariable.temp_cont_enq.test_ride ? "Y" : "N";
-                $scope.requestData.existVeh = $scope.getValueInJson($scope.veh_type_list, $scope.sessionVariable.temp_cont_enq.existVeh, "id", "type");
-                $scope.requestData.existMake = $scope.getValueInJson($scope.sessionVariable.temp_cont_enq.make_list, $scope.sessionVariable.temp_cont_enq.existMake, "id", "make_name");
-                if ($scope.sessionVariable.temp_cont_enq.existModel == null)
-                    $scope.sessionVariable.temp_cont_enq.existModel = "";
-                $scope.requestData.existModel = $scope.sessionVariable.temp_cont_enq.existModel;
-                $scope.requestData.model_interested = $scope.sessionVariable.temp_cont_enq.X_MODEL_INTERESTED;
-                var fol_d = $scope.sessionVariable.temp_cont_enq.FOLLOW_DATE;
-                var exp_purchase_d = $scope.sessionVariable.temp_cont_enq.EXPCTD_DT_PURCHASE;
-                $scope.requestData.fol_date = date_picker.getDateInFormat(fol_d, "mm/dd/yyyy");
-                $scope.requestData.exp_purchase_date = date_picker.getDateInFormat(exp_purchase_d, "mm/dd/yyyy");
-                $scope.requestData.dealer_code = $scope.sessionVariable.login_data.dealer_code;
-
-                var camp_counter = 1; //open campaigns
-                for (i = 0; i < $scope.sessionVariable.campaign.campaign_data.length; i++) {
-                    if ($scope.sessionVariable.campaign.campaign_data[i].check == true)
-                        $scope.requestData["campid" + (camp_counter++)] = $scope.sessionVariable.campaign.campaign_data[i].camp_id;
-                }
-
-                //previous_selected campaigns without open campaigns
-                if ($scope.sessionVariable.contact_list.campaign) {
-                    for (i = 0; i < $scope.sessionVariable.contact_list.campaign.length; i++) {
-                        var campaign = $scope.sessionVariable.contact_list.campaign[i];
-                        if (!$scope.isCampaignOpen(i) && $scope.taggedWithEnquiry(i)) {
-                            $scope.requestData["campid" + (camp_counter++)] = campaign.ROW_ID;
-                        }//end if
-                    }//end for
-                }//end if
-
-                generic_http_post_service.getDetails(generic_http_post_service.getServices().SYNC_RECORDS,
-                    $scope.requestData, $scope.saveTempEnquiry_callback);
-            } catch (error) {
-                alert(error);
-                $scope.hideLoader();
+            //try {
+            if (!$scope.tab1_validation() || !$scope.tab2_validation() || !$scope.tab3_validation()) {
+                return;
             }
+
+            $scope.showLoader("Please wait...");
+            $scope.requestData = {};
+            //$scope.requestData = $scope.sessionVariable.temp_cont_enq;
+
+            // {"mobile":"3768623623","email":"dbc@hsdbch.com","fname":"sdcsd",
+            // "lname":"sdcsd","age":12,"gender":"M","address1":"dc",
+            // "address2":"dc","pincode":"dc","fol_date":"05/14/2016",
+            // "model_interested":"GLAMOUR","finance_req":"Y","test_ride":"Y",
+            // "remarks":"sdc","existVeh":"Two Wheeler","existMake":"BAJAJ",
+            // "existModel":"PULSAR","user_id":"10866S20","state":"HARYANA",
+            // "district":"BHIWANI","tehsil":"BAWANI KHERA","village":"LOHARI JATU",
+            // "exchange_req":"N","exp_purchase_date":"","dealer_code":"10866"}
+
+
+            $scope.requestData.mobile = $scope.sessionVariable.temp_cont_enq.CELL_PH_NUM;
+            $scope.requestData.email = $scope.sessionVariable.temp_cont_enq.EMAIL_ADDR;
+            $scope.requestData.fname = $scope.sessionVariable.temp_cont_enq.FST_NAME;
+            $scope.requestData.lname = $scope.sessionVariable.temp_cont_enq.LAST_NAME;
+            $scope.requestData.age = $scope.sessionVariable.temp_cont_enq.AGE;
+            $scope.requestData.gender = $scope.sessionVariable.temp_cont_enq.GENDER;
+            $scope.requestData.address1 = $scope.sessionVariable.temp_cont_enq.ADDR;
+            $scope.requestData.address2 = $scope.sessionVariable.temp_cont_enq.ADDR_LINE_2;
+            $scope.requestData.pincode = $scope.sessionVariable.temp_cont_enq.pincode;
+            if ($scope.sessionVariable.selected_enquiry_edit.ENQUIRY_ID)
+                $scope.requestData.exist_enq_id = $scope.sessionVariable.selected_enquiry_edit.ENQUIRY_ID;
+
+            $scope.requestData.user_id = $scope.sessionVariable.username;
+            if (!$scope.disableCase.TWO) {
+                $scope.requestData.state = $scope.sessionVariable.selected_enquiry_edit.STATE;
+                $scope.requestData.district = $scope.sessionVariable.selected_enquiry_edit.DISTRICT;
+                $scope.requestData.tehsil = $scope.sessionVariable.selected_enquiry_edit.TEHSIL;
+                $scope.requestData.village = $scope.sessionVariable.selected_enquiry_edit.CITY;
+            } else {
+                $scope.requestData.state = $scope.getValueInJson($scope.sessionVariable.temp_cont_enq.state_list, $scope.sessionVariable.temp_cont_enq.state_id, "id", "state_name");//$scope.sessionVariable.state_list[$scope.sessionVariable.login_data.state_id];//.split(',')[1];
+                $scope.requestData.district = $scope.getValueInJson($scope.sessionVariable.temp_cont_enq.district_list, $scope.sessionVariable.temp_cont_enq.district_id, "id", "district_name");//$scope.sessionVariable.district_list[$scope.sessionVariable.login_data.district_id];//.split(',')[1];
+                $scope.requestData.tehsil = $scope.getValueInJson($scope.sessionVariable.temp_cont_enq.tehsil_list, $scope.sessionVariable.temp_cont_enq.tehsil_id, "id", "tehsil_name");//$scope.sessionVariable.tehsil_list[$scope.sessionVariable.login_data.tehsil_id];//.split(',')[1];
+                $scope.requestData.village = $scope.getValueInJson($scope.sessionVariable.temp_cont_enq.village_list, $scope.sessionVariable.temp_cont_enq.village_id, "id", "village_name");//$scope.sessionVariable.village_list[$scope.sessionVariable.login_data.village_id];//.split(',')[1];
+
+            }
+            $scope.requestData.exchange_req = $scope.sessionVariable.temp_cont_enq.exchange_req ? "Y" : "N";
+            $scope.requestData.finance_req = $scope.sessionVariable.temp_cont_enq.finance_req ? "Y" : "N";
+            $scope.requestData.test_ride = $scope.sessionVariable.temp_cont_enq.test_ride ? "Y" : "N";
+            $scope.requestData.existVeh = $scope.getValueInJson($scope.veh_type_list, $scope.sessionVariable.temp_cont_enq.existVeh, "id", "type");
+            $scope.requestData.existMake = $scope.getValueInJson($scope.sessionVariable.temp_cont_enq.make_list, $scope.sessionVariable.temp_cont_enq.existMake, "id", "make_name");
+            if ($scope.sessionVariable.temp_cont_enq.existModel == null)
+                $scope.sessionVariable.temp_cont_enq.existModel = "";
+            $scope.requestData.existModel = $scope.sessionVariable.temp_cont_enq.existModel;
+            $scope.requestData.model_interested = $scope.sessionVariable.temp_cont_enq.X_MODEL_INTERESTED;
+            var fol_d = $scope.sessionVariable.temp_cont_enq.FOLLOW_DATE;
+            var exp_purchase_d = $scope.sessionVariable.temp_cont_enq.EXPCTD_DT_PURCHASE;
+            $scope.requestData.fol_date = date_picker.getDateInFormat(fol_d, "mm/dd/yyyy");
+            $scope.requestData.exp_purchase_date = date_picker.getDateInFormat(exp_purchase_d, "mm/dd/yyyy");
+            $scope.requestData.dealer_code = $scope.sessionVariable.login_data.dealer_code;
+
+            var camp_counter = 1; //open campaigns
+            for (i = 0; i < $scope.sessionVariable.campaign.campaign_data.length; i++) {
+                if ($scope.sessionVariable.campaign.campaign_data[i].check == true)
+                    $scope.requestData["campid" + (camp_counter++)] = $scope.sessionVariable.campaign.campaign_data[i].camp_id;
+            }
+
+            //previous_selected campaigns without open campaigns
+            if ($scope.sessionVariable.contact_list.campaign) {
+                for (i = 0; i < $scope.sessionVariable.contact_list.campaign.length; i++) {
+                    var campaign = $scope.sessionVariable.contact_list.campaign[i];
+                    if (!$scope.isCampaignOpen(i) && $scope.taggedWithEnquiry(i)) {
+                        $scope.requestData["campid" + (camp_counter++)] = campaign.ROW_ID;
+                    }//end if
+                }//end for
+            }//end if
+
+            generic_http_post_service.getDetails(generic_http_post_service.getServices().SYNC_RECORDS,
+                $scope.requestData, $scope.saveTempEnquiry_callback);
+            // } catch (error) {
+            //     alert(error);
+            //     $scope.hideLoader();
+            // }
             //
         }
 
@@ -525,13 +525,15 @@ angular.module('starter.editEnquiry', [])
         $scope.isCampaignSeleted = function (index) {
             var retval = false;
             var item = $scope.sessionVariable.campaign.campaign_data[index];
-            for (i = 0; i < $scope.sessionVariable.contact_list.campaign.length; i++) {
-                if (item.ENQUIRY_ID == $scope.sessionVariable.contact_list.campaign[i].OPTY_ID) {
-                    $scope.sessionVariable.campaign.campaign_data[index].check = true;
-                    retval = true;
-                    $scope.onChangeCampaign(index); // checked true
-                }//END IF
-            }//end for
+            if ($scope.sessionVariable.contact_list.campaign) {
+                for (i = 0; i < $scope.sessionVariable.contact_list.campaign.length; i++) {
+                    if ($scope.taggedWithEnquiry(i) && item.camp_id == $scope.sessionVariable.contact_list.campaign[i].ROW_ID) {
+                        $scope.sessionVariable.campaign.campaign_data[index].check = true;
+                        retval = true;
+                        $scope.onChangeCampaign(index); // checked true
+                    }//END IF
+                }//end for
+            }//end if
             return retval;
         }//end func
 
@@ -558,11 +560,19 @@ angular.module('starter.editEnquiry', [])
         $scope.onModelChange = function (model, onLoad) {
             var data = model;
 
-            if (onLoad) {
+            if (onLoad || !$scope.previous_selectedModel) {
                 $scope.previous_selectedModel = data;
                 $scope.fetchCampaign(data);
             } else {
-                $scope.showConfirm2("Change model !!", "Be careful, changing model will permanantly removed previously added campaigns with this enquiry", data, $scope.onModelChange_callback, null, null)
+                // if (!$scope.previous_selectedModel) {
+                //     alert($scope.previous_selectedModel);
+                // $scope.previous_selectedModel = data;
+                //     $scope.fetchCampaign(data);
+                // } else {
+                //     $scope.showConfirm2("Change model !!", "Be careful, changing model will permanantly removed previously added campaigns with this enquiry", data, $scope.onModelChange_callback, null, null);
+                // }
+                $scope.showConfirm2("Change model !!", "Be careful, changing model will permanantly removed previously added campaigns with this enquiry", data, $scope.onModelChange_callback, null, null);
+
             }
         }
 

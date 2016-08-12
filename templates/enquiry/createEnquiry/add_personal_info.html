@@ -6,12 +6,12 @@
         <div class="card">
             <label class="item item-input">
                 <span class="input-label">First Name</span>
-                <input type="text" ng-model="sessionVariable.temp_cont_enq.fname" placeholder="eg: Pradeep">
+                <input type="text" ng-model="sessionVariable.temp_cont_enq.fname" placeholder="Enter First Name">
                 <i class="  {{validationClass.ERROR}}  input_icon_right"></i>
             </label>
             <label class="item item-input">
                 <span class="input-label">Last Name</span>
-                <input type="text" ng-model="sessionVariable.temp_cont_enq.lname" placeholder="eg : sharma">
+                <input type="text" ng-model="sessionVariable.temp_cont_enq.lname" placeholder="Enter last Name">
                 <i class="  {{validationClass.ERROR}}  input_icon_right"></i>
             </label>
             <label class="item item-input">
@@ -35,7 +35,7 @@
                         <!--<p ng-bind=" getDateWithMonthName(sessionVariable.temp_cont_enq.dob)">23 oct, 2015</p>-->
                         <!--<p ng-if="!sessionVariable.temp_cont_enq.dob">&#45;&#45;Select&#45;&#45;</p>-->
                         <input ng-model="sessionVariable.temp_cont_enq.age" type="number" min="1" max="99"
-                               placeholder="eg: 23" ng-keypress="checkNumberLength($event)" style="width: 100%;">
+                               placeholder="Enter Age" ng-keypress="checkNumberLength($event)" style="width: 100%;">
                         <!--<i class="  {{validationClass.ERROR}}  " ></i>-->
                     </div>
                     <div class="col date-col">
@@ -139,7 +139,7 @@
             <label class="item item-input">
                 <span class="input-label">Pincode</span>
                 <input type="tel" maxlength="6" ng-model="sessionVariable.temp_cont_enq.pincode"
-                       placeholder="eg : 1109018">
+                       placeholder="Enter Pincode">
                 <!--<i class="  {{validationClass.ERROR}}  input_icon_right"></i>-->
             </label>
         </div>

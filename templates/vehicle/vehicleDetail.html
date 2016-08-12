@@ -2,14 +2,14 @@
   <ion-content ng-controller="vehicleDetailCtrl">
     <div class="item item-text-wrap  black-bg ">
       <div class="row " style="padding: 0px; ">
-        <div class="col" style="padding: 0px;">
+        <div class="col in-black" style="padding: 0px;">
 
           <h2><span ng-bind="sessionVariable.contact_list.selected_item.FST_NAME +' '+ sessionVariable.contact_list.selected_item.LAST_NAME">Pulkit Bhardwaj</span></h2>
-          <p class="s_item"><span ng-if="sessionVariable.contact_list.selected_item.AGE" ng-bind="sessionVariable.contact_list.selected_item.AGE + 'yrs / '">32</span>
+          <p style="color:#D7E7E9 !important;"><span ng-if="sessionVariable.contact_list.selected_item.AGE" ng-bind="sessionVariable.contact_list.selected_item.AGE + 'yrs / '">32</span>
             <span ng-bind="sessionVariable.contact_list.selected_item.GENDER">M</span></p>
           <!--<p>+91-9999999999</h4>-->
         </div>
-        <div class="col " style="padding: 0px;">
+        <div class="col  in-black" style="padding: 0px;">
 
 
           <h4><b>Mobile : </b><span ng-bind="sessionVariable.contact_list.selected_item.CELL_PH_NUM"
@@ -27,7 +27,7 @@
       </div>
       <br/>
       <i class="icon ion ion-card energized" style="font-size:25px;margin-right:10px;float:left"></i>
-      <p class="s_item"><span>Customer id : <span ng-bind="sessionVariable.contact_list.selected_item.X_CON_SEQ_NUM"></span></span>
+      <p style="color:#D7E7E9 !important;"><span>Customer id : <span ng-bind="sessionVariable.contact_list.selected_item.X_CON_SEQ_NUM"></span></span>
       </p>
     </div>
     <div class="item item-divider">

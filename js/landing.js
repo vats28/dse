@@ -39,12 +39,20 @@ angular.module('starter.landing', [])
                 $scope.showLoader("Logging in...");
                 $scope.requestData = {};
                 $scope.requestData.username = $scope.sessionVariable.username;
-               // $scope.requestData.password = "";//$scope.sessionVariable.password;
+                // $scope.requestData.password = "";//$scope.sessionVariable.password;
                 if (!$scope.OS.DESKTOP) {
                     $scope.requestData.version = AppVersion.version;
                     $scope.requestData.uuid = $cordovaDevice.getUUID();
-                    if (!$scope.OS.IOS)
-                        $scope.requestData.imei = $rootScope.IMEI;
+                    if (!$scope.OS.IOS) {
+                        try {
+                            $scope.requestData.imei = $rootScope.IMEI;
+                            if (!$scope.requestData.imei)
+                                $scope.requestData.imei = '0';
+                        } catch (error) {
+                            $scope.requestData.imei = '0';
+                            Console.log('Error in imei : ' + error);
+                        }
+                    }
                 } else {
                     $scope.requestData.version = '1.0';
                     $scope.requestData.imei = '0';

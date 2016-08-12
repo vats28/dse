@@ -1,11 +1,12 @@
 angular.module('starter.dashboard', [])
 
-    .controller('dashboardCtrl', function($scope, generic_http_post_service, fileTransfer, $ionicPlatform) {
+    .controller('dashboardCtrl', function ($scope, generic_http_post_service, fileTransfer, $ionicPlatform) {
 
 
         $scope.sessionVariable.search = {};
         $scope.apkPath = '';
         $scope.directoryPath = '';
+        $scope.HeroProducts_istrat = true;
 
         $scope.menuList = [
             {
@@ -30,7 +31,7 @@ angular.module('starter.dashboard', [])
 
 
 
-        $scope.init = function() {
+        $scope.init = function () {
             //get make model
             //alert('sdcsdcs');
             var make_model_data = null;
@@ -48,8 +49,8 @@ angular.module('starter.dashboard', [])
                 }
                 //$scope.hideLoader();
             } catch (error) {
-               // alert(error);
-               console.log("make model not found  " +  error);
+                // alert(error);
+                console.log("make model not found  " + error);
             }
 
         }
@@ -59,7 +60,7 @@ angular.module('starter.dashboard', [])
 
 
 
-        $scope.fetch_contact = function(state_id) {
+        $scope.fetch_contact = function (state_id) {
             //$scope.jumpTo('app.contactList');
             //return;
             $scope.showLoader("");
@@ -75,7 +76,7 @@ angular.module('starter.dashboard', [])
 
         };//end doLogin
 
-        $scope.fetch_contact_callback = function(data) {
+        $scope.fetch_contact_callback = function (data) {
             $scope.hideLoader();
             //alert(JSON.stringify(data));
             $scope.sessionVariable.temp_cont_enq = {};
@@ -95,45 +96,56 @@ angular.module('starter.dashboard', [])
         }
 
 
-        $scope.launchProductCatalogApp = function() {
-            $scope.checkAppAvailability("com.ionicframework.gallapp343021");
+        $scope.launchProductCatalogApp = function () {
+            // backAsHome.trigger(function() {
+            //         //console.log("Success");
+            //     }, function() {
+            //         //console.log("Error");
+            //     }, "products_home");
+            if (!$scope.HeroProducts_istrat) {
+                $scope.checkAppAvailability("com.ionicframework.gallapp343021");
+            } else {
+                $scope.checkAppAvailability("com.herocorp");
+            }
         }//end 
 
 
-        $scope.checkAppAvailability = function(pakageName) {
+        $scope.checkAppAvailability = function (pakageName) {
             //alert('we');
-            navigator.startApp.check(pakageName, function(message) {
+            navigator.startApp.check(pakageName, function (message) {
                 $scope.startApp(pakageName);
-            }, function(error) {
+            }, function (error) {
                 $scope.downloadApp(pakageName);
             });
         }
 
-        $scope.startApp = function(pakageName) {
+        $scope.startApp = function (pakageName) {
             $scope.SaveInLocalStorage('Dealer', $scope.sessionVariable.login_data.dealer_code);
-            navigator.startApp.start(pakageName, function(message) {  /* success */
+            navigator.startApp.start(pakageName, function (message) {  /* success */
 
                 if ($scope.OS.ANDROID) {
-                    //"action", "ACTION_NAME", "PACKAGE", "TYPE", "URI"
-                    //navigator.startApp.start([["app.com.name", "app.com.name.Activity"], [{"product_id":"100"}]], ...);
-                    //navigator.startApp.start([["action", "MAIN", "com.ionicframework.gallapp343021", "TYPE", "URI"]], function (message) { /* success */
-                    navigator.startApp.start([["com.ionicframework.gallapp343021", "com.ionicframework.gallapp343021.MainActivity"], [{ "dse_id": $scope.sessionVariable.username }]], function(message) { /* success */
+                    navigator.startApp.start([[pakageName], [{ "dse_id": $scope.sessionVariable.username }]], function (message) { /* success */
                         console.log(message); // => OK
-                    }, function(error) { /* error */
+                    }, function (error) { /* error */
                         console.log(error);
                     });
+
                 } else if ($scope.OS.IOS) {
                     // not right now
                 }
-            }, function(error) { /* error */
+            }, function (error) { /* error */
                 // console.log(error);
             });
         }
 
-        $scope.downloadApp = function(pakageName) {
+        $scope.downloadApp = function (pakageName) {
             $scope.showLoader("Downloading pakage");
             if ($scope.OS.ANDROID) {
-                $scope.apkPath = "http://tab.hmcl.biz/HeroProduct/HeroProducts.apk";
+                if (!$scope.HeroProducts_istrat) {
+                    $scope.apkPath = "http://tab.hmcl.biz/HeroProduct/HeroProducts.apk";
+                } else {
+                    $scope.apkPath = "http://tab.hmcl.biz/HeroProduct/HeroProducts_istrat.apk";
+                }
                 //fileTransfer.downloadInOuterDirectory($scope.installApk, $scope.apkPath, 'hero/hero-dse', 'HeroProducts.apk');//downloadFile($scope.installApk, url);// (callback, url, targetPath, options)
                 $scope.directoryPath = cordova.file.externalRootDirectory + 'Download/';
                 window.resolveLocalFileSystemURL($scope.directoryPath, $scope.fileDownload());
@@ -144,7 +156,7 @@ angular.module('starter.dashboard', [])
             }
         }
 
-        $scope.installApk = function(data, err) {
+        $scope.installApk = function (data, err) {
             // alert('installing');
             //$scope.hideLoader();
             if (data == -1) {
@@ -171,10 +183,10 @@ angular.module('starter.dashboard', [])
 
 
 
-        $scope.fileDownload = function() {
+        $scope.fileDownload = function () {
             var fileTransfer = new FileTransfer();
             $scope.apkPath = encodeURI($scope.apkPath);
-            fileTransfer.onprogress = function(progressEvent) {
+            fileTransfer.onprogress = function (progressEvent) {
 
                 try {
                     if (progressEvent.lengthComputable) {
@@ -191,9 +203,9 @@ angular.module('starter.dashboard', [])
                 }//end catch
             };
 
-            fileTransfer.download($scope.apkPath, $scope.directoryPath + 'HeroProducts.apk', function(HeroProducts) {
+            fileTransfer.download($scope.apkPath, $scope.directoryPath + 'HeroProducts.apk', function (HeroProducts) {
                 $scope.installApk();
-            }, function(error) {
+            }, function (error) {
                 $scope.showAlertWindow_Titled("Sorry", "Your download failed.");
                 console.log("download error source " + error.source);
                 console.log("download error target " + error.target);
@@ -204,7 +216,7 @@ angular.module('starter.dashboard', [])
                     }
                 });
 
-            $scope.installApk = function() {
+            $scope.installApk = function () {
                 // alert('installing');
                 $scope.hideLoader();
                 cordova.plugins.fileOpener2.open(

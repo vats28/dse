@@ -1,6 +1,6 @@
 angular.module('starter.createEnquiry', [])
 
-    .controller('createEnquiryCtrl', function ($scope, date_picker, generic_http_post_service, $ionicPopup) {
+    .controller('createEnquiryCtrl', function ($scope, date_picker, generic_http_post_service, $ionicPopup, $timeout) {
 
         $scope.sessionVariable.createEnquiry = {};// for create enquiry
         //$scope.sessionVariable.temp_cont_enq.exp_purchase_date = '2016-03-27';

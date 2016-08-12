@@ -51,6 +51,9 @@
                 <ion-item menu-close ng-click="jumpTo('app.pendingOrderList')" class="s_item dark-bg item-icon-left">
                     <i class="icon ion ion-alert-circled"></i> Pending order
                 </ion-item>
+                <ion-item menu-close ng-click="launchProductCatalogApp()" ng-controller="dashboardCtrl" class="s_item dark-bg item-icon-left">
+                    <i class="icon ion ion-calculator"></i> Hero Sales App
+                </ion-item>
                 <ion-item menu-close ng-click="jumpTo('app.emi_calc')" class="s_item dark-bg item-icon-left">
                     <i class="icon ion ion-calculator"></i> EMI Calculator
                 </ion-item>
@@ -58,6 +61,7 @@
                     <i class="icon ion ion-log-out"></i> Logout
                 </ion-item>
 
+        <h6 style="padding-left:10px; color:white;">Copyright &copy; 2016 by Hero MotoCorp. All rights reserved.</h6>
             </ion-list>
         </ion-content>
     </ion-side-menu>
