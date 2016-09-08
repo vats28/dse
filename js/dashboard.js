@@ -1,6 +1,6 @@
 angular.module('starter.dashboard', [])
 
-    .controller('dashboardCtrl', function ($scope, generic_http_post_service, fileTransfer, $ionicPlatform) {
+    .controller('dashboardCtrl', function ($scope, generic_http_post_service, fileTransfer, $ionicPlatform, date_picker) {
 
 
         $scope.sessionVariable.search = {};
@@ -34,6 +34,7 @@ angular.module('starter.dashboard', [])
         $scope.init = function () {
             //get make model
             //alert('sdcsdcs');
+            $scope.getDashboardCounters();
             var make_model_data = null;
             try {
                 make_model_data = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.MAKE_MODEL));
@@ -228,9 +229,6 @@ angular.module('starter.dashboard', [])
             }//installapk
 
         }//end fileDOwnload
-
-
-
 
 
     });

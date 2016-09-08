@@ -1,4 +1,4 @@
-<ion-view cache-view="false" view-title="Follow-ups">
+<ion-view cache-view="false" view-title="Today's Follow-ups">
 
   <ion-content ng-controller="followupListCtrl" ng-init="init()">
 
@@ -10,7 +10,7 @@
     </div>
     <ion-list can-swipe>
       <ion-item class=" item-text-wrap item-icon-right" ng-click="showDetail(item)" ng-repeat="item in arrayList.follow_up">
-        <i class="icon ion ion-alert assertive"></i>
+        <i class="icon ion  " ng-class="item.FOLLOWUP_STATUS != 'done' ? 'ion-alert assertive': 'ion-checkmark-round balanced'"></i>
         <p> <span ng-bind="item.FST_NAME +' '+ item.LAST_NAME" class="margin-r-20">Pulkit</span> Enquiry Id : <span ng-bind="item.ENQUIRY_ID">10897</span></p>
 
         <p>Model : <span ng-bind="item.X_MODEL_INTERESTED">Splender Pro</span></p>

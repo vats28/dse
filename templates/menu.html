@@ -41,24 +41,28 @@
                 </ion-item>
                 <ion-item menu-close ng-click="jumpTo('app.followupList')" class="s_item dark-bg item-icon-left">
                     <i class="icon ion ion-calendar"></i> Today's followup
+                    <span class="badge badge-assertive" ng-bind="sessionVariable.count_pnd_today_fol" ng-if="sessionVariable.count_pnd_today_fol>0"></span>
                 </ion-item>
                 <ion-item menu-close ng-click="jumpTo('app.pendingFollowupList')" class="s_item dark-bg item-icon-left">
                     <i class="icon ion ion-ios-calendar"></i> Pending followup
+                    <span class="badge badge-assertive"  ng-bind="sessionVariable.count_pnd_fol" ng-if="sessionVariable.count_pnd_fol>0">5</span>
                 </ion-item>
                 <ion-item menu-close ng-click="jumpTo('app.searchEnquiryList')" class="s_item dark-bg item-icon-left">
                     <i class="icon ion ion-android-search"></i> Search enquiry
                 </ion-item>
                 <ion-item menu-close ng-click="jumpTo('app.pendingOrderList')" class="s_item dark-bg item-icon-left">
-                    <i class="icon ion ion-alert-circled"></i> Pending order
+                    <i class="icon ion ion-alert-circled"  ></i> Pending order
+                    <span class="badge badge-assertive" ng-bind="sessionVariable.count_pnd_order" ng-if="sessionVariable.count_pnd_order>0">10</span>
                 </ion-item>
                 <ion-item menu-close ng-click="launchProductCatalogApp()" ng-controller="dashboardCtrl" class="s_item dark-bg item-icon-left">
-                    <i class="icon ion ion-calculator"></i> Hero Sales App
+                    <i class="icon ion icon-motorcycle"></i> Hero Sales App
                 </ion-item>
                 <ion-item menu-close ng-click="jumpTo('app.emi_calc')" class="s_item dark-bg item-icon-left">
                     <i class="icon ion ion-calculator"></i> EMI Calculator
                 </ion-item>
                 <ion-item menu-close class="s_item dark-bg item-icon-left" ng-click="askLogout()">
                     <i class="icon ion ion-log-out"></i> Logout
+
                 </ion-item>
 
         <h6 style="padding-left:10px; color:white;">Copyright &copy; 2016 by Hero MotoCorp. All rights reserved.</h6>

@@ -9,9 +9,9 @@ angular.module('starter.controllers', [])
         // listen for the $ionicView.enter event:
         $scope.headerButton = {};
         $scope.OS = {
-            ANDROID: true,
+            ANDROID: false,
             IOS: false,
-            DESKTOP: false,
+            DESKTOP: true,
         }
 
         $scope.$on('$ionicView.enter', function(e) {
@@ -682,4 +682,67 @@ angular.module('starter.controllers', [])
             }//installapk
 
         }//end fileDOwnload
+
+
+
+
+        
+        $scope.getDashboardCounters = function () {
+            var pendingOrders = null;
+            var ten_days_followup = null;
+            try {
+                pendingOrders = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.PENDING_ORDERS));
+                $scope.sessionVariable.count_pnd_order = pendingOrders.order_data.length;
+            } catch (error) {
+                console.log(error);
+            }
+
+            try {
+                ten_days_followup = JSON.parse($scope.GetInLocalStorage($scope.localStorageKeys.TEN_DAY_FOLLOW));
+
+                var output  = [];
+                var output2 = [];
+                var currDate = date_picker.convertDateToString(new Date(), 'yyyy-mm-dd');
+                angular.forEach(ten_days_followup.follow_up, function (item) {
+                    var one = true;
+
+                    if (currDate && (currDate != $scope.convertFormatOfDate(item['FOLLOW_DATE']))) {
+                        one = false;
+                    }//end if
+                    if (one) {
+                        output.push(item);
+                    }
+
+                    if(item["FOLLOWUP_STATUS"] != 'done'){
+                        output2.push(item);
+                    }
+
+                });//end foreach
+
+                $scope.sessionVariable.count_pnd_fol = output2.length;
+                $scope.sessionVariable.count_pnd_today_fol = output.length;
+            } catch (error) {
+                console.log(error);
+            }
+
+        }//getDashboardCounters
+
+        $scope.convertFormatOfDate = function (date) {
+            function padLeftZero(data) {
+                if (('' + data).length < 2)
+                    data = "0" + data;
+                return data;
+            }
+            var retval = "";
+            var month_names = new Array("jan", "feb", "mar",
+                "apr", "may", "jun", "jul", "aug", "sep",
+                "cct", "nov", "dec");
+
+            var c = date.split("-");
+            var check = new Date(('20' + c[2]), month_names.indexOf(c[1].toLowerCase()), c[0]);
+            retval = check.getFullYear() + "-" + padLeftZero(check.getMonth() + 1) + "-" + padLeftZero(check.getDate());
+            return retval;
+        }//convertFormatOfDate
+
+
     });

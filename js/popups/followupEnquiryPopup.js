@@ -25,7 +25,7 @@ angular.module('starter.followupEnquiryModal', [])
         $scope.getFolDateWithMonthName = function (dateString) {
 
             if (!dateString) {
-                var nextDate = date_picker.addDays(new Date(), 1);
+                var nextDate = date_picker.addDays(new Date(), 3);
                 // alert(nextDate);
                 dateString = date_picker.convertDateToString(nextDate, 'yyyy-mm-dd');
                 // alert(dateString);
@@ -44,17 +44,17 @@ angular.module('starter.followupEnquiryModal', [])
                 $scope.showAlertWindow("Please select date");
                 return;
             }
-            
+
             // if(date_picker.isGreaterDate($scope.page.date, $scope.sessionVariable.selected_enquiry.EXPCTD_DT_PURCHASE) == 2){                
             //     $scope.showAlertWindow("Expected date of purchase can't be smaller then followup date");
             //     return;
             // }
-            
-            
+
+
             $scope.showLoader("");
             $scope.requestData = {};
             $scope.requestData = $scope.page;
-            $scope.requestData.fol_date = date_picker.getDateInFormat( $scope.page.date, "mm/dd/yyyy");
+            $scope.requestData.fol_date = date_picker.getDateInFormat($scope.page.date, "mm/dd/yyyy");
             $scope.requestData.user_id = $scope.sessionVariable.username;
             $scope.requestData.dms_enquiry_id = $scope.sessionVariable.selected_enquiry.ENQUIRY_ID;
             generic_http_post_service.getDetails(generic_http_post_service.getServices().SYNC_FOLLOW_UP,
@@ -85,9 +85,11 @@ angular.module('starter.followupEnquiryModal', [])
                         if (value['ENQUIRY_ID'] == $scope.sessionVariable.selected_enquiry.ENQUIRY_ID) {
                             $scope.sessionVariable.ten_days_followup.follow_up[index].FOLLOW_DATE = $scope.convertFormatOfDate($scope.page.date);
                             $scope.sessionVariable.ten_days_followup.follow_up[index].FOLLOWUP_COMMENTS = $scope.page.remarks;
+                            $scope.sessionVariable.ten_days_followup.follow_up[index].FOLLOWUP_STATUS = 'done';
                             $scope.SaveInLocalStorage($scope.localStorageKeys.TEN_DAY_FOLLOW,
                                 JSON.stringify($scope.sessionVariable.ten_days_followup));
 
+                            $scope.getDashboardCounters();//update counter in sidemenu
                             $rootScope.$broadcast('filterFollowups', 'follow');
                             keepGoing = false;
                         }
@@ -107,18 +109,18 @@ angular.module('starter.followupEnquiryModal', [])
                             $scope.sessionVariable.contact_list.enquiry[index].FOLLOW_DATE = $scope.convertFormatOfDate($scope.page.date);
                             $scope.sessionVariable.contact_list.enquiry[index].FOLLOWUP_COMMENTS = $scope.page.remarks;
                             $rootScope.$broadcast('filterFollowups', 'close');
-                                
+
                             //alert(JSON.stringify($scope.sessionVariable.contact_list.enquiry));
                             keepGoing = false; //in this more the one query is returning with same id which is wrong
-                                
+
                         }
                         index++;
                     }
                 });
             }
         }//end
-        
-        
+
+
         $scope.convertFormatOfDate = function (date) {
             function padLeftZero(data) {
                 if (('' + data).length < 2)
@@ -131,7 +133,7 @@ angular.module('starter.followupEnquiryModal', [])
                 "cct", "nov", "dec");
 
             var c = date.split("-");
-            var check = new Date(c[0], (parseInt( c[1]) -1), c[2]);
+            var check = new Date(c[0], (parseInt(c[1]) - 1), c[2]);
             retval = padLeftZero(check.getDate()) + "-" + month_names[check.getMonth()] + "-" + check.getFullYear().toString();
             return retval;
         }

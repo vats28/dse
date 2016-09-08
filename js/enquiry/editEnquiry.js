@@ -363,7 +363,7 @@ angular.module('starter.editEnquiry', [])
         $scope.getFolDateWithMonthName = function (dateString) {
 
             if (!dateString) {
-                var nextDate = date_picker.addDays(new Date(), 1);
+                var nextDate = date_picker.addDays(new Date(), 3);
                 dateString = date_picker.convertDateToString(nextDate, 'yyyy-mm-dd');
             } else {
                 return;
